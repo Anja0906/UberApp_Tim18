@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/driver_ride_history"
+    android:background="@drawable/layout_radius"
+    tools:context=".DriverRideHistoryActivity"
+    >
+
+    <ImageView
+        android:id="@+id/item_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_baseline_directions_car_24" />
+
+    <TextView
+        android:id="@+id/ride_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:gravity="center_vertical"
+        android:textColor="@color/edit_text"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/item_icon"
+        android:padding="5dp"/>
+
+    <TextView android:id="@+id/ride_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ride_main"
+        android:layout_toEndOf="@+id/item_icon"
+        android:textColor="@color/button"
+        android:padding="5dp"/>
+
+</RelativeLayout>

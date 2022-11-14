@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item android:id="@+id/account"
+            android:icon="@drawable/ic_profile"
+            android:title="@string/account" />
+
+        <item android:id="@+id/inbox"
+            android:icon="@drawable/ic_inbox"
+            android:title="@string/inbox"/>
+
+        <item android:id="@+id/ride_history"
+            android:icon="@drawable/ic_history"
+            android:title="@string/ride_history"/>
+
+        <item android:id="@+id/home"
+            android:icon="@drawable/ic_home_black"
+            android:title="@string/home"/>
+
+
+
+    </group>
+</menu>
