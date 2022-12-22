@@ -2,6 +2,7 @@ package com.example.uberapp_tim18;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ThemedSpinnerAdapter;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.uberapp_tim18.Adapters.MessageAdapter;
 import com.example.uberapp_tim18.Adapters.RideAdapter;
+import com.example.uberapp_tim18.Adapters.UserAdapter;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.ByteArrayInputStream;
@@ -30,6 +32,13 @@ import model.Ride;
 import model.User;
 import tools.HelperClasses;
 
+/*
+SENDER - > Current user
+RECEIVER - > Person current user is talking to
+???????????????????????????????????
+ */
+
+
 public class PassengerInboxActivity extends Activity {
     private ListView lv;
     @Override
@@ -40,56 +49,20 @@ public class PassengerInboxActivity extends Activity {
         Intent mainIntent = getIntent();
 
         byte[] userBytes = getIntent().getByteArrayExtra("user");
-        ByteArrayInputStream bis = new ByteArrayInputStream(userBytes);
-        ObjectInput in = null;
-        User user = null;
-        try {
-            in = new ObjectInputStream(bis);
-            user = (User)in.readObject();
-//            System.out.println("uspeo sam");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-            } catch (IOException ex) {
-                // ignore close exception
-            }
-        }
+        User currentUser = (User)HelperClasses.Deserialize(userBytes);
 
         lv  = (ListView) findViewById(R.id.list_view);
-        MessageAdapter adapter = new MessageAdapter(this, user);
+        UserAdapter adapter = new UserAdapter(this, currentUser);
         lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(PassengerInboxActivity.this, MessageDetailActivity.class);
-                Message message = (Message) parent.getItemAtPosition(position);
-                byte[] messageBytes = new byte[0];
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                ObjectOutputStream out = null;
-                try {
-                    out = new ObjectOutputStream(bos);
-                    out.writeObject(message);
-                    out.flush();
-                    messageBytes = bos.toByteArray();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        bos.close();
-                    } catch (IOException ex) {
-                        // ignore close exception
-                    }
-                }
-                intent.putExtra("message", messageBytes);
-                intent.putExtra("user", mainIntent.getByteArrayExtra("user"));
+                Intent intent = new Intent(PassengerInboxActivity.this, ChatActivity.class);
+                User user = (User) parent.getItemAtPosition(position);
+                byte[] receiverBytes = HelperClasses.Serialize(user);
+                intent.putExtra("receiver", receiverBytes);
+                intent.putExtra("sender", mainIntent.getByteArrayExtra("user"));
                 startActivity(intent);
             }
         });
@@ -120,7 +93,7 @@ public class PassengerInboxActivity extends Activity {
                         startActivity(profile);
                         break;
                     case R.id.ride_history:
-                        Intent ride = new Intent(PassengerInboxActivity.this, PassengerAccountActivity.class);
+                        Intent ride = new Intent(PassengerInboxActivity.this, DriverRideHistoryActivity.class);
                         ride.putExtra("user", mainIntent.getByteArrayExtra("user"));
                         startActivity(ride);
                         break;

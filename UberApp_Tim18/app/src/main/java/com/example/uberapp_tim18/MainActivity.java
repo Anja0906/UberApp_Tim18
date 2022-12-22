@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent intent = new Intent(MainActivity.this,SplashActivity.class);
+        //Intent intent = new Intent(MainActivity.this, ChatActivity.class);
         startActivity(intent);
 
     }

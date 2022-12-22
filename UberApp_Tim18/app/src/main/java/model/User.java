@@ -1,6 +1,9 @@
 package model;
 
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
+import java.util.Objects;
 
 public class User implements Serializable {
     //private int id;
@@ -103,8 +106,20 @@ public class User implements Serializable {
     }
 
     public String getName() {
-        return firstName+" "+lastName;
+        return firstName + " " + lastName;
     }
 
+    @Override
+    public boolean equals(@Nullable Object _obj) {
+        User obj = (User) _obj;
+        return Objects.equals(this.firstName, obj.getFirstName()) &&
+                Objects.equals(this.lastName, obj.getLastName()) &&
+                this.avatar == obj.getAvatar() &&
+                this.telephoneNumber == getTelephoneNumber() &&
+                Objects.equals(this.emailAddress, getEmailAddress()) &&
+                Objects.equals(this.address, getAddress()) &&
+                Objects.equals(this.password, getPassword()) &&
+                this.role == getRole();
+    }
 }
 

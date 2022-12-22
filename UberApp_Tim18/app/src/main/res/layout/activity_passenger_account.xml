@@ -155,7 +155,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:alpha="1"
-                        android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+                        android:drawableLeft="@drawable/ic_phone"
                         android:fontFamily="sans-serif-medium"
                         android:drawablePadding="10dp"
                         android:text="@string/phone"
@@ -198,7 +198,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:alpha="1"
-                        android:drawableLeft="@drawable/ic_baseline_alternate_email_24"
+                        android:drawableLeft="@drawable/ic_monkey_a"
                         android:drawablePadding="10dp"
                         android:fontFamily="sans-serif-medium"
 
