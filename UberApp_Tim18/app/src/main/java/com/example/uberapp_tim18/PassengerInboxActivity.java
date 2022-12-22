@@ -93,7 +93,7 @@ public class PassengerInboxActivity extends Activity {
                         startActivity(profile);
                         break;
                     case R.id.ride_history:
-                        Intent ride = new Intent(PassengerInboxActivity.this, PassengerAccountActivity.class);
+                        Intent ride = new Intent(PassengerInboxActivity.this, DriverRideHistoryActivity.class);
                         ride.putExtra("user", mainIntent.getByteArrayExtra("user"));
                         startActivity(ride);
                         break;
