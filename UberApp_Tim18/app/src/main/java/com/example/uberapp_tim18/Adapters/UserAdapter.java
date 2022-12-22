@@ -9,14 +9,20 @@ import android.widget.TextView;
 
 import com.example.uberapp_tim18.R;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import model.User;
 import tools.Mockup;
 
 public class UserAdapter extends BaseAdapter {
     private Activity activity;
+    private User user;
 
-    public UserAdapter(Activity activity) {
-        this.activity = activity;
+    public UserAdapter(Activity _activity, User _user) {
+
+        this.activity = _activity;
+        this.user = _user;
     }
 
     /*
@@ -31,7 +37,7 @@ public class UserAdapter extends BaseAdapter {
      * Ova metoda vraca pojedinacan element na osnovu pozicije
      * */
     @Override
-    public Object getItem(int position) {
+    public User getItem(int position) {
         return Mockup.getUsers().get(position);
     }
 
@@ -61,23 +67,28 @@ public class UserAdapter extends BaseAdapter {
         View vi=convertView;
         User user = Mockup.getUsers().get(position);
 
-        /*
         if(convertView==null)
-            vi = activity.getLayoutInflater().inflate(R.layout.cinema_list, null);
+            vi = activity.getLayoutInflater().inflate(R.layout.activity_passenger_inbox, null);
 
-        TextView name = (TextView)vi.findViewById(R.id.name);
-        TextView description = (TextView)vi.findViewById(R.id.description);
-        ImageView image = (ImageView)vi.findViewById(R.id.item_icon);
+        TextView from_name = (TextView)vi.findViewById(R.id.from_name_txt_view);
+        /*
+        TextView from_content = (TextView)vi.findViewById(R.id.from_content_txt_view);
+        TextView mess_date = (TextView)vi.findViewById(R.id.from_date_txt_view);
+        TextView mess_time = (TextView)vi.findViewById(R.id.from_time_txt_view);
+        */
+        ImageView image = (ImageView)vi.findViewById(R.id.from_pfp_view);
 
-        name.setText(user.getName());
-        description.setText(user.getDescription());
+        int pfp = user.getAvatar();
+        String fromName = user.getFirstName() + " " + user.getLastName();
 
-        if (user.getAvatar() != -1){
-            image.setImageResource(user.getAvatar());
+
+        from_name.setText(fromName);
+
+        if (pfp != -1){
+            image.setImageResource(pfp);
         }
 
-        return  vi;
-         */
+
         return vi;
     }
 }

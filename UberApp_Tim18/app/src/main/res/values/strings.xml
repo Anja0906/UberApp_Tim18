@@ -37,4 +37,5 @@
     <string name="date">Date sent:</string>
     <string name="message">Message:</string>
     <string name="profile_picture">Profile picture</string>
+    <string name="type_message">Type message</string>
 </resources>
