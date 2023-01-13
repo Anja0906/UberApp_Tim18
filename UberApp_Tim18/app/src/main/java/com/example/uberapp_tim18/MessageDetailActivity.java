@@ -1,16 +1,15 @@
 package com.example.uberapp_tim18;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -21,7 +20,7 @@ import java.io.ObjectInputStream;
 import java.time.format.DateTimeFormatter;
 
 import model.Message;
-import model.Ride;
+import model.Role;
 import model.User;
 import tools.HelperClasses;
 
@@ -54,7 +53,7 @@ public class MessageDetailActivity extends Activity {
         }
 
         TextView from = (TextView)findViewById(R.id.from_txt_view);
-        from.setText(message.getFrom().getEmailAddress());
+        from.setText(message.getFrom().getEmail());
         TextView type = (TextView)findViewById(R.id.type_txt_view);
         type.setText(message.getType().toString());
         TextView date = (TextView)findViewById(R.id.date_txt_view);
@@ -100,10 +99,10 @@ public class MessageDetailActivity extends Activity {
                     case R.id.home:
                         User user = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("user"));
                         Intent home = null;
-                        if (user.getRole() == 1) {
+                        if (user.getRole() == Role.PASSENGER) {
                             home = new Intent(MessageDetailActivity.this, PassengerMainActivity.class);
                         }
-                        if (user.getRole() == 2) {
+                        if (user.getRole() == Role.DRIVER) {
                             home = new Intent(MessageDetailActivity.this, DriverMainActivity.class);
                         }
                         home.putExtra("user", intent.getByteArrayExtra("user"));

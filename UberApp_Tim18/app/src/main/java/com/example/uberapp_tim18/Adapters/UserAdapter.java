@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import com.example.uberapp_tim18.R;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import model.User;
 import tools.Mockup;
 
@@ -78,8 +75,8 @@ public class UserAdapter extends BaseAdapter {
         */
         ImageView image = (ImageView)vi.findViewById(R.id.from_pfp_view);
 
-        int pfp = user.getAvatar();
-        String fromName = user.getFirstName() + " " + user.getLastName();
+        int pfp = user.getProfilePicture();
+        String fromName = user.getName() + " " + user.getSurname();
 
 
         from_name.setText(fromName);

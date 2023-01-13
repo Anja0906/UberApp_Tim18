@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import model.Ride;
+import model.Role;
 import model.User;
 import tools.HelperClasses;
 
@@ -128,10 +129,10 @@ public class RideDetailActivity extends Activity {
                     case R.id.home:
                         User user = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("user"));
                         Intent home = null;
-                        if (user.getRole() == 1) {
+                        if (user.getRole() == Role.PASSENGER) {
                             home = new Intent(RideDetailActivity.this, PassengerMainActivity.class);
                         }
-                        if (user.getRole() == 2) {
+                        if (user.getRole() == Role.DRIVER) {
                             home = new Intent(RideDetailActivity.this, DriverMainActivity.class);
                         }
                         home.putExtra("user", getIntent().getByteArrayExtra("user"));

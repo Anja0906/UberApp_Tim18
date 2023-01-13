@@ -1,11 +1,6 @@
 package com.example.uberapp_tim18.Adapters;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Point;
-import android.media.Image;
-import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -13,9 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.uberapp_tim18.R;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import model.Message;
 import model.User;
@@ -63,8 +55,8 @@ public class MessageAdapter extends BaseAdapter {
 
         User to = message.getTo();
         User from = message.getFrom();
-        int pfp = from.getAvatar();
-        String fromName = from.getFirstName() + " " + from.getLastName();
+        int pfp = from.getProfilePicture();
+        String fromName = from.getName() + " " + from.getSurname();
 //        LocalDateTime date = message.getDate();
         String content = message.getContent();
         content = content.substring(0, 10) + "...";

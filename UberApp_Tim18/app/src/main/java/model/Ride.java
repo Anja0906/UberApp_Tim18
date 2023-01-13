@@ -2,8 +2,10 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Ride implements Serializable {
+    private Integer id;
     private LocalDateTime beginning;
     private LocalDateTime end;
     private double price;
@@ -12,6 +14,13 @@ public class Ride implements Serializable {
     private boolean petInCar;
     private boolean splitFair;
     private int duration;
+    private Rejection rejection;
+    private Driver driver;
+    private Status status;
+    private List<Message> messages;
+    private List<Review> reviews;
+    private List<Passenger> passengers;
+    private Route route;
 
     public Ride() {
     }

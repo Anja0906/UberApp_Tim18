@@ -1,20 +1,17 @@
 package com.example.uberapp_tim18;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.uberapp_tim18.Adapters.RideAdapter;
 import com.google.android.material.navigation.NavigationView;
@@ -24,6 +21,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 import model.Ride;
+import model.Role;
 import model.User;
 import tools.HelperClasses;
 
@@ -107,10 +105,10 @@ public class DriverRideHistoryActivity extends AppCompatActivity {
                 case R.id.home:
                     User user = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("user"));
                     Intent home = null;
-                    if (user.getRole() == 1) {
+                    if (user.getRole() == Role.PASSENGER) {
                         home = new Intent(DriverRideHistoryActivity.this, PassengerMainActivity.class);
                     }
-                    if (user.getRole() == 2) {
+                    if (user.getRole() == Role.DRIVER) {
                         home = new Intent(DriverRideHistoryActivity.this, DriverMainActivity.class);
                     }
                     home.putExtra("user", getIntent().getByteArrayExtra("user"));
