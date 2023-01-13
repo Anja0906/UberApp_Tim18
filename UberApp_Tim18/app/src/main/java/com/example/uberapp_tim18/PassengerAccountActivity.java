@@ -1,17 +1,15 @@
 package com.example.uberapp_tim18;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -20,7 +18,7 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 
-import model.Ride;
+import model.Role;
 import model.User;
 import tools.HelperClasses;
 
@@ -57,13 +55,13 @@ public class PassengerAccountActivity extends Activity {
         TextView name = (TextView)findViewById(R.id.name_txt_view);
         name.setText(user.getName());
         TextView phone = (TextView)findViewById(R.id.phone_txt_view);
-        phone.setText(Double.toString(user.getTelephoneNumber()));
+        phone.setText(user.getTelephoneNumber());
         TextView email = (TextView)findViewById(R.id.email_txt_view);
-        email.setText(user.getEmailAddress());
+        email.setText(user.getEmail());
         TextView address = (TextView)findViewById(R.id.address_txt_view);
         address.setText(user.getAddress());
-        TextView password = (TextView)findViewById(R.id.pass_txt_view);
-        password.setText(user.getPassword());
+//        TextView password = (TextView)findViewById(R.id.pass_txt_view);
+//        password.setText(user.get());
 
         DrawerLayout drawerLayout = findViewById(R.id.passenger_account_activity);
 
@@ -101,10 +99,10 @@ public class PassengerAccountActivity extends Activity {
                     case R.id.home:
                         User user = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("user"));
                         Intent home = null;
-                        if (user.getRole() == 1) {
+                        if (user.getRole() == Role.PASSENGER) {
                             home = new Intent(PassengerAccountActivity.this, PassengerMainActivity.class);
                         }
-                        if (user.getRole() == 2) {
+                        if (user.getRole() == Role.DRIVER) {
                             home = new Intent(PassengerAccountActivity.this, DriverMainActivity.class);
                         }
                         home.putExtra("user", getIntent().getByteArrayExtra("user"));

@@ -11,6 +11,7 @@ public class Message implements Serializable {
         SUPPORT
     }
 
+    private Integer id;
     private User from;
     private User to;
     private String content;

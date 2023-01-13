@@ -1,7 +1,5 @@
 package com.example.uberapp_tim18;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -35,7 +33,7 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
                 startActivity(new Intent(SplashActivity.this, UserLoginActivity.class));
-                finish(); // da nebi mogao da ode back na splash
+                finish(); // da ne bi mogao da ode back na splash
             }
         }, SPLASH_TIME_OUT);
     }

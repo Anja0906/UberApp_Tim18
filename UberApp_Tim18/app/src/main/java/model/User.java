@@ -6,79 +6,78 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class User implements Serializable {
-    //private int id;
-    private String firstName;
-    private String lastName;
-    private int avatar;
-    private double telephoneNumber;
-    private String emailAddress;
+    private Integer id;
+    private String name;
+    private String surname;
+    private int profilePicture;
+    private String telephoneNumber;
+    private String email;
     private String address;
+    private boolean blocked;
     private String password;
-    private int role;
+    private Role role;
 
-    public User(String firstName, String lastName, int avatar, double telephoneNumber, String emailAddress, String address, String password, int role) {
-        //this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.avatar = avatar;
+    public User(){}
+
+    public User(Integer id, String name, String surname, int profilePicture, String telephoneNumber, String email, String address, boolean blocked, String password, Role role) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.profilePicture = profilePicture;
         this.telephoneNumber = telephoneNumber;
-        this.emailAddress = emailAddress;
+        this.email = email;
         this.address = address;
+        this.blocked = blocked;
         this.password = password;
         this.role = role;
     }
 
-    public User() {
-    }
-
-    /*
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-     */
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public int getAvatar() {
-        return avatar;
+    public int getProfilePicture() {
+        return profilePicture;
     }
 
-    public void setAvatar(int avatar) {
-        this.avatar = avatar;
+    public void setProfilePicture(int profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
-    public double getTelephoneNumber() {
+    public String getTelephoneNumber() {
         return telephoneNumber;
     }
 
-    public void setTelephoneNumber(double telephoneNumber) {
+    public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAddress() {
@@ -89,6 +88,22 @@ public class User implements Serializable {
         this.address = address;
     }
 
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -97,29 +112,16 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int password) {
-        this.role = role;
-    }
-
-    public String getName() {
-        return firstName + " " + lastName;
-    }
-
     @Override
     public boolean equals(@Nullable Object _obj) {
         User obj = (User) _obj;
-        return Objects.equals(this.firstName, obj.getFirstName()) &&
-                Objects.equals(this.lastName, obj.getLastName()) &&
-                this.avatar == obj.getAvatar() &&
-                this.telephoneNumber == getTelephoneNumber() &&
-                Objects.equals(this.emailAddress, getEmailAddress()) &&
-                Objects.equals(this.address, getAddress()) &&
-                Objects.equals(this.password, getPassword()) &&
-                this.role == getRole();
+        return Objects.equals(this.name, obj.getName()) &&
+                Objects.equals(this.surname, obj.getSurname()) &&
+                Objects.equals(this.profilePicture, obj.getProfilePicture()) &&
+                Objects.equals(this.telephoneNumber, obj.getTelephoneNumber()) &&
+                Objects.equals(this.email, obj.getEmail()) &&
+                Objects.equals(this.address, obj.getAddress()) &&
+                Objects.equals(this.password, obj.getPassword()) &&
+                Objects.equals(this.role, obj.getRole());
     }
 }
-

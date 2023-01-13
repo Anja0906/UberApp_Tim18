@@ -1,24 +1,17 @@
 package com.example.uberapp_tim18;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.uberapp_tim18.Adapters.UserAdapter;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import model.Role;
 import model.User;
 import tools.HelperClasses;
 import tools.Mockup;
@@ -41,7 +34,7 @@ public class UserLoginActivity extends Activity {
                 boolean found = false;
                 User foundUser = null;
                 for (User user : users) {
-                    if (username.getText().toString().equals(user.getEmailAddress()) && password.getText().toString().equals(user.getPassword())) {
+                    if (username.getText().toString().equals(user.getEmail()) && password.getText().toString().equals(user.getPassword())) {
                         found = true;
                         foundUser = user;
                         break;
@@ -51,7 +44,7 @@ public class UserLoginActivity extends Activity {
                     Toast.makeText(UserLoginActivity.this, "Incorrect data!", Toast.LENGTH_SHORT).show();
                 } else {
                     byte[] userBytes = HelperClasses.Serialize(foundUser);
-                    if (foundUser.getRole() == 1) {
+                    if (foundUser.getRole() == Role.PASSENGER) {
                         Intent intent = new Intent(UserLoginActivity.this, PassengerMainActivity.class);
                         intent.putExtra("user", userBytes);
                         startActivity(intent);

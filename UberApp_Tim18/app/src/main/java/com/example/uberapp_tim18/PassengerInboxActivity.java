@@ -1,11 +1,5 @@
 package com.example.uberapp_tim18;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ThemedSpinnerAdapter;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,20 +9,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.uberapp_tim18.Adapters.MessageAdapter;
-import com.example.uberapp_tim18.Adapters.RideAdapter;
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.example.uberapp_tim18.Adapters.UserAdapter;
 import com.google.android.material.navigation.NavigationView;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
-import model.Message;
-import model.Ride;
+import model.Role;
 import model.User;
 import tools.HelperClasses;
 
@@ -100,10 +88,10 @@ public class PassengerInboxActivity extends Activity {
                     case R.id.home:
                         User user = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("user"));
                         Intent home = null;
-                        if (user.getRole() == 1) {
+                        if (user.getRole() == Role.PASSENGER) {
                             home = new Intent(PassengerInboxActivity.this, PassengerMainActivity.class);
                         }
-                        if (user.getRole() == 2) {
+                        if (user.getRole() == Role.DRIVER) {
                             home = new Intent(PassengerInboxActivity.this, DriverMainActivity.class);
                         }
                         home.putExtra("user", mainIntent.getByteArrayExtra("user"));

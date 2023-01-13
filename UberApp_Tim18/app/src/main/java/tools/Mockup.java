@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import model.Message;
 import model.Ride;
+import model.Role;
 import model.User;
 
 public class Mockup {
@@ -31,11 +32,11 @@ public class Mockup {
     }
 
     public static ArrayList<User> getUsers(){
-        user1 = new User("anja", "petkovic", R.drawable.user4, 614578456, "anja@gmail.com", "Strumicka 6, Novi Sad, Srbija", "anja123", 1);
-        user2 = new User("kristina", "andrijin", R.drawable.user5, 564845445, "kris@gmail.com", "ajhsdgeygdfwefj", "kris123", 1);
-        user3 = new User("branislav", "stojkovic", R.drawable.user1, 45548745, "bane@gmail.com", "eucbdsfewfebcasodkwpdlmdv", "bane123", 2);
-        user4 = new User("driver", "d", R.drawable.user2, 963852741, "driver@gmail.com", "oiugvbniuytgfvbnhgfcvbnytgf", "driver", 2);
-        user5 = new User("passenger", "p", R.drawable.user3, 23456789, "passenger@gmail.com", "laksfwecnjkejdwqjf", "passenger", 1);
+        user1 = new User(1, "anja", "petkovic", R.drawable.user4, "614578456", "anja@gmail.com", "Strumicka 6, Novi Sad, Srbija", false, "anja123", Role.PASSENGER);
+        user2 = new User(2, "kristina", "andrijin", R.drawable.user5, "564845445", "kris@gmail.com", "ajhsdgeygdfwefj", false, "kris123", Role.PASSENGER);
+        user3 = new User(3, "branislav",  "stojkovic", R.drawable.user1, "614578456", "bane@gmail.com", "Strumicka 6, Novi Sad, Srbija", false, "bane123", Role.PASSENGER);
+        user4 = new User(4, "driver", "d", R.drawable.user2, "614578456", "driver@gmail.com", "Strumicka 6, Novi Sad, Srbija", false, "driver123", Role.PASSENGER);
+        user5 = new User(5, "passenger", "p", R.drawable.user3, "614578456", "passenger@gmail.com", "Strumicka 6, Novi Sad, Srbija", false, "passenger123", Role.PASSENGER);
 
         ArrayList<User> users = new ArrayList<>();
         users.add(user1);

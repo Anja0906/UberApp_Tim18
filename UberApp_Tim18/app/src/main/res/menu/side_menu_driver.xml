@@ -18,6 +18,9 @@
         <item android:id="@+id/home"
             android:icon="@drawable/ic_home_black"
             android:title="@string/home"/>
+        <item android:id="@+id/settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/home"/>
 
 
 

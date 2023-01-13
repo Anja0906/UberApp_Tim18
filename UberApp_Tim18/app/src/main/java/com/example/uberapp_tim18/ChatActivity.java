@@ -1,18 +1,16 @@
 package com.example.uberapp_tim18;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uberapp_tim18.Adapters.ChatAdapter;
 
@@ -60,8 +58,8 @@ public class ChatActivity extends AppCompatActivity {
         this.sender = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("sender"));
         this.receiver = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("receiver"));
 
-        txtSender.setText(receiver.getFirstName() + " " + receiver.getLastName());
-        int pfp = receiver.getAvatar();
+        txtSender.setText(receiver.getName() + " " + receiver.getSurname());
+        int pfp = receiver.getProfilePicture();
         if (pfp != -1){
             imgSender.setImageResource(pfp);
         }
