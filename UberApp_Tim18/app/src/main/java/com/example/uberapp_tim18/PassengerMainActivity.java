@@ -1,16 +1,10 @@
 package com.example.uberapp_tim18;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -56,6 +50,10 @@ public class PassengerMainActivity extends Activity {
                         Intent rideHistory = new Intent(PassengerMainActivity.this, DriverRideHistoryActivity.class);
                         rideHistory.putExtra("user", getIntent().getByteArrayExtra("user"));
                         startActivity(rideHistory);
+                        break;
+                    case R.id.review_preferences:
+                        Intent settings = new Intent(PassengerMainActivity.this, ReviewerPreferenceActivity.class);
+                        startActivity(settings);
                         break;
                     case R.id.home:
                         Toast toast= Toast.makeText(getApplicationContext(),"Already on page",Toast. LENGTH_LONG);

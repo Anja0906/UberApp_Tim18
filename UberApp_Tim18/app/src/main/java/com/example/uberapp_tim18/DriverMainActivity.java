@@ -55,6 +55,11 @@ public class DriverMainActivity extends AppCompatActivity {
                         startActivity(history);
                         break;
 
+                    case R.id.review_preferences:
+                        Intent settings = new Intent(DriverMainActivity.this, ReviewerPreferenceActivity.class);
+                        startActivity(settings);
+                        break;
+
                     case R.id.home:
                         Toast toast= Toast.makeText(getApplicationContext(),"Already on page",Toast. LENGTH_LONG);
                         toast.setMargin(50,50);
