@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
@@ -137,6 +138,11 @@ public class RideDetailActivity extends Activity {
                         }
                         home.putExtra("user", getIntent().getByteArrayExtra("user"));
                         startActivity(home);
+                        break;
+                    case R.id.settings:
+                        Intent settings = new Intent(RideDetailActivity.this, ReviewerPreferenceActivity.class);
+                        settings.putExtra("user", getIntent().getByteArrayExtra("user"));
+                        startActivity(settings);
                         break;
                 }
                 return false;

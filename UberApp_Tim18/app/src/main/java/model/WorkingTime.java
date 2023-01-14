@@ -9,20 +9,18 @@ public class WorkingTime  implements Serializable {
     private LocalDateTime endTime;
     private Driver driver;
 
-    public WorkingTime() {
-    }
+    public WorkingTime() {}
 
     public WorkingTime(Integer id, LocalDateTime startTime, LocalDateTime endTime, Driver driver) {
-        this.id = id;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.driver = driver;
+        this.id         = id;
+        this.startTime  = startTime;
+        this.endTime    = endTime;
+        this.driver     = driver;
     }
 
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -30,7 +28,6 @@ public class WorkingTime  implements Serializable {
     public LocalDateTime getStartTime() {
         return startTime;
     }
-
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
@@ -38,7 +35,6 @@ public class WorkingTime  implements Serializable {
     public LocalDateTime getEndTime() {
         return endTime;
     }
-
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
@@ -46,7 +42,6 @@ public class WorkingTime  implements Serializable {
     public Driver getDriver() {
         return driver;
     }
-
     public void setDriver(Driver driver) {
         this.driver = driver;
     }

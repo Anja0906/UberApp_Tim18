@@ -9,7 +9,6 @@ public class PrefsFragment extends PreferenceFragmentCompat{
 
     public static PrefsFragment newInstance() {
         Bundle args = new Bundle();
-
         PrefsFragment fragment = new PrefsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -18,6 +17,7 @@ public class PrefsFragment extends PreferenceFragmentCompat{
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences);
+
     }
 
 
