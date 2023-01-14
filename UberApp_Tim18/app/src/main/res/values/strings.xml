@@ -19,6 +19,7 @@
     <string name="sign_up">"Don't have an account? Sign up"</string>
     <string name="smart_car">Smart car</string>
     <string name="home">Home</string>
+    <string name="settings">Settings</string>
     <string name="ride_history">Ride history</string>
     <string name="acc_info">My info:</string>
     <string name="edit_data">EDIT DATA</string>

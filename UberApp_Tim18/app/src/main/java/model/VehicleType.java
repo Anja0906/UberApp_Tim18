@@ -7,19 +7,17 @@ public class VehicleType  implements Serializable {
     private VehicleName vehicleName;
     private double priceForKm;
 
-    public VehicleType() {
-    }
+    public VehicleType() {}
 
     public VehicleType(Integer id, VehicleName vehicleName, double priceForKm) {
-        this.id = id;
-        this.vehicleName = vehicleName;
-        this.priceForKm = priceForKm;
+        this.id             = id;
+        this.vehicleName    = vehicleName;
+        this.priceForKm     = priceForKm;
     }
 
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -27,7 +25,6 @@ public class VehicleType  implements Serializable {
     public VehicleName getVehicleName() {
         return vehicleName;
     }
-
     public void setVehicleName(VehicleName vehicleName) {
         this.vehicleName = vehicleName;
     }
@@ -35,7 +32,6 @@ public class VehicleType  implements Serializable {
     public double getPriceForKm() {
         return priceForKm;
     }
-
     public void setPriceForKm(double priceForKm) {
         this.priceForKm = priceForKm;
     }

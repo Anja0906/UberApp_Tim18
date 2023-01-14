@@ -97,6 +97,11 @@ public class PassengerInboxActivity extends Activity {
                         home.putExtra("user", mainIntent.getByteArrayExtra("user"));
                         startActivity(home);
                         break;
+                    case R.id.settings:
+                        Intent settings = new Intent(PassengerInboxActivity.this, ReviewerPreferenceActivity.class);
+                        settings.putExtra("user", getIntent().getByteArrayExtra("user"));
+                        startActivity(settings);
+                        break;
                 }
                 return false;
             }

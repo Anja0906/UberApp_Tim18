@@ -62,6 +62,11 @@ public class PassengerMainActivity extends Activity {
                         toast.setMargin(50,50);
                         toast.show();
                         break;
+                    case R.id.settings:
+                        Intent settings = new Intent(PassengerMainActivity.this, ReviewerPreferenceActivity.class);
+                        settings.putExtra("user", getIntent().getByteArrayExtra("user"));
+                        startActivity(settings);
+                        break;
                 }
                 return false;
             }

@@ -22,25 +22,23 @@ public class Ride implements Serializable {
     private List<Passenger> passengers;
     private Route route;
 
-    public Ride() {
-    }
+    public Ride() {}
 
     public Ride(LocalDateTime beginning, LocalDateTime end, double price, boolean panic, boolean babyInCar, boolean petInCar, boolean splitFair, int duration) {
-        this.beginning = beginning;
-        this.end = end;
-        this.price = price;
-        this.panic = panic;
-        this.babyInCar = babyInCar;
-        this.petInCar = petInCar;
-        this.splitFair = splitFair;
-        this.duration = duration;
+        this.beginning  = beginning;
+        this.end        = end;
+        this.price      = price;
+        this.panic      = panic;
+        this.babyInCar  = babyInCar;
+        this.petInCar   = petInCar;
+        this.splitFair  = splitFair;
+        this.duration   = duration;
     }
 
 
     public LocalDateTime getBeginning() {
         return beginning;
     }
-
     public void setBeginning(LocalDateTime beginning) {
         this.beginning = beginning;
     }
@@ -48,7 +46,6 @@ public class Ride implements Serializable {
     public LocalDateTime getEnd() {
         return end;
     }
-
     public void setEnd(LocalDateTime end) {
         this.end = end;
     }
@@ -56,7 +53,6 @@ public class Ride implements Serializable {
     public double getPrice() {
         return price;
     }
-
     public void setPrice(double price) {
         this.price = price;
     }
@@ -64,7 +60,6 @@ public class Ride implements Serializable {
     public boolean isPanic() {
         return panic;
     }
-
     public void setPanic(boolean panic) {
         this.panic = panic;
     }
@@ -72,7 +67,6 @@ public class Ride implements Serializable {
     public boolean isBabyInCar() {
         return babyInCar;
     }
-
     public void setBabyInCar(boolean babyInCar) {
         this.babyInCar = babyInCar;
     }
@@ -80,7 +74,6 @@ public class Ride implements Serializable {
     public boolean isPetInCar() {
         return petInCar;
     }
-
     public void setPetInCar(boolean petInCar) {
         this.petInCar = petInCar;
     }
@@ -88,7 +81,6 @@ public class Ride implements Serializable {
     public boolean isSplitFair() {
         return splitFair;
     }
-
     public void setSplitFair(boolean splitFair) {
         this.splitFair = splitFair;
     }
@@ -96,7 +88,6 @@ public class Ride implements Serializable {
     public int getDuration() {
         return duration;
     }
-
     public void setDuration(int duration) {
         this.duration = duration;
     }

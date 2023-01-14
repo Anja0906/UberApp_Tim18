@@ -13,8 +13,10 @@ public class ReviewerPreferenceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_prefs);
-        FragmentTransition.to(PrefsFragment.newInstance(), this);
+        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new PrefsFragment()).commit();
+        
+//        setContentView(R.layout.fragment_prefs);
+//        FragmentTransition.to(PrefsFragment.newInstance(), this);
     }
 
     @Override

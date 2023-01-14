@@ -33,17 +33,16 @@ public class Message implements Serializable {
     }
 
     public Message(User from, User to, String content, LocalDateTime date, MessageType type) {
-        this.from = from;
-        this.to = to;
-        this.content = content;
-        this.date = date;
-        this.type = type;
+        this.from       = from;
+        this.to         = to;
+        this.content    = content;
+        this.date       = date;
+        this.type       = type;
     }
 
     public void setFrom(User from) {
         this.from = from;
     }
-
     public void setTo(User to) {
         this.to = to;
     }
@@ -51,7 +50,6 @@ public class Message implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
-
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
@@ -59,7 +57,6 @@ public class Message implements Serializable {
     public void setType(MessageType type) {
         this.type = type;
     }
-
     public User getFrom() {
         return from;
     }
@@ -67,7 +64,6 @@ public class Message implements Serializable {
     public User getTo() {
         return to;
     }
-
     public String getContent() {
         return content;
     }
@@ -75,7 +71,6 @@ public class Message implements Serializable {
     public LocalDateTime getDate() {
         return date;
     }
-
     public MessageType getType() {
         return type;
     }

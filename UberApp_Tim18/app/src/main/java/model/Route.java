@@ -10,22 +10,20 @@ public class Route implements Serializable {
     private Location departure;
     private Location destination;
 
-    public Route() {
-    }
+    public Route() {}
 
     public Route(Integer id, Integer kilometers, double price, Integer serialNumber, Location departure, Location destination) {
-        this.id = id;
-        this.kilometers = kilometers;
-        this.price = price;
-        this.serialNumber = serialNumber;
-        this.departure = departure;
-        this.destination = destination;
+        this.id             = id;
+        this.kilometers     = kilometers;
+        this.price          = price;
+        this.serialNumber   = serialNumber;
+        this.departure      = departure;
+        this.destination    = destination;
     }
 
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -33,7 +31,6 @@ public class Route implements Serializable {
     public Integer getKilometers() {
         return kilometers;
     }
-
     public void setKilometers(Integer kilometers) {
         this.kilometers = kilometers;
     }
@@ -41,7 +38,6 @@ public class Route implements Serializable {
     public double getPrice() {
         return price;
     }
-
     public void setPrice(double price) {
         this.price = price;
     }
@@ -49,7 +45,6 @@ public class Route implements Serializable {
     public Integer getSerialNumber() {
         return serialNumber;
     }
-
     public void setSerialNumber(Integer serialNumber) {
         this.serialNumber = serialNumber;
     }
@@ -57,7 +52,6 @@ public class Route implements Serializable {
     public Location getDeparture() {
         return departure;
     }
-
     public void setDeparture(Location departure) {
         this.departure = departure;
     }
@@ -65,7 +59,6 @@ public class Route implements Serializable {
     public Location getDestination() {
         return destination;
     }
-
     public void setDestination(Location destination) {
         this.destination = destination;
     }

@@ -13,7 +13,6 @@ public class Request extends User implements Serializable {
     public boolean isAccepted() {
         return accepted;
     }
-
     public void setAccepted(boolean accepted) {
         this.accepted = accepted;
     }
