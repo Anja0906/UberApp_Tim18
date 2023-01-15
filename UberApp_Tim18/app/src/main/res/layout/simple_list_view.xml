@@ -24,7 +24,7 @@
                 android:background="@color/background"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
-                app:titleTextColor="#fff" />
+                app:titleTextColor="#EBE8D7" />
 
             <ImageView
                 android:id="@+id/menu_toolbar_icon_simple_list"
