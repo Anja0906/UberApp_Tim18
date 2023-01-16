@@ -22,6 +22,7 @@ public class DriverMainActivity extends AppCompatActivity {
 
         DrawerLayout drawerLayout = findViewById(R.id.driver_main);
 
+
         findViewById(R.id.menu_toolbar_icon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
