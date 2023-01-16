@@ -22,6 +22,7 @@ import java.io.ObjectInputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import DTO.RideResponseDTO;
 import model.Ride;
 import model.Role;
 import model.User;
@@ -38,10 +39,10 @@ public class RideDetailActivity extends Activity {
         byte[] rideBytes = intent.getByteArrayExtra("ride");
         ByteArrayInputStream bis = new ByteArrayInputStream(rideBytes);
         ObjectInput in = null;
-        Ride ride = null;
+        RideResponseDTO ride = null;
         try {
             in = new ObjectInputStream(bis);
-            ride = (Ride) in.readObject();
+            ride = (RideResponseDTO) in.readObject();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -58,42 +59,30 @@ public class RideDetailActivity extends Activity {
 
         //System.out.println(ride);
         TextView beginning = (TextView)findViewById(R.id.beginning_txt_view);
-        LocalDateTime beg = ride.getBeginning();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
-        beginning.setText(beg.format(formatter));
+        String beg = ride.getStartTime();
 
         TextView end = (TextView)findViewById(R.id.end_txt_view);
-        LocalDateTime endf = ride.getBeginning();
-        end.setText(endf.format(formatter));
+        String endf = ride.getEndTime();
 
         TextView price = (TextView)findViewById(R.id.price_txt_view);
-        price.setText(Double.toString(ride.getPrice()));
+        price.setText(Double.toString(ride.getTotalCost()));
         TextView duration = (TextView)findViewById(R.id.duration_txt_view);
-        duration.setText(Integer.toString(ride.getDuration()));
+        duration.setText(Integer.toString(ride.getEstimatedTimeInMinutes()));
         TextView panic = (TextView)findViewById(R.id.panic_ride_txt_view);
-        if (ride.isPanic()) {
-            panic.setText("+");
-        } else {
-            panic.setText("-");
-        }
+
         TextView baby = (TextView)findViewById(R.id.baby_ride_txt_view);
-        if (ride.isBabyInCar()) {
+        if (ride.isBabyTransport()) {
             baby.setText("+");
         } else {
             baby.setText("-");
         }
         TextView pet = (TextView)findViewById(R.id.pet_ride_txt_view);
-        if (ride.isPetInCar()) {
+        if (ride.isPetTransport()) {
             pet.setText("+");
         } else {
             pet.setText("-");
         }
-        TextView split = (TextView)findViewById(R.id.split_fair_ride_txt_view);
-        if (ride.isSplitFair()) {
-            split.setText("+");
-        } else {
-            split.setText("-");
-        }
+
 
         DrawerLayout drawerLayout = findViewById(R.id.ride_detail);
 

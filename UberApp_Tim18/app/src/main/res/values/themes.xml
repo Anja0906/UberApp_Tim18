@@ -14,4 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="PreferenceTheme" parent="Theme.UberApp_Tim18">
+        <item name="android:colorBackground">@color/background</item>
+    </style>
 </resources>

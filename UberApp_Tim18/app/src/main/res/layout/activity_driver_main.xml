@@ -69,35 +69,10 @@
                     android:textOn="@string/toggle_on" />
             </RelativeLayout>
             <ImageView
-                android:id="@+id/imagelogo1"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
                 android:layout_gravity="center"
                 android:src="@drawable/logo" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_below="@+id/linear_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:id ="@+id/linear_layoutmap"
-            >
-<!--            <fragment-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:id="@+id/mapId"-->
-<!--                android:name="com.google.android.gms.maps.SupportMapFragment">-->
-<!--            </fragment>-->
-        </LinearLayout>
-        <LinearLayout
-            android:translationZ="90dp"
-            android:layout_below="@+id/linear_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:id ="@+id/bane">
-
         </LinearLayout>
 
     </RelativeLayout>

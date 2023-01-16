@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -32,6 +33,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.uberapp_tim18.R;
@@ -47,6 +49,7 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.gson.Gson;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
@@ -66,6 +69,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import DTO.LocationDTO;
+import DTO.LocationSetDTO;
+
 
 public class MapFragment extends Fragment implements LocationListener, OnMapReadyCallback {
 
@@ -80,9 +86,15 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
     ArrayList<LatLng> listPoints;
     private String TAG = "so47492459";
     int i;
+    LatLng departure;
+    LatLng destination;
 
     Button button;
 
+    public MapFragment() {
+        this.departure = null;
+        this.destination = null;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,7 +120,63 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         SearchView departureEditText = view.findViewById(R.id.search_departure);
         SearchView destinationEditText = view.findViewById(R.id.search_destination);
         i=0;
+
         Button button = view.findViewById(R.id.searchbutton);
+        Button buttonOrder = view.findViewById(R.id.orderbutton);
+        buttonOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                String locationDeparture = departureEditText.getQuery().toString();
+                String locationDestination = destinationEditText.getQuery().toString();
+                LocationSetDTO locationSetDTO = new LocationSetDTO();
+                MarkerOptions markerOptions = new MarkerOptions();
+
+                List<Address> addressList = null;
+                if (locationDeparture != null || !locationDeparture.equals("")) {
+                    Geocoder geocoder = new Geocoder(view.getContext());
+                    try {
+                        addressList = geocoder.getFromLocationName(locationDeparture, 1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Address addressDeparture = addressList.get(0);
+                    LatLng latLngDeparture = new LatLng(addressDeparture.getLatitude(), addressDeparture.getLongitude());
+                    System.out.println("ADSDASDASDSADASDASDASDASDASDASDAS  "+ addressDeparture.toString());
+                    LocationDTO locationDTODeparture = new LocationDTO(addressDeparture.getAddressLine(0),latLngDeparture.latitude,latLngDeparture.longitude);
+                    locationSetDTO.setDeparture(locationDTODeparture);
+                    if (locationDestination != null || !locationDestination.equals("")) {
+                        geocoder = new Geocoder(view.getContext());
+                        try {
+                            addressList = geocoder.getFromLocationName(locationDestination, 1);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Address addressDestination = addressList.get(0);
+                        LatLng latLngDestination = new LatLng(addressDestination.getLatitude(), addressDestination.getLongitude());
+                        LocationDTO locationDTODestination = new LocationDTO(addressDestination.getAddressLine(0),latLngDestination.latitude,latLngDestination.longitude);
+                        locationSetDTO.setDestination(locationDTODestination);
+                        }
+                    }
+
+                SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+
+                Gson gson = new Gson();
+                String json = gson.toJson(locationSetDTO);
+                editor.putString("object", json);
+                editor.apply();
+
+                CreateRide newFragment = new CreateRide();
+                fragmentTransaction.replace(R.id.fragment_container, newFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+
+            }
+        });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -345,10 +413,11 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
                     listPoints.clear();
                     map.clear();
                 }
+
                 listPoints.add(latLng);
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
-                System.out.println(latLng.toString());
+
                 if (listPoints.size() == 1) {
                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                     CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -362,7 +431,15 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
 
                     map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 }
-                map.addMarker(markerOptions);
+                if(i<2) {
+                    map.addMarker(markerOptions);
+                    i += 1;
+                }else{
+                    map.clear();
+                    i=0;
+                    map.addMarker(markerOptions);
+                    i+=1;
+                }
 
                 if (listPoints.size() == 2) {
                     String url = getRequestUrl(listPoints.get(0), listPoints.get(1));
@@ -439,7 +516,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
     @Override
     public void onResume() {
         super.onResume();
-
+        View view = getView();
         createMapFragmentAndInflate();
 
         boolean gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);

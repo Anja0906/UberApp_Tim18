@@ -3,10 +3,14 @@
     <string name="name">Name</string>
     <string name="surname">Surname</string>
     <string name="email">Email</string>
+    <string name="departure">Departure</string>
+    <string name="destination">Destination</string>
     <string name="password">Password</string>
+    <string name="new_password">New password</string>
     <string name="username">Username</string>
     <string name="phone">Phone</string>
     <string name="address">Address</string>
+    <string name="confirm">Confirm</string>
     <string name="confirm_password">Confirm password</string>
     <string name="account">Account</string>
     <string name="inbox">Inbox</string>
@@ -96,4 +100,14 @@
     <string name="pref_sync">pref_sync</string>
     <string name="notif_on_sync_key">notif_on_sync</string>
     <string name="turn_notif_on">Stop notification</string>
+    <string name="yes">YES</string>
+    <string name="pet_transport">Pet transport</string>
+    <string name="baby_transport">Baby transport</string>
+    <string name="s1_title">Start time of the ride: </string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="vehicle_type">Vehicle type:</string>
+    <string name="other_options">Other options:</string>
+    <string name="other_passengers">Other passengers</string>
+    <string name="order">ORDER</string>
 </resources>

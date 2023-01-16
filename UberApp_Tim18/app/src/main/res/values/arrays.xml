@@ -28,5 +28,11 @@
         <item>3</item>
         <item>10</item>
     </string-array>
+
+    <array name="details">
+        <item>Time</item>
+        <item>Vehicle type</item>
+        <item>Other</item>
+    </array>
     
 </resources>

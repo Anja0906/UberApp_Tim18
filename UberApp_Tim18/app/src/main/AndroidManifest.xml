@@ -8,23 +8,33 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_secutity_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UberApp_Tim18"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDYRxUrFDTe31EDYIsyG8q5QnRo4VY0zWc"
-        />
+            />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".ReviewerPreferenceActivity"
             android:exported="false">
@@ -37,7 +47,7 @@
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="AIzaSyApqYpHZifiARMSzPgVzZO7TQD6Cdz99Gk" />
+                android:value="" />
         </activity>
         <activity
             android:name=".MessageDetailActivity"

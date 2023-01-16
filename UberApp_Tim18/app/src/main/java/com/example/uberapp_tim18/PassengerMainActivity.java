@@ -8,16 +8,27 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
+import com.example.uberapp_tim18.Adapters.SimpleFragmentPagerAdapter;
 import com.google.android.material.navigation.NavigationView;
 
-public class PassengerMainActivity extends Activity {
+public class PassengerMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_main);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        MapFragment fragment = new MapFragment();
+//        CreateRide fragment = new CreateRide();
+        fragmentTransaction.add(R.id.fragment_container, fragment, "my_fragment_tag");
+        fragmentTransaction.commit();
 
         DrawerLayout drawerLayout = findViewById(R.id.passenger_main);
 

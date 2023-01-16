@@ -10,15 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text = "Google Maps"-->
-<!--            android:textSize="30dp"-->
-<!--            android:textColor="#000"-->
-<!--            android:textStyle="bold"-->
-<!--            android:padding="20dp">-->
-<!--        </TextView>-->
+        <!--        <TextView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text = "Google Maps"-->
+        <!--            android:textSize="30dp"-->
+        <!--            android:textColor="#000"-->
+        <!--            android:textStyle="bold"-->
+        <!--            android:padding="20dp">-->
+        <!--        </TextView>-->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

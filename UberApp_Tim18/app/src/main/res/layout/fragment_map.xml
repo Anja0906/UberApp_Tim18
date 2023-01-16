@@ -54,7 +54,20 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:layout_alignParentRight="true"
-            android:textSize="15dp"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/orderbutton"
+            android:layout_below="@+id/search_destination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/order"
+            android:background="@drawable/button_shape"
+            android:textColor="@color/black"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentLeft="true"
+            android:textSize="17dp"
             android:textStyle="bold" />
     </RelativeLayout>
 

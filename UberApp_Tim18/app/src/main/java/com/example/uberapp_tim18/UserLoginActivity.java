@@ -11,20 +11,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import DTO.JWTResponse;
 import DTO.LoginDTO;
-import model.User;
 import retrofit.LoginApi;
 import retrofit.RetrofitService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import tools.HelperClasses;
-import tools.Mockup;
 
 public class UserLoginActivity extends Activity {
 
@@ -33,8 +29,22 @@ public class UserLoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_login2);
 
-        Button button = findViewById(R.id.login);
         RetrofitService retrofitService = new RetrofitService();
+        this.setUserInterface(retrofitService);
+    }
+
+    private void saveLoggedUser(JWTResponse response){
+        SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("id", String.valueOf(response.getId()));
+        editor.putString("email", response.getEmail());
+        editor.putString("role", String.valueOf(response.getRoles().get(0)));
+        editor.putString("jwt", response.getAccessToken());
+
+    }
+
+    private void setUserInterface(RetrofitService retrofitService){
+        Button button = findViewById(R.id.login);
         LoginApi loginApi = retrofitService.getRetrofit().create(LoginApi.class);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,15 +90,17 @@ public class UserLoginActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        TextView forgotPassword = findViewById(R.id.forgotPass);
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserLoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
-    private void saveLoggedUser(JWTResponse response){
-        SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("id", String.valueOf(response.getId()));
-        editor.putString("email", String.valueOf(response.getEmail()));
-        editor.putString("role", String.valueOf(response.getRoles().get(0)));
-    }
 
 
     @Override

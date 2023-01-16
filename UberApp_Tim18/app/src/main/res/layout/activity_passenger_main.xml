@@ -58,29 +58,15 @@
                     tools:ignore="MissingConstraints" />
             </RelativeLayout>
 
-
-
-
-            <ImageView
-                android:layout_margin="20dp"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:src="@drawable/logo"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-            />
-            <TextView
-                android:id="@+id/welcome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/welcome"
-                android:textColor="@color/edit_text"
-                android:textSize="30dp"
-                android:textStyle="bold"
-
-            />
+            <LinearLayout
+                android:id="@+id/fragment_container"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+            </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_view"
