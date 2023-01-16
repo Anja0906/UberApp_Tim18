@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">UberApp_Tim18</string>
     <string name="name">Name</string>
+    <string name="surname">Surname</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="username">Username</string>
@@ -44,6 +45,7 @@
 
 
     <string name="search">Search</string>
+    <string name="setting">Settings</string>
     <string name="preferences">Preferences</string>
     <string name="about">About</string>
     <string name="drawer_open">Open navigation drawer</string>
