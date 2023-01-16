@@ -24,12 +24,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = new Intent(MainActivity.this,SplashActivity.class);
-        startActivity(intent);
-        //        MapFragment mapFragment = new MapFragment();
-//        DrawRouteFragment drawRouteFragment = new DrawRouteFragment();
-////        SearchFragment searchFragment = new SearchFragment();
-//        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, mapFragment).commit();
+//        Intent intent = new Intent(MainActivity.this,SplashActivity.class);
+//        startActivity(intent);
+        MapFragment mapFragment = new MapFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.bane, mapFragment).commit();
 
     }
 }
