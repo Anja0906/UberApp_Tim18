@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/driver_ride_history"
     android:background="@drawable/layout_radius"
-    tools:context=".DriverRideHistoryActivity"
+    tools:context=".Activities.DriverRideHistoryActivity"
     >
 
     <ImageView

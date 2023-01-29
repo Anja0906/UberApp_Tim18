@@ -1,8 +1,10 @@
-package com.example.uberapp_tim18;
+package com.example.uberapp_tim18.fragments;
 
 import android.os.Bundle;
 
 import androidx.preference.PreferenceFragmentCompat;
+
+import com.example.uberapp_tim18.R;
 
 
 public class PrefsFragment extends PreferenceFragmentCompat{

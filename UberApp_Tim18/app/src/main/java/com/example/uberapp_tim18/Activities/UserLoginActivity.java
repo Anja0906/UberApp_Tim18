@@ -1,4 +1,4 @@
-package com.example.uberapp_tim18;
+package com.example.uberapp_tim18.Activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.uberapp_tim18.R;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

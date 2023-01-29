@@ -1,4 +1,4 @@
-package com.example.uberapp_tim18;
+package com.example.uberapp_tim18.Activities;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uberapp_tim18.Adapters.ChatAdapter;
+import com.example.uberapp_tim18.R;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

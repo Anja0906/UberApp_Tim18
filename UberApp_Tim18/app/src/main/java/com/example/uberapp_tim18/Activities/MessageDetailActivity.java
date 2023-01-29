@@ -1,4 +1,4 @@
-package com.example.uberapp_tim18;
+package com.example.uberapp_tim18.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.uberapp_tim18.R;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.ByteArrayInputStream;

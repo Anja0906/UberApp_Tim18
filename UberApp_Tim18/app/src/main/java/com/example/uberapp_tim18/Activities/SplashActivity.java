@@ -1,4 +1,4 @@
-package com.example.uberapp_tim18;
+package com.example.uberapp_tim18.Activities;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -8,6 +8,8 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import com.example.uberapp_tim18.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

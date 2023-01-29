@@ -1,4 +1,4 @@
-package com.example.uberapp_tim18;
+package com.example.uberapp_tim18.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -13,22 +13,17 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -89,8 +84,6 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
     LatLng departure;
     LatLng destination;
 
-    Button button;
-
     public MapFragment() {
         this.departure = null;
         this.destination = null;
@@ -144,7 +137,6 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
                     }
                     Address addressDeparture = addressList.get(0);
                     LatLng latLngDeparture = new LatLng(addressDeparture.getLatitude(), addressDeparture.getLongitude());
-                    System.out.println("ADSDASDASDSADASDASDASDASDASDASDAS  "+ addressDeparture.toString());
                     LocationDTO locationDTODeparture = new LocationDTO(addressDeparture.getAddressLine(0),latLngDeparture.latitude,latLngDeparture.longitude);
                     locationSetDTO.setDeparture(locationDTODeparture);
                     if (locationDestination != null || !locationDestination.equals("")) {

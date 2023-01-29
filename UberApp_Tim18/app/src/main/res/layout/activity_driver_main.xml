@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/driver_main"
     android:background="@color/background"
-    tools:context=".DriverMainActivity">
+    tools:context=".Activities.DriverMainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

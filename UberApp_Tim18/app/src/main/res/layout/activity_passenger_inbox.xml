@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/layout_radius"
 
-    tools:context=".PassengerInboxActivity">
+    tools:context=".Activities.PassengerInboxActivity">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

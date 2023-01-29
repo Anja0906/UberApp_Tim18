@@ -1,6 +1,5 @@
-package com.example.uberapp_tim18;
+package com.example.uberapp_tim18.Activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -13,9 +12,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
-import com.example.uberapp_tim18.Adapters.SimpleFragmentPagerAdapter;
+import com.example.uberapp_tim18.R;
+import com.example.uberapp_tim18.fragments.MapFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class PassengerMainActivity extends AppCompatActivity {
@@ -26,7 +25,6 @@ public class PassengerMainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         MapFragment fragment = new MapFragment();
-//        CreateRide fragment = new CreateRide();
         fragmentTransaction.add(R.id.fragment_container, fragment, "my_fragment_tag");
         fragmentTransaction.commit();
 

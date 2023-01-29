@@ -1,4 +1,5 @@
-package com.example.uberapp_tim18;
+package com.example.uberapp_tim18.Activities;
+
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,12 +7,12 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.uberapp_tim18.R;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.ByteArrayInputStream;
@@ -19,25 +20,26 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 
+import DTO.RideResponseDTO;
 import model.Role;
 import model.User;
 import tools.HelperClasses;
 
-public class PassengerAccountActivity extends Activity {
+public class RideDetailActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_passenger_account);
+        setContentView(R.layout.activity_ride_detail);
         Intent intent = getIntent();
-        byte[] userBytes = intent.getByteArrayExtra("user");
-        ByteArrayInputStream bis = new ByteArrayInputStream(userBytes);
+//        System.out.println(getIntent().getByteArrayExtra("user").toString());
+        byte[] rideBytes = intent.getByteArrayExtra("ride");
+        ByteArrayInputStream bis = new ByteArrayInputStream(rideBytes);
         ObjectInput in = null;
-        User user = null;
+        RideResponseDTO ride = null;
         try {
             in = new ObjectInputStream(bis);
-            user = (User)in.readObject();
-//            System.out.println("uspeo sam");
+            ride = (RideResponseDTO) in.readObject();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -53,18 +55,33 @@ public class PassengerAccountActivity extends Activity {
         }
 
         //System.out.println(ride);
-        TextView name = (TextView)findViewById(R.id.name_txt_view);
-        name.setText(user.getName());
-        TextView phone = (TextView)findViewById(R.id.phone_txt_view);
-        phone.setText(user.getTelephoneNumber());
-        TextView email = (TextView)findViewById(R.id.email_txt_view);
-        email.setText(user.getEmail());
-        TextView address = (TextView)findViewById(R.id.address_txt_view);
-        address.setText(user.getAddress());
-//        TextView password = (TextView)findViewById(R.id.pass_txt_view);
-//        password.setText(user.get());
+        TextView beginning = (TextView)findViewById(R.id.beginning_txt_view);
+        String beg = ride.getStartTime();
 
-        DrawerLayout drawerLayout = findViewById(R.id.passenger_account_activity);
+        TextView end = (TextView)findViewById(R.id.end_txt_view);
+        String endf = ride.getEndTime();
+
+        TextView price = (TextView)findViewById(R.id.price_txt_view);
+        price.setText(Double.toString(ride.getTotalCost()));
+        TextView duration = (TextView)findViewById(R.id.duration_txt_view);
+        duration.setText(Integer.toString(ride.getEstimatedTimeInMinutes()));
+        TextView panic = (TextView)findViewById(R.id.panic_ride_txt_view);
+
+        TextView baby = (TextView)findViewById(R.id.baby_ride_txt_view);
+        if (ride.isBabyTransport()) {
+            baby.setText("+");
+        } else {
+            baby.setText("-");
+        }
+        TextView pet = (TextView)findViewById(R.id.pet_ride_txt_view);
+        if (ride.isPetTransport()) {
+            pet.setText("+");
+        } else {
+            pet.setText("-");
+        }
+
+
+        DrawerLayout drawerLayout = findViewById(R.id.ride_detail);
 
         findViewById(R.id.menu_toolbar_icon).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +91,7 @@ public class PassengerAccountActivity extends Activity {
         });
 
 
-        NavigationView navigationView = findViewById(R.id.navigation_view_passenger_account);
+        NavigationView navigationView = findViewById(R.id.ride_detail_navigation);
         navigationView.setItemIconTintList(null);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -82,18 +99,17 @@ public class PassengerAccountActivity extends Activity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.inbox:
-                        Intent inbox = new Intent(PassengerAccountActivity.this, PassengerInboxActivity.class);
+                        Intent inbox = new Intent(RideDetailActivity.this, PassengerInboxActivity.class);
                         inbox.putExtra("user", getIntent().getByteArrayExtra("user"));;
                         startActivity(inbox);
                         break;
                     case R.id.account:
-                        Intent profile = new Intent(PassengerAccountActivity.this, PassengerAccountActivity.class);
+                        Intent profile = new Intent(RideDetailActivity.this, PassengerAccountActivity.class);
                         profile.putExtra("user", getIntent().getByteArrayExtra("user"));
                         startActivity(profile);
                         break;
-
                     case R.id.ride_history:
-                        Intent history = new Intent(PassengerAccountActivity.this, DriverRideHistoryActivity.class);
+                        Intent history = new Intent(RideDetailActivity.this, DriverRideHistoryActivity.class);
                         history.putExtra("user", getIntent().getByteArrayExtra("user"));
                         startActivity(history);
                         break;
@@ -101,16 +117,16 @@ public class PassengerAccountActivity extends Activity {
                         User user = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("user"));
                         Intent home = null;
                         if (user.getRole() == Role.PASSENGER) {
-                            home = new Intent(PassengerAccountActivity.this, PassengerMainActivity.class);
+                            home = new Intent(RideDetailActivity.this, PassengerMainActivity.class);
                         }
                         if (user.getRole() == Role.DRIVER) {
-                            home = new Intent(PassengerAccountActivity.this, DriverMainActivity.class);
+                            home = new Intent(RideDetailActivity.this, DriverMainActivity.class);
                         }
                         home.putExtra("user", getIntent().getByteArrayExtra("user"));
                         startActivity(home);
                         break;
                     case R.id.settings:
-                        Intent settings = new Intent(PassengerAccountActivity.this, ReviewerPreferenceActivity.class);
+                        Intent settings = new Intent(RideDetailActivity.this, ReviewerPreferenceActivity.class);
                         settings.putExtra("user", getIntent().getByteArrayExtra("user"));
                         startActivity(settings);
                         break;
@@ -118,35 +134,6 @@ public class PassengerAccountActivity extends Activity {
                 return false;
             }
         });
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
     }
 }

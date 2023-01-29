@@ -1,4 +1,4 @@
-package com.example.uberapp_tim18;
+package com.example.uberapp_tim18.Activities;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -6,7 +6,7 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
-import tools.FragmentTransition;
+import com.example.uberapp_tim18.fragments.PrefsFragment;
 
 public class ReviewerPreferenceActivity extends AppCompatActivity {
 

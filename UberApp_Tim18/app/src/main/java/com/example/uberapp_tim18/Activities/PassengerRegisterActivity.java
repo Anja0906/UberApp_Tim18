@@ -1,7 +1,5 @@
-package com.example.uberapp_tim18;
+package com.example.uberapp_tim18.Activities;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +7,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.uberapp_tim18.R;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
