@@ -7,7 +7,7 @@
     android:id="@+id/driver_ride_history"
     android:background="@drawable/layout_radius"
     tools:context=".Activities.DriverRideHistoryActivity"
-    >
+    tools:ignore="MissingClass">
 
     <ImageView
         android:id="@+id/item_icon"
@@ -40,5 +40,6 @@
         android:layout_toEndOf="@+id/item_icon"
         android:textColor="@color/button"
         android:padding="5dp"/>
+
 
 </RelativeLayout>
