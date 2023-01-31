@@ -9,6 +9,6 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface RideApi {
-    @POST("/api/ride")
+    @POST("/api/ride/android")
     Call<RideResponseDTO> save(@Body RidePostDTO ridePostDTO);
 }
