@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -41,9 +41,9 @@ public class CreateRide extends Fragment {
     //delovi GUIja
     View rootView;
     StepView stepView;
-    LinearLayout layout1;
-    LinearLayout layout2;
-    LinearLayout layout3;
+    RelativeLayout layout1;
+    RelativeLayout layout2;
+    RelativeLayout layout3;
     TimePicker timePicker;
     RadioGroup radioGroup;
     ToggleButton babyTransportToggle;
@@ -69,7 +69,6 @@ public class CreateRide extends Fragment {
     //inicijalizacija GUIja
     private void initGUI(LayoutInflater inflater, ViewGroup container){
         rootView = inflater.inflate(R.layout.fragment_create_ride, container, false);
-        stepView = rootView.findViewById(R.id.step_view);
         layout1 = rootView.findViewById(R.id.stepper1);
         layout2 = rootView.findViewById(R.id.stepper2);
         layout3 = rootView.findViewById(R.id.stepper3);
@@ -77,6 +76,12 @@ public class CreateRide extends Fragment {
         radioGroup = rootView.findViewById(R.id.radio_group);
         babyTransportToggle = (ToggleButton) rootView.findViewById(R.id.baby_transport_button);
         petTransportToggle = (ToggleButton) rootView.findViewById(R.id.pet_transport_button);
+        initStepper();
+    }
+
+    //inicijalizacija step view-a
+    private void initStepper(){
+        stepView = rootView.findViewById(R.id.step_view);
         setStep1();
         ArrayList<String> steps = new ArrayList<>();
         steps.add("Time");
