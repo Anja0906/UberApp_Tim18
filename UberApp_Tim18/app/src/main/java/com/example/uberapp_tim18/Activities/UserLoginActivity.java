@@ -65,7 +65,7 @@ public class UserLoginActivity extends Activity {
                             public void onResponse(Call<JWTResponse> call, Response<JWTResponse> response) {
                                 Toast.makeText(UserLoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
                                 UserLoginActivity.this.saveLoggedUser(response.body());
-                                if (response.body().getRoles().get(0).equals("ROLE_USER")) {
+                                if (response.body().getRoles().get(1).equals("ROLE_PASSENGER")) {
                                     Intent intent = new Intent(UserLoginActivity.this, PassengerMainActivity.class);
                                     startActivity(intent);
                                 } else {
