@@ -1,12 +1,14 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 public class Request extends User implements Serializable {
     private boolean accepted;
 
-    public Request(Integer id, String name, String surname, int profilePicture, String telephoneNumber, String email, String address, boolean blocked, String password, Role role, boolean accepted) {
-        super(id, name, surname, profilePicture, telephoneNumber, email, address, blocked, password, role);
+    public Request(Integer id, String name, String surname, String profilePicture, String telephoneNumber, String email, String address, String password, boolean blocked, boolean active, String verificationCode, String resetPasswordToken, Date timeOfResetPasswordToken, List<Role> roles, boolean accepted) {
+        super(id, name, surname, profilePicture, telephoneNumber, email, address, password, blocked, active, verificationCode, resetPasswordToken, timeOfResetPasswordToken, roles);
         this.accepted = accepted;
     }
 

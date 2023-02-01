@@ -55,7 +55,7 @@ public class MessageAdapter extends BaseAdapter {
 
         User to = message.getTo();
         User from = message.getFrom();
-        int pfp = from.getProfilePicture();
+        int pfp = Integer.parseInt(from.getProfilePicture());
         String fromName = from.getName() + " " + from.getSurname();
 //        LocalDateTime date = message.getDate();
         String content = message.getContent();

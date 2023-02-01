@@ -60,7 +60,7 @@ public class ChatActivity extends AppCompatActivity {
         this.receiver = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("receiver"));
 
         txtSender.setText(receiver.getName() + " " + receiver.getSurname());
-        int pfp = receiver.getProfilePicture();
+        int pfp = Integer.parseInt(receiver.getProfilePicture());
         if (pfp != -1){
             imgSender.setImageResource(pfp);
         }

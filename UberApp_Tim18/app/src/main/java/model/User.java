@@ -3,38 +3,49 @@ package model;
 import androidx.annotation.Nullable;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class User implements Serializable {
     private Integer id;
     private String name;
     private String surname;
-    private int profilePicture;
+    private String profilePicture;
     private String telephoneNumber;
     private String email;
     private String address;
-    private boolean blocked;
     private String password;
-    private Role role;
+    private boolean blocked;
+    private boolean active;
+    private String verificationCode;
+    private String resetPasswordToken;
+    private Date timeOfResetPasswordToken;
+    private List<Role> roles;
 
     public User(){}
 
-    public User(Integer id, String name, String surname, int profilePicture, String telephoneNumber, String email, String address, boolean blocked, String password, Role role) {
-        this.id              = id;
-        this.name            = name;
-        this.surname         = surname;
-        this.profilePicture  = profilePicture;
+    public User(Integer id, String name, String surname, String profilePicture, String telephoneNumber, String email, String address, String password, boolean blocked, boolean active, String verificationCode, String resetPasswordToken, Date timeOfResetPasswordToken, List<Role> roles) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.profilePicture = profilePicture;
         this.telephoneNumber = telephoneNumber;
-        this.email           = email;
-        this.address         = address;
-        this.blocked         = blocked;
-        this.password        = password;
-        this.role            = role;
+        this.email = email;
+        this.address = address;
+        this.password = password;
+        this.blocked = blocked;
+        this.active = active;
+        this.verificationCode = verificationCode;
+        this.resetPasswordToken = resetPasswordToken;
+        this.timeOfResetPasswordToken = timeOfResetPasswordToken;
+        this.roles = roles;
     }
 
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -42,6 +53,7 @@ public class User implements Serializable {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -49,25 +61,31 @@ public class User implements Serializable {
     public String getSurname() {
         return surname;
     }
+
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
-    public int getProfilePicture() {
+    public String getProfilePicture() {
         return profilePicture;
     }
-    public void setProfilePicture(int profilePicture) {
+
+    public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
     }
 
     public String getTelephoneNumber() {
         return telephoneNumber;
     }
-    public void setTelephoneNumber(String telephoneNumber) {this.telephoneNumber = telephoneNumber;}
+
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
+    }
 
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -75,41 +93,64 @@ public class User implements Serializable {
     public String getAddress() {
         return address;
     }
+
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public boolean isBlocked() {
-        return blocked;
-    }
-    public void setBlocked(boolean blocked) {
-        this.blocked = blocked;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
 
-    @Override
-    public boolean equals(@Nullable Object _obj) {
-        User obj = (User) _obj;
-        return Objects.equals(this.name, obj.getName()) &&
-                Objects.equals(this.surname, obj.getSurname()) &&
-                Objects.equals(this.profilePicture, obj.getProfilePicture()) &&
-                Objects.equals(this.telephoneNumber, obj.getTelephoneNumber()) &&
-                Objects.equals(this.email, obj.getEmail()) &&
-                Objects.equals(this.address, obj.getAddress()) &&
-                Objects.equals(this.password, obj.getPassword()) &&
-                Objects.equals(this.role, obj.getRole());
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
+    public String getResetPasswordToken() {
+        return resetPasswordToken;
+    }
+
+    public void setResetPasswordToken(String resetPasswordToken) {
+        this.resetPasswordToken = resetPasswordToken;
+    }
+
+    public Date getTimeOfResetPasswordToken() {
+        return timeOfResetPasswordToken;
+    }
+
+    public void setTimeOfResetPasswordToken(Date timeOfResetPasswordToken) {
+        this.timeOfResetPasswordToken = timeOfResetPasswordToken;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
