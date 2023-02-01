@@ -42,7 +42,7 @@ public class UserLoginActivity extends Activity {
         editor.putString("email", response.getEmail());
         editor.putString("role", String.valueOf(response.getRoles().get(0)));
         editor.putString("jwt", response.getAccessToken());
-
+        editor.apply();
     }
 
     private void setUserInterface(RetrofitService retrofitService){

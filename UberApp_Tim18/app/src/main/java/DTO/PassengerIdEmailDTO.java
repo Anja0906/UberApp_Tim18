@@ -1,6 +1,8 @@
 package DTO;
 
-public class PassengerIdEmailDTO {
+import java.io.Serializable;
+
+public class PassengerIdEmailDTO  implements Serializable {
     private Integer id;
     private String email;
 

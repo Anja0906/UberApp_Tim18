@@ -1,8 +1,9 @@
 package DTO;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class JWTResponse {
+public class JWTResponse implements Serializable {
     private String accessToken;
 
     private String refreshToken;

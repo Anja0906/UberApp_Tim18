@@ -9,6 +9,6 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface PassengerApi {
-    @POST("/api/passenger")
+    @POST("/api/user/register")
     Call<PassengerResponseDTO> save(@Body PassengerPostDTO passengerPostDTO);
 }

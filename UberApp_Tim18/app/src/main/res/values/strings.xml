@@ -113,4 +113,6 @@
     <string name="edit_profile">Edit profile:</string>
     <string name="ID">ID:</string>
     <string name="cancel">Cancel</string>
+    <string name="verify">Please verify your account with an email!</string>
+    <string name="verified_button">I have verified!</string>
 </resources>

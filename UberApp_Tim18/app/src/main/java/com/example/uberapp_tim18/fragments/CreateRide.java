@@ -110,7 +110,7 @@ public class CreateRide extends Fragment {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               setStep2();
+                setStep2();
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +122,7 @@ public class CreateRide extends Fragment {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               orderRide();
+                orderRide();
             }
         });
         buttonCancel.setOnClickListener(new View.OnClickListener() {
@@ -198,7 +198,10 @@ public class CreateRide extends Fragment {
     //porucivanje voznje
     private void orderRide(){
         //izdebagovati sa backendom
+        SharedPreferences preferences = getActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        String token = preferences.getString("jwt", "");
         RetrofitService retrofitService = new RetrofitService();
+        retrofitService.onSavedUser(token);
         RideApi rideApi = retrofitService.getRetrofit().create(RideApi.class);
         Set<LocationSetDTO> locations = new HashSet<LocationSetDTO>();
         locations.add(locationSetDTO);
@@ -218,7 +221,6 @@ public class CreateRide extends Fragment {
                 .enqueue(new Callback<RideResponseDTO>() {
                     @Override
                     public void onResponse(Call<RideResponseDTO> call, Response<RideResponseDTO> response) {
-                        System.out.println(ridePostDTO);
                         Toast.makeText(getActivity(), "Voznja je porucena", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getActivity(), PassengerMainActivity.class);
                         startActivity(intent);
