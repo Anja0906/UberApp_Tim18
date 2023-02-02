@@ -1,6 +1,8 @@
 package com.example.uberapp_tim18.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.uberapp_tim18.R;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import DTO.JWTResponse;
 import DTO.PassengerPostDTO;
 import DTO.PassengerResponseDTO;
 import retrofit.PassengerApi;
@@ -67,7 +71,7 @@ public class PassengerRegisterActivity extends AppCompatActivity {
                     .enqueue(new Callback<PassengerResponseDTO>() {
                         @Override
                         public void onResponse(Call<PassengerResponseDTO> call, Response<PassengerResponseDTO> response) {
-                            Log.i("Ne pada", response.body().toString());
+                            saveLoggedUser(passengerPostDTO.getEmail());
                             Toast.makeText(PassengerRegisterActivity.this, "Save successful!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(PassengerRegisterActivity.this, ConfirmRegistration.class);
                             startActivity(intent);
@@ -101,6 +105,13 @@ public class PassengerRegisterActivity extends AppCompatActivity {
         else{
             return null;
         }
+    }
+
+    private void saveLoggedUser(String email){
+        SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("email", email);
+        editor.apply();
     }
 
     @Override

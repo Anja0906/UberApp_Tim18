@@ -75,7 +75,7 @@ public class UserAdapter extends BaseAdapter {
         */
         ImageView image = (ImageView)vi.findViewById(R.id.from_pfp_view);
 
-        int pfp = user.getProfilePicture();
+        int pfp = Integer.parseInt(user.getProfilePicture());
         String fromName = user.getName() + " " + user.getSurname();
 
 
