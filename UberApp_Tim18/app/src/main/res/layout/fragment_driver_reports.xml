@@ -10,25 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/profile_first_part_background"
-            />
-        <ImageView
-            android:layout_width="150dp"
-            android:id="@+id/picture"
-            android:layout_height="150dp"
-            android:background="@drawable/round_image_view"
-            android:src="@drawable/user4"
-            android:layout_marginTop="100dp"
-            android:layout_centerHorizontal="true"
-            />
+
         <ListView
             android:id="@+id/list_view"
-            android:layout_marginTop="15dp"
             android:padding="10dp"
-            android:layout_below="@+id/picture"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

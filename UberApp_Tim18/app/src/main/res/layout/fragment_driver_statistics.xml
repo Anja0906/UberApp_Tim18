@@ -11,26 +11,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/profile_first_part_background" />
-
-        <ImageView
-            android:id="@+id/picture"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
-            android:background="@drawable/round_image_view"
-            android:src="@drawable/user4" />
 
         <com.anychart.anychart.AnyChartView
             android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_below="@+id/picture"
-            android:layout_margin = "15dp"
+            android:layout_margin = "20dp"
             android:background="@drawable/edit_text_background" />
 
 

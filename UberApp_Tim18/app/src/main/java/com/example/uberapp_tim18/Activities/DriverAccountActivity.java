@@ -22,6 +22,8 @@ public class DriverAccountActivity extends AppCompatActivity {
     ImageView statistics;
     ImageView vehicle;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
