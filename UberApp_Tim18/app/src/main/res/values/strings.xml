@@ -115,4 +115,9 @@
     <string name="cancel">Cancel</string>
     <string name="verify">Please verify your account with an email!</string>
     <string name="verified_button">I have verified!</string>
+    <string name="model">Model</string>
+    <string name="license_number">License number</string>
+    <string name="passenger_seats">Passenger seats</string>
+    <string name="true_text">True</string>
+    <string name="false_text">False</string>
 </resources>

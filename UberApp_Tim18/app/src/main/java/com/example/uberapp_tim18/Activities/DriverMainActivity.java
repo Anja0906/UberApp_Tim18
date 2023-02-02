@@ -44,8 +44,7 @@ public class DriverMainActivity extends AppCompatActivity {
                         startActivity(inbox);
                         break;
                     case R.id.account:
-                        Intent profile = new Intent(DriverMainActivity.this, PassengerAccountActivity.class);
-                        profile.putExtra("user", getIntent().getByteArrayExtra("user"));
+                        Intent profile = new Intent(DriverMainActivity.this, DriverAccountActivity.class);
                         startActivity(profile);
                         break;
 

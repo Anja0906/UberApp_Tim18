@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".fragments.AboutVehicle">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/profile_first_part_background" />
+
+        <ImageView
+            android:id="@+id/picture"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/round_image_view"
+            android:src="@drawable/user4" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/picture"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/vehicle_type_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:alpha="1"
+                    android:background="@drawable/textview_border"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/vehicle_type"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+
+
+                <EditText
+                    android:id="@+id/vehicle_type_edit_text"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/textview_border"
+                    android:fontFamily="sans-serif-medium"
+                    android:inputType="text"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/model_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:alpha="1"
+                    android:background="@drawable/textview_border"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/model"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+
+
+                <EditText
+                    android:id="@+id/model_edit_text"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/textview_border"
+                    android:fontFamily="sans-serif-medium"
+                    android:inputType="text"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/license_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:alpha="1"
+                    android:background="@drawable/textview_border"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/license_number"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/license_number_edit_text"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/textview_border"
+                    android:fontFamily="sans-serif-medium"
+                    android:inputType="phone"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/passenger_seats_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:alpha="1"
+                    android:background="@drawable/textview_border"
+                    android:drawablePadding="10dp"
+
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/passenger_seats"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/passenger_seats_edit_text"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/textview_border"
+                    android:fontFamily="sans-serif-medium"
+
+                    android:inputType="textEmailAddress"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/baby_transport_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:alpha="1"
+                    android:background="@drawable/textview_border"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/baby_transport"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+
+                <ToggleButton
+                    android:id="@+id/baby_transport_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/toggle_button_color"
+                    android:textOff="@string/false_text"
+                    android:textOn="@string/true_text" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/pet_transport_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:alpha="1"
+                    android:background="@drawable/textview_border"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/baby_transport"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+
+                <ToggleButton
+                    android:id="@+id/pet_transport_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/toggle_button_color"
+                    android:textOff="@string/false_text"
+                    android:textOn="@string/true_text" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</ScrollView>
