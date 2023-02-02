@@ -107,10 +107,10 @@ public class PassengerAccountActivity extends AppCompatActivity {
                     case R.id.home:
                         User user = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("user"));
                         Intent home = null;
-                        if (user.getRole() == Role.PASSENGER) {
+                        if (user.getRoles().get(1) == Role.PASSENGER) {
                             home = new Intent(PassengerAccountActivity.this, PassengerMainActivity.class);
                         }
-                        if (user.getRole() == Role.DRIVER) {
+                        if (user.getRoles().get(1) == Role.DRIVER) {
                             home = new Intent(PassengerAccountActivity.this, DriverMainActivity.class);
                         }
                         home.putExtra("user", getIntent().getByteArrayExtra("user"));

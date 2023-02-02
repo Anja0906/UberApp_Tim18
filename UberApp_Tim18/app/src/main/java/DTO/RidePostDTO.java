@@ -1,10 +1,11 @@
 package DTO;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import model.VehicleName;
 
-public class RidePostDTO {
+public class RidePostDTO implements Serializable {
     private Integer id;
     private Set<LocationSetDTO> locations;
     private Set<PassengerIdEmailDTO> passengers;
@@ -77,5 +78,18 @@ public class RidePostDTO {
 
     public void setScheduledTime(String scheduledTime) {
         this.scheduledTime = scheduledTime;
+    }
+
+    @Override
+    public String toString() {
+        return "RidePostDTO{" +
+                "id=" + id +
+                ", locations=" + locations +
+                ", passengers=" + passengers +
+                ", vehicleType=" + vehicleType +
+                ", babyTransport=" + babyTransport +
+                ", petTransport=" + petTransport +
+                ", scheduledTime='" + scheduledTime + '\'' +
+                '}';
     }
 }

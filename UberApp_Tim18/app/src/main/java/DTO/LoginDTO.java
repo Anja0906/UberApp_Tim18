@@ -1,10 +1,8 @@
 package DTO;
 
-public class LoginDTO {
-//    {
-//        "email": "kristina@gmail.com",
-//            "password": "123"
-//    }
+import java.io.Serializable;
+
+public class LoginDTO  implements Serializable {
     private String email;
     private String password;
 

@@ -4,7 +4,7 @@ public class PassengerPostDTO {
 
     private String name;
     private String surname;
-    private int profilePicture;
+    private String profilePicture;
     private String telephoneNumber;
     private String email;
     private String address;
@@ -13,7 +13,7 @@ public class PassengerPostDTO {
     public PassengerPostDTO() {
     }
 
-    public PassengerPostDTO(String name, String surname, int profilePicture, String telephoneNumber, String email, String address, String password) {
+    public PassengerPostDTO(String name, String surname, String profilePicture, String telephoneNumber, String email, String address, String password) {
         this.name = name;
         this.surname = surname;
         this.profilePicture = profilePicture;
@@ -39,11 +39,11 @@ public class PassengerPostDTO {
         this.surname = surname;
     }
 
-    public int getProfilePicture() {
+    public String getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(int profilePicture) {
+    public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
     }
 

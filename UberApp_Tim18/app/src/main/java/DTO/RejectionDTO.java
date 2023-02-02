@@ -1,6 +1,8 @@
 package DTO;
 
-public class RejectionDTO {
+import java.io.Serializable;
+
+public class RejectionDTO implements Serializable {
     private String reason;
     private String timeOfRejection;
 

@@ -1,124 +1,118 @@
 package com.example.uberapp_tim18.Activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.uberapp_tim18.R;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import DTO.JWTResponse;
 import DTO.PassengerPostDTO;
 import DTO.PassengerResponseDTO;
 import retrofit.PassengerApi;
-import retrofit.RetrofitService;
+import retrofit.UserRetrofitService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PassengerRegisterActivity extends AppCompatActivity {
+    EditText name;
+    EditText surname;
+    EditText address;
+    EditText email;
+    EditText password;
+    EditText confirmPassword;
+    EditText telephoneNumber;
+    Button register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_register);
+        initializeComponents();
 
-        PassengerApi passengerApi;
-        RetrofitService retrofitService;
-
-        Button register = findViewById(R.id.register);
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initializeComponents();
-
-            }
-        });
-        //                String emailText = String.valueOf(username.getText());
-//                String passwordText = String.valueOf(password.getText());
-//
-//                LoginDTO loginDTO = new LoginDTO(emailText, passwordText);
-//
-//                loginApi.save(loginDTO)
-//                        .enqueue(new Callback<JWTResponse>() {
-//                            @Override
-//                            public void onResponse(Call<JWTResponse> call, Response<JWTResponse> response) {
-//                                Toast.makeText(UserLoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-//                                byte[] userBytes = HelperClasses.Serialize(response.body());
-//                                if (response.body().getRoles().get(0).equals("ROLE_USER")) {
-//                                    Intent intent = new Intent(UserLoginActivity.this, PassengerMainActivity.class);
-//                                    intent.putExtra("user", userBytes);
-//                                    startActivity(intent);
-//                                } else {
-//                                    Intent intent2 = new Intent(UserLoginActivity.this, DriverMainActivity.class);
-//                                    intent2.putExtra("user", userBytes);
-//                                    startActivity(intent2);
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onFailure(Call<JWTResponse> call, Throwable t) {
-//                                Toast.makeText(UserLoginActivity.this, "Login failed!!!", Toast.LENGTH_SHORT).show();
-//                                Logger.getLogger(UserLoginActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
-//                            }
-//
-//                        });
     }
 
     private void initializeComponents() {
-        EditText name = (EditText) findViewById(R.id.name);
-        EditText surname = (EditText) findViewById(R.id.surname);
-        EditText address = (EditText) findViewById(R.id.address);
-        EditText email = (EditText) findViewById(R.id.passenger_email);
-        EditText password = (EditText) findViewById(R.id.passenger_password);
-        EditText confirmPassword = (EditText) findViewById(R.id.passenger_password_confirm);
-        EditText telephoneNumber = (EditText) findViewById(R.id.phone_num);
-        Button register = findViewById(R.id.register);
+        name = findViewById(R.id.name);
+        surname = findViewById(R.id.surname);
+        address = findViewById(R.id.address);
+        email = findViewById(R.id.passenger_email);
+        password = findViewById(R.id.passenger_password);
+        confirmPassword = findViewById(R.id.passenger_password_confirm);
+        telephoneNumber = findViewById(R.id.phone_num);
 
-        RetrofitService retrofitService = new RetrofitService();
-        PassengerApi passengerApi = retrofitService.getRetrofit().create(PassengerApi.class);
+        initButton();
+    }
 
-        register.setOnClickListener(view -> {
-            String nameTxt = String.valueOf(name.getText());
-            String surnameTxt = String.valueOf(surname.getText());
-            String addressTxt = String.valueOf(address.getText());
-            String emailTxt = String.valueOf(email.getText());
-            String passwordTxt = String.valueOf(password.getText());
-            String confirmPasswordTxt = String.valueOf(confirmPassword.getText());
-            String telephoneNumberTxt = String.valueOf(telephoneNumber.getText());
-
-            if(passwordTxt.equals(confirmPasswordTxt)){
-                PassengerPostDTO passengerPostDTO = new PassengerPostDTO(nameTxt, surnameTxt, 1, telephoneNumberTxt, emailTxt, addressTxt, passwordTxt);
-
-                passengerApi.save(passengerPostDTO)
-                        .enqueue(new Callback<PassengerResponseDTO>() {
-                            @Override
-                            public void onResponse(Call<PassengerResponseDTO> call, Response<PassengerResponseDTO> response) {
-                                Toast.makeText(PassengerRegisterActivity.this, "Save successful!", Toast.LENGTH_SHORT).show();
-                                Logger.getLogger(PassengerRegisterActivity.class.getName()).log(Level.SEVERE, response.body().getEmail());
-//                                Intent intent = new Intent(PassengerRegisterActivity.this, UserLoginActivity.class);
-//                                startActivity(intent);
-                            }
-
-                            @Override
-                            public void onFailure(Call<PassengerResponseDTO> call, Throwable t) {
-                                Toast.makeText(PassengerRegisterActivity.this, "Save failed!!!", Toast.LENGTH_SHORT).show();
-                                Logger.getLogger(PassengerRegisterActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
-                            }
-
-
-                        });
+    private void initButton(){
+        register = findViewById(R.id.register);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendRequest();
             }
-
-
         });
     }
 
+    private void sendRequest(){
+        UserRetrofitService userRetrofitService = new UserRetrofitService();
+        PassengerApi passengerApi = userRetrofitService.getRetrofit().create(PassengerApi.class);
+        PassengerPostDTO passengerPostDTO = collectInputs();
+        if(passengerPostDTO!=null){
+            passengerApi.save(passengerPostDTO)
+                    .enqueue(new Callback<PassengerResponseDTO>() {
+                        @Override
+                        public void onResponse(Call<PassengerResponseDTO> call, Response<PassengerResponseDTO> response) {
+                            saveLoggedUser(passengerPostDTO.getEmail());
+                            Toast.makeText(PassengerRegisterActivity.this, "Save successful!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(PassengerRegisterActivity.this, ConfirmRegistration.class);
+                            startActivity(intent);
+                        }
 
+                        @Override
+                        public void onFailure(Call<PassengerResponseDTO> call, Throwable t) {
+                            System.out.println("pada");
+                            Log.i("Pada zbog", t.toString());
+                            Toast.makeText(PassengerRegisterActivity.this, "Save failed!!!", Toast.LENGTH_SHORT).show();
+                            Logger.getLogger(PassengerRegisterActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+                        }
+
+
+                    });
+        }
+
+    }
+
+    private PassengerPostDTO collectInputs(){
+        String nameTxt = name.getText().toString();
+        String surnameTxt = surname.getText().toString();
+        String addressTxt = address.getText().toString();
+        String emailTxt = email.getText().toString();
+        String passwordTxt = password.getText().toString();
+        String confirmPasswordTxt = confirmPassword.getText().toString();
+        String telephoneNumberTxt = telephoneNumber.getText().toString();
+        if (confirmPasswordTxt.equals(passwordTxt)){
+            return new PassengerPostDTO(nameTxt, surnameTxt, "1", telephoneNumberTxt, emailTxt, addressTxt, passwordTxt);
+        }
+        else{
+            return null;
+        }
+    }
+
+    private void saveLoggedUser(String email){
+        SharedPreferences sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("email", email);
+        editor.apply();
+    }
 
     @Override
     protected void onStart() {

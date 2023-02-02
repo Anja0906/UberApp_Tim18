@@ -32,18 +32,18 @@ public class Mockup {
     }
 
     public static ArrayList<User> getUsers(){
-        user1 = new User(1, "anja", "petkovic", R.drawable.user4, "614578456", "anja@gmail.com", "Strumicka 6, Novi Sad, Srbija", false, "anja123", Role.ADMIN);
-        user2 = new User(2, "kristina", "andrijin", R.drawable.user5, "564845445", "kris@gmail.com", "ajhsdgeygdfwefj", false, "kris123", Role.PASSENGER);
-        user3 = new User(3, "branislav",  "stojkovic", R.drawable.user1, "614578456", "bane@gmail.com", "Strumicka 6, Novi Sad, Srbija", false, "bane123", Role.DRIVER);
-        user4 = new User(4, "driver", "d", R.drawable.user2, "614578456", "driver@gmail.com", "Strumicka 6, Novi Sad, Srbija", false, "driver123", Role.PASSENGER);
-        user5 = new User(5, "passenger", "p", R.drawable.user3, "614578456", "passenger@gmail.com", "Strumicka 6, Novi Sad, Srbija", false, "passenger123", Role.PASSENGER);
+//        user1 = new User(1, "anja", "petkovic", R.drawable.user4, "614578456", "anja@gmail.com", "Strumicka 6, Novi Sad, Srbija", false, "anja123", Role.ADMIN);
+//        user2 = new User(2, "kristina", "andrijin", R.drawable.user5, "564845445", "kris@gmail.com", "ajhsdgeygdfwefj", false, "kris123", Role.PASSENGER);
+//        user3 = new User(3, "branislav",  "stojkovic", R.drawable.user1, "614578456", "bane@gmail.com", "Strumicka 6, Novi Sad, Srbija", false, "bane123", Role.DRIVER);
+//        user4 = new User(4, "driver", "d", R.drawable.user2, "614578456", "driver@gmail.com", "Strumicka 6, Novi Sad, Srbija", false, "driver123", Role.PASSENGER);
+//        user5 = new User(5, "passenger", "p", R.drawable.user3, "614578456", "passenger@gmail.com", "Strumicka 6, Novi Sad, Srbija", false, "passenger123", Role.PASSENGER);
 
         ArrayList<User> users = new ArrayList<>();
-        users.add(user1);
-        users.add(user2);
-        users.add(user3);
-        users.add(user4);
-        users.add(user5);
+//        users.add(user1);
+//        users.add(user2);
+//        users.add(user3);
+//        users.add(user4);
+//        users.add(user5);
         return users;
     }
 

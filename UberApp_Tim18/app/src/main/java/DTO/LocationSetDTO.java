@@ -1,6 +1,8 @@
 package DTO;
 
-public class LocationSetDTO {
+import java.io.Serializable;
+
+public class LocationSetDTO implements Serializable {
     private LocationDTO departure;
     private LocationDTO destination;
 
