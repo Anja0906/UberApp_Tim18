@@ -120,4 +120,5 @@
     <string name="passenger_seats">Passenger seats</string>
     <string name="true_text">True</string>
     <string name="false_text">False</string>
+    <string name="current_ride">Current ride:</string>
 </resources>
