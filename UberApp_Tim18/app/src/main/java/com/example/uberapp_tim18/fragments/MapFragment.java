@@ -108,6 +108,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         SupportMapFragment supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapId);
         supportMapFragment.getMapAsync(this);
         SearchView departureEditText = view.findViewById(R.id.search_departure);
@@ -376,24 +377,15 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
 
         boolean successs = googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getContext(), R.raw.map_style));
 
-        if (provider == null) {
-            Log.i("ASD", "Onmapre");
-
-            showLocatonDialog();
-        } else {
-            if (checkLocationPermission()) {
-                Log.i("ASD", "str" + provider);
-
-                if (ContextCompat.checkSelfPermission(getContext(),
-                        Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    //Request location updates:
-                    location = locationManager.getLastKnownLocation(provider);
-                } else if (ContextCompat.checkSelfPermission(getContext(),
-                        Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    //Request location updates:
-                    location = map.getMyLocation();
-                }
-            }
+        Criteria criteria = new Criteria();
+        if (ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+        if (location != null)
+        {
+            LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 12.0f));
         }
 
         //ako zelimo da rucno postavljamo markere to radimo
@@ -490,6 +482,7 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         mMapFragment = SupportMapFragment.newInstance();
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.map_container, mMapFragment).commit();
+
         mMapFragment.getMapAsync(this);
     }
 

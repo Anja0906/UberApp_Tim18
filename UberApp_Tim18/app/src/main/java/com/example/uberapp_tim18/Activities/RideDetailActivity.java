@@ -32,7 +32,6 @@ public class RideDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride_detail);
         Intent intent = getIntent();
-//        System.out.println(getIntent().getByteArrayExtra("user").toString());
         byte[] rideBytes = intent.getByteArrayExtra("ride");
         ByteArrayInputStream bis = new ByteArrayInputStream(rideBytes);
         ObjectInput in = null;
@@ -54,26 +53,26 @@ public class RideDetailActivity extends Activity {
             }
         }
 
-        //System.out.println(ride);
-        TextView beginning = (TextView)findViewById(R.id.beginning_txt_view);
+        System.out.println(ride);
+        TextView beginning = findViewById(R.id.beginning_txt_view);
         String beg = ride.getStartTime();
 
-        TextView end = (TextView)findViewById(R.id.end_txt_view);
+        TextView end = findViewById(R.id.end_txt_view);
         String endf = ride.getEndTime();
 
-        TextView price = (TextView)findViewById(R.id.price_txt_view);
+        TextView price = findViewById(R.id.price_txt_view);
         price.setText(Double.toString(ride.getTotalCost()));
-        TextView duration = (TextView)findViewById(R.id.duration_txt_view);
+        TextView duration = findViewById(R.id.duration_txt_view);
         duration.setText(Integer.toString(ride.getEstimatedTimeInMinutes()));
-        TextView panic = (TextView)findViewById(R.id.panic_ride_txt_view);
+        TextView panic = findViewById(R.id.panic_ride_txt_view);
 
-        TextView baby = (TextView)findViewById(R.id.baby_ride_txt_view);
+        TextView baby = findViewById(R.id.baby_ride_txt_view);
         if (ride.isBabyTransport()) {
             baby.setText("+");
         } else {
             baby.setText("-");
         }
-        TextView pet = (TextView)findViewById(R.id.pet_ride_txt_view);
+        TextView pet = findViewById(R.id.pet_ride_txt_view);
         if (ride.isPetTransport()) {
             pet.setText("+");
         } else {
