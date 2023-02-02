@@ -1,6 +1,8 @@
 package com.example.uberapp_tim18.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,77 +19,77 @@ import com.example.uberapp_tim18.Adapters.RideAdapter;
 import com.example.uberapp_tim18.R;
 import com.google.android.material.navigation.NavigationView;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 
-import model.Ride;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import DTO.RideResponseDTO;
+import DTO.RideRetDTOMap;
 import model.Role;
 import model.User;
+import retrofit.DriverApi;
+import retrofit.RetrofitService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import tools.HelperClasses;
 
 
 public class DriverRideHistoryActivity extends AppCompatActivity {
     private ListView lv;
+    private NavigationView navigationView;
+    private RideAdapter adapter;
+    private DrawerLayout drawerLayout;
+    private RetrofitService retrofitService;
+    private SharedPreferences preferences;
+
+    private String token;
+    private Integer id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simple_list_view);
-
-        Intent mainIntent = getIntent();
-
-        lv = (ListView) findViewById(R.id.list_view);
-        RideAdapter adapter = new RideAdapter(this);
-        lv.setAdapter(adapter);
-        //FragmentTransition.to(DriverRideHistoryFragment.newInstance(), this, false);
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(DriverRideHistoryActivity.this, RideDetailActivity.class);
-            Ride ride = (Ride) parent.getItemAtPosition(position);
-            byte[] rideBytes = new byte[0];
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ObjectOutputStream out = null;
-            try {
-                out = new ObjectOutputStream(bos);
-                out.writeObject(ride);
-                out.flush();
-                rideBytes = bos.toByteArray();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    bos.close();
-                } catch (IOException ex) {
-                    // ignore close exception
+        this.initGui();
+        DriverApi driverApi = retrofitService.getRetrofit().create(DriverApi.class);
+        driverApi.getRides(this.id).enqueue(new Callback<RideRetDTOMap>() {
+            @Override
+            public void onResponse(Call<RideRetDTOMap> call, Response<RideRetDTOMap> response) {
+                if(response.body()==null){
+                    Toast toast= Toast.makeText(getApplicationContext(),"Ride history is empty",Toast. LENGTH_SHORT);
+                    toast.show();
+                }else{
+                    adapter.setRides(response.body().getResults());
+                    lv.setAdapter(adapter);
                 }
             }
-            intent.putExtra("ride", rideBytes);
-
-            intent.putExtra("user", mainIntent.getByteArrayExtra("user"));
-//            System.out.println(getIntent().getByteArrayExtra("user").toString());
-            startActivity(intent);
-        }
-
-
-        });
-        DrawerLayout drawerLayout = findViewById(R.id.simple_list_view);
-
-        findViewById(R.id.menu_toolbar_icon_simple_list).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {drawerLayout.openDrawer(GravityCompat.START);}
+            public void onFailure(Call<RideRetDTOMap> call, Throwable t) {
+                Logger.getLogger(PassengerRegisterActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
+//        this.lv.setOnItemClickListener((parent, view, position, id) -> {
+//
+//            Intent intent = new Intent(DriverRideHistoryActivity.this, RideDetailActivity.class);
+//            intent.putExtra("id",)
+//            startActivity(intent);
+//        });
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(DriverRideHistoryActivity.this, RideDetailActivity.class);
+                RideResponseDTO rideResponseDTO = (RideResponseDTO) parent.getItemAtPosition(position);
+                byte[] receiverBytes = HelperClasses.Serialize(rideResponseDTO);
+                intent.putExtra("ride", receiverBytes);
+                startActivity(intent);
+            }
         });
 
+        findViewById(R.id.menu_toolbar_icon_simple_list).setOnClickListener(view -> drawerLayout.openDrawer(GravityCompat.START));
 
-        NavigationView navigationView = findViewById(R.id.navigation_view_simple_list);
-        navigationView.setItemIconTintList(null);
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        this.navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.inbox:
                     Intent inbox = new Intent(DriverRideHistoryActivity.this, PassengerInboxActivity.class);
@@ -122,8 +124,19 @@ public class DriverRideHistoryActivity extends AppCompatActivity {
                     break;
             }
             return false;
-        }
         });
     }
-
+    public void initGui(){
+        this.lv = findViewById(R.id.list_view);
+        this.adapter = new RideAdapter(this);
+        lv.setAdapter(adapter);
+        this.navigationView = findViewById(R.id.navigation_view_simple_list);
+        this.navigationView.setItemIconTintList(null);
+        this.drawerLayout = findViewById(R.id.simple_list_view);
+        this.retrofitService = new RetrofitService();
+        this.preferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        this.token = preferences.getString("jwt", "");
+        this.id = Integer.parseInt(preferences.getString("id", ""));
+        retrofitService.onSavedUser(token);
+    }
 }

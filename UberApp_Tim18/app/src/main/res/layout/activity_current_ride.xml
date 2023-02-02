@@ -59,8 +59,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/background">
-    </FrameLayout>
+        android:background="@color/background"></FrameLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -83,7 +83,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
-            android:text="@string/acc_info"
+            android:text="@string/current_ride"
             android:fontFamily="sans-serif-medium"
             android:textColor="@color/edit_text"
             android:textSize="30dp"
@@ -112,9 +112,9 @@
 
           <EditText
               android:id="@+id/name_txt_view"
-              android:layout_width="200dp"
+              android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_weight="1"
+              android:layout_weight="4"
               android:textAlignment="viewEnd"
               android:textColor="@color/edit_text"
               android:textSize="20sp"
@@ -157,16 +157,15 @@
 
           <EditText
               android:id="@+id/phone_txt_view"
-              android:layout_width="200dp"
+              android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_weight="1"
+              android:layout_weight="4"
+              android:background="@drawable/textview_border"
+              android:fontFamily="sans-serif-medium"
+              android:inputType="phone"
               android:textAlignment="viewEnd"
               android:textColor="@color/edit_text"
-              android:fontFamily="sans-serif-medium"
-              android:textSize="20sp"
-              android:inputType="phone"
-              android:background="@drawable/textview_border"
-              />
+              android:textSize="20sp" />
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -201,9 +200,9 @@
 
           <EditText
               android:id="@+id/email_txt_view"
-              android:layout_width="200dp"
+              android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_weight="1"
+              android:layout_weight="4"
               android:textAlignment="viewEnd"
               android:fontFamily="sans-serif-medium"
 
@@ -243,9 +242,9 @@
 
           <EditText
               android:id="@+id/address_txt_view"
-              android:layout_width="200dp"
+              android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_weight="1"
+              android:layout_weight="4"
               android:textAlignment="viewEnd"
               android:textColor="@color/edit_text"
               android:fontFamily="sans-serif-medium"
@@ -283,9 +282,9 @@
 
           <EditText
               android:id="@+id/pass_txt_view"
-              android:layout_width="200dp"
+              android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_weight="1"
+              android:layout_weight="4"
               android:textAlignment="viewEnd"
               android:textColor="@color/edit_text"
               android:fontFamily="sans-serif-medium"
@@ -302,25 +301,7 @@
             android:alpha="0.5"
             android:background="@color/background" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
-          <androidx.appcompat.widget.AppCompatButton
-              android:id="@+id/edit_personal"
-              android:layout_width="match_parent"
-              android:layout_height="60dp"
-              android:layout_gravity="center"
-              android:layout_marginLeft ="20dp"
-              android:layout_marginRight ="20dp"
-              android:layout_marginBottom="10dp"
-              android:background="@drawable/button_shape"
-              android:text="@string/edit_data"
-              android:textColor="@color/black"
-              android:textSize="15dp"
-              android:textStyle="bold" />
-        </LinearLayout>
       </LinearLayout>
     </ScrollView>
   </LinearLayout>

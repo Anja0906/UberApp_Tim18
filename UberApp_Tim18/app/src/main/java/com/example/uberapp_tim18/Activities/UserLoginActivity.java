@@ -51,8 +51,8 @@ public class UserLoginActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText username = (EditText) findViewById(R.id.Email);
-                EditText password = (EditText) findViewById(R.id.Password);
+                EditText username = findViewById(R.id.Email);
+                EditText password = findViewById(R.id.Password);
 
                 String emailText = String.valueOf(username.getText());
                 String passwordText = String.valueOf(password.getText());
@@ -85,21 +85,15 @@ public class UserLoginActivity extends Activity {
 
 
         TextView text = findViewById(R.id.signUp);
-        text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UserLoginActivity.this, PassengerRegisterActivity.class);
-                startActivity(intent);
-            }
+        text.setOnClickListener(v -> {
+            Intent intent = new Intent(UserLoginActivity.this, PassengerRegisterActivity.class);
+            startActivity(intent);
         });
 
         TextView forgotPassword = findViewById(R.id.forgotPass);
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UserLoginActivity.this, ForgotPasswordActivity.class);
-                startActivity(intent);
-            }
+        forgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(UserLoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
         });
     }
 

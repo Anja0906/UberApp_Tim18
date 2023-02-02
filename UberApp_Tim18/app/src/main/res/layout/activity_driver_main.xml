@@ -14,7 +14,7 @@
         <LinearLayout
             android:id="@+id/linear_layout"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             >
             <RelativeLayout
@@ -83,8 +83,4 @@
         android:background="@color/edit_text"
         app:menu="@menu/side_menu_passenger"
         android:layout_gravity="start"/>
-
-
-
-
 </androidx.drawerlayout.widget.DrawerLayout>

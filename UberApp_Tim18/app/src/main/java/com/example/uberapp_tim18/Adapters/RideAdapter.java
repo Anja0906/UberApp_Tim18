@@ -11,26 +11,30 @@ import com.example.uberapp_tim18.R;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
+import DTO.RideResponseDTO;
 import model.Ride;
 import tools.Mockup;
 
 public class RideAdapter extends BaseAdapter {
 
     private Activity activity;
+    private ArrayList<RideResponseDTO> rides;
 
     public RideAdapter(Activity activity) {
         this.activity = activity;
+        this.rides = new ArrayList<>();
     }
 
     @Override
     public int getCount() {
-        return Mockup.getRides().size();
+        return this.rides.size();
     }
 
     @Override
-    public Ride getItem(int i) {
-        return Mockup.getRides().get(i);
+    public RideResponseDTO getItem(int i) {
+        return this.rides.get(i);
     }
 
     @Override
@@ -38,24 +42,32 @@ public class RideAdapter extends BaseAdapter {
         return i;
     }
 
+    public ArrayList<RideResponseDTO> getRides() {
+        return rides;
+    }
+
+    public void setRides(ArrayList<RideResponseDTO> rides) {
+        this.rides = rides;
+    }
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         View vi = view;
-        Ride ride = Mockup.getRides().get(i);
+        RideResponseDTO ride = this.rides.get(i);
 
         if(view==null)
             vi = activity.getLayoutInflater().inflate(R.layout.activity_driver_ride_history, null);
 
-        TextView ride_main = (TextView)vi.findViewById(R.id.ride_main);
-        TextView ride_description = (TextView)vi.findViewById(R.id.ride_description);
-        ImageView image = (ImageView)vi.findViewById(R.id.item_icon);
+        TextView ride_main = vi.findViewById(R.id.ride_main);
+        TextView ride_description = vi.findViewById(R.id.ride_description);
+        ImageView image = vi.findViewById(R.id.item_icon);
 
-        LocalDateTime beginning = ride.getBeginning();
-        LocalDateTime end = ride.getEnd();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
-        String ret = beginning.format(formatter) + " - "  + end.format(formatter);
+        String beginning = ride.getStartTime();
+        String end = ride.getEndTime();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
+        String ret = beginning + " - "  + end;
         ride_main.setText(ret);
-        ride_description.setText(Double.toString(ride.getPrice()));
+        ride_description.setText(String.valueOf(ride.getTotalCost()));
 
         return  vi;
     }
