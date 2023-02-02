@@ -54,18 +54,17 @@ public class RideDetailActivity extends Activity {
         }
 
         System.out.println(ride);
-        TextView beginning = findViewById(R.id.beginning_txt_view);
-        String beg = ride.getStartTime();
+        TextView start = findViewById(R.id.beginning_txt_view);
+        start.setText(ride.getStartTime());
 
         TextView end = findViewById(R.id.end_txt_view);
-        String endf = ride.getEndTime();
+        end.setText(ride.getEndTime());
 
         TextView price = findViewById(R.id.price_txt_view);
         price.setText(Double.toString(ride.getTotalCost()));
         TextView duration = findViewById(R.id.duration_txt_view);
         duration.setText(Integer.toString(ride.getEstimatedTimeInMinutes()));
         TextView panic = findViewById(R.id.panic_ride_txt_view);
-
         TextView baby = findViewById(R.id.baby_ride_txt_view);
         if (ride.isBabyTransport()) {
             baby.setText("+");

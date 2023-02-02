@@ -56,8 +56,13 @@ public class DriverRideHistoryActivity extends AppCompatActivity {
         driverApi.getRides(this.id).enqueue(new Callback<RideRetDTOMap>() {
             @Override
             public void onResponse(Call<RideRetDTOMap> call, Response<RideRetDTOMap> response) {
-                adapter.setRides(response.body().getResults());
-                lv.setAdapter(adapter);
+                if(response.body()==null){
+                    Toast toast= Toast.makeText(getApplicationContext(),"Ride history is empty",Toast. LENGTH_SHORT);
+                    toast.show();
+                }else{
+                    adapter.setRides(response.body().getResults());
+                    lv.setAdapter(adapter);
+                }
             }
             @Override
             public void onFailure(Call<RideRetDTOMap> call, Throwable t) {

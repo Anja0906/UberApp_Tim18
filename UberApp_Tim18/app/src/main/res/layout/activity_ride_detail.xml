@@ -82,15 +82,15 @@
                         android:alpha="1"
                         android:drawableLeft="@drawable/ic_calendar"
                         android:drawablePadding="10dp"
-                        android:text="@string/beginning"
+                        android:text="@string/start"
                         android:textColor="@color/edit_text"
                         android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/beginning_txt_view"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/edit_text"
                         android:textSize="20sp" />
@@ -124,9 +124,9 @@
 
                     <TextView
                         android:id="@+id/end_txt_view"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/edit_text"
                         android:textSize="20sp" />
@@ -160,9 +160,9 @@
 
                     <TextView
                         android:id="@+id/price_txt_view"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/button"
                         android:textSize="20sp" />
@@ -196,9 +196,9 @@
 
                     <TextView
                         android:id="@+id/duration_txt_view"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/edit_text"
                         android:textSize="20sp" />
@@ -232,9 +232,9 @@
 
                     <TextView
                         android:id="@+id/panic_ride_txt_view"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/edit_text"
                         android:textSize="20sp" />
@@ -268,9 +268,9 @@
 
                     <TextView
                         android:id="@+id/baby_ride_txt_view"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/edit_text"
                         android:textSize="20sp" />
@@ -302,9 +302,9 @@
 
                     <TextView
                         android:id="@+id/pet_ride_txt_view"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/edit_text"
                         android:textSize="20sp" />
@@ -341,9 +341,9 @@
 
                     <TextView
                         android:id="@+id/split_fair_ride_txt_view"
-                        android:layout_width="200dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/edit_text"
                         android:textSize="20sp"
