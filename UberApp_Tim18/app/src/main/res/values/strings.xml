@@ -122,4 +122,5 @@
     <string name="false_text">False</string>
     <string name="current_ride">Current ride:</string>
     <string name="start">Start</string>
+    <string name="choose_dates">Choose dates</string>
 </resources>

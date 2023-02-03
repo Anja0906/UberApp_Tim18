@@ -1,10 +1,12 @@
 package com.example.uberapp_tim18.Adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.uberapp_tim18.R;
@@ -49,6 +51,8 @@ public class ReportsAdapter extends BaseAdapter {
         title.setText(item.getName());
         TextView description = convertView.findViewById(R.id.report_description);
         description.setText(item.getDescription());
+        ImageView imageView = convertView.findViewById(R.id.image);
+        imageView.setImageResource(item.getImagePath());
 
         return convertView;
     }

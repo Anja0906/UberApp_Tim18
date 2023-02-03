@@ -120,13 +120,13 @@
             </RelativeLayout>
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/account_header"
             android:orientation="vertical">
-        </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView

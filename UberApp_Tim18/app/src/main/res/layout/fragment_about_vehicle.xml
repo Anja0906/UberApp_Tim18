@@ -194,7 +194,7 @@
                     android:background="@drawable/textview_border"
                     android:drawablePadding="10dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="@string/baby_transport"
+                    android:text="@string/pet_transport"
                     android:textColor="@color/edit_text"
                     android:textSize="20sp" />
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,18 +8,69 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
-        <com.anychart.anychart.AnyChartView
-            android:id="@+id/chart"
+        <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:id="@+id/date_pickers"
+            android:orientation="vertical">
+            <DatePicker
+                android:id="@+id/datePicker1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/time_picker"
+                android:datePickerMode="spinner"/>
+
+            <DatePicker
+                android:id="@+id/datePicker2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/time_picker"
+                android:datePickerMode="spinner"/>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_below="@id/date_pickers"
+            android:id="@+id/button_dates"
+            android:text="@string/choose_dates"
+            android:background="@color/button"/>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart1"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/button_dates"
             android:layout_height="300dp"
-            android:layout_margin = "20dp"
-            android:background="@drawable/edit_text_background" />
+            android:background="@drawable/time_picker"
+            android:layout_margin="10dp"
+            tools:ignore="MissingConstraints" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart2"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/chart1"
+            android:layout_height="300dp"
+            android:background="@drawable/time_picker"
+            android:layout_margin="10dp"
+            tools:ignore="MissingConstraints" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart3"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/chart2"
+            android:layout_height="300dp"
+            android:background="@drawable/time_picker"
+            android:layout_margin="10dp"
+            tools:ignore="MissingConstraints" />
+
 
 
     </RelativeLayout>
 
-</FrameLayout>
+</ScrollView>
