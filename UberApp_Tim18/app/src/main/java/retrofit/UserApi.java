@@ -11,4 +11,7 @@ import retrofit2.http.POST;
 public interface UserApi {
     @GET("/api/passenger/find")
     Call<User> findUserByEmail(@Body String email);
+
+    @GET("/api/user/whoami")
+    Call<User> whoami();
 }

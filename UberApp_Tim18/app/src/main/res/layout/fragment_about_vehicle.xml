@@ -11,23 +11,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/profile_first_part_background" />
-
-        <ImageView
-            android:id="@+id/picture"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
-            android:background="@drawable/round_image_view"
-            android:src="@drawable/user4" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/picture"
             android:layout_marginTop="25dp"
             android:layout_marginStart="10dp"
             android:orientation="vertical">
@@ -208,7 +194,7 @@
                     android:background="@drawable/textview_border"
                     android:drawablePadding="10dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="@string/baby_transport"
+                    android:text="@string/pet_transport"
                     android:textColor="@color/edit_text"
                     android:textSize="20sp" />
 

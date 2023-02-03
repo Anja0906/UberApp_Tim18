@@ -30,9 +30,12 @@ import DTO.LocationSetDTO;
 import DTO.PassengerIdEmailDTO;
 import DTO.RidePostDTO;
 import DTO.RideResponseDTO;
+import DTO.RideRetDTOMap;
+import model.User;
 import model.VehicleName;
 import retrofit.RetrofitService;
 import retrofit.RideApi;
+import retrofit.UserApi;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -202,6 +205,9 @@ public class CreateRide extends Fragment {
         String token = preferences.getString("jwt", "");
         RetrofitService retrofitService = new RetrofitService();
         retrofitService.onSavedUser(token);
+        Integer userId = Integer.parseInt(preferences.getString("id", ""));
+        String userEmail = preferences.getString("email", "");
+        passengers.add(new PassengerIdEmailDTO(userId, userEmail));
         RideApi rideApi = retrofitService.getRetrofit().create(RideApi.class);
         Set<LocationSetDTO> locations = new HashSet<LocationSetDTO>();
         locations.add(locationSetDTO);
@@ -209,13 +215,15 @@ public class CreateRide extends Fragment {
         VehicleName vehicleName;
         switch (selectedId){
             case 0: vehicleName = VehicleName.KOMBI;
-            case 1: vehicleName = VehicleName.STANDARDNO;
+            case 1: vehicleName = VehicleName.STANDARD;
             default: vehicleName = VehicleName.LUKSUZNO;
         }
         boolean babyTransport = babyTransportToggle.isChecked();
         boolean petTransport = petTransportToggle.isChecked();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date = dateFormat.format(dateTimeOfRide);
+        String[] dateStrings = date.split(" ");
+        date = dateStrings[0] + "T" + dateStrings[1] + "Z";
         RidePostDTO ridePostDTO = new RidePostDTO(0, locations, passengers, vehicleName, babyTransport, petTransport, date);
         rideApi.save(ridePostDTO)
                 .enqueue(new Callback<RideResponseDTO>() {
