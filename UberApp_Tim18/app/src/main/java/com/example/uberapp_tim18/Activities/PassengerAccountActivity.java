@@ -1,7 +1,9 @@
 package com.example.uberapp_tim18.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,41 +38,8 @@ public class PassengerAccountActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         PassengerAccount passengerAccount = new PassengerAccount();
         fragmentTransaction.add(R.id.fragment_container, passengerAccount, "my_fragment_tag").commit();
-//        Intent intent = getIntent();
-//        byte[] userBytes = intent.getByteArrayExtra("user");
-//        ByteArrayInputStream bis = new ByteArrayInputStream(userBytes);
-//        ObjectInput in = null;
-//        User user = null;
-//        try {
-//            in = new ObjectInputStream(bis);
-//            user = (User)in.readObject();
-////            System.out.println("uspeo sam");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if (in != null) {
-//                    in.close();
-//                }
-//            } catch (IOException ex) {
-//                // ignore close exception
-//            }
-//        }
 
-        //System.out.println(ride);
-//        TextView name = (TextView)findViewById(R.id.name_txt_view);
-//        name.setText(user.getName());
-//        TextView phone = (TextView)findViewById(R.id.phone_txt_view);
-//        phone.setText(user.getTelephoneNumber());
-//        TextView email = (TextView)findViewById(R.id.email_txt_view);
-//        email.setText(user.getEmail());
-//        TextView address = (TextView)findViewById(R.id.address_txt_view);
-//        address.setText(user.getAddress());
-//        TextView password = (TextView)findViewById(R.id.pass_txt_view);
-//        password.setText(user.get());
-
+        SharedPreferences preferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         DrawerLayout drawerLayout = findViewById(R.id.passenger_account_activity);
 
         findViewById(R.id.menu_toolbar_icon).setOnClickListener(new View.OnClickListener() {
@@ -83,6 +52,7 @@ public class PassengerAccountActivity extends AppCompatActivity {
 
         NavigationView navigationView = findViewById(R.id.navigation_view_passenger_account);
         navigationView.setItemIconTintList(null);
+        String role =preferences.getString("role","");
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -105,15 +75,13 @@ public class PassengerAccountActivity extends AppCompatActivity {
                         startActivity(history);
                         break;
                     case R.id.home:
-                        User user = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("user"));
-                        Intent home = null;
-                        if (user.getRoles().get(1) == Role.PASSENGER) {
+                        Intent home;
+                        if (role.equals("ROLE_PASSENGER") ) {
                             home = new Intent(PassengerAccountActivity.this, PassengerMainActivity.class);
                         }
-                        if (user.getRoles().get(1) == Role.DRIVER) {
+                        else {
                             home = new Intent(PassengerAccountActivity.this, DriverMainActivity.class);
                         }
-                        home.putExtra("user", getIntent().getByteArrayExtra("user"));
                         startActivity(home);
                         break;
                     case R.id.settings:

@@ -2,16 +2,16 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ride_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/ride_detail"
-    tools:context=".Activities.RideDetailActivity"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".Activities.RideDetailActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -30,10 +30,10 @@
                 android:id="@+id/menu_toolbar_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
                 android:src="@drawable/ic_menu"
                 tools:ignore="MissingConstraints"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="16dp" />
 
@@ -54,312 +54,259 @@
         </RelativeLayout>
 
 
-
-
-        <ScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:alpha="1"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="18dp"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:id="@+id/linear_layout_beginning">
 
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/beginning_view"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:alpha="1"
+                    android:drawableLeft="@drawable/ic_calendar"
+                    android:drawablePadding="10dp"
+                    android:text="@string/start"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
 
-                    <TextView
-                        android:id="@+id/beginning_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:alpha="1"
-                        android:drawableLeft="@drawable/ic_calendar"
-                        android:drawablePadding="10dp"
-                        android:text="@string/start"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/beginning_txt_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:alpha="0.5"
-                    android:background="@color/edit_text" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/beginning_txt_view"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/end_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:alpha="1"
-                        android:drawableLeft="@drawable/ic_calendar"
-                        android:drawablePadding="10dp"
-                        android:text="@string/end"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/end_txt_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:alpha="0.5"
-                    android:background="@color/edit_text" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/price_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:alpha="1"
-                        android:drawableLeft="@drawable/ic_dollar_sign"
-                        android:drawablePadding="10dp"
-                        android:text="@string/price"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/price_txt_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/button"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:alpha="0.5"
-                    android:background="@color/edit_text" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/duration_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:alpha="1"
-                        android:drawableLeft="@drawable/ic_clock"
-                        android:drawablePadding="10dp"
-                        android:text="@string/duration"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/duration_txt_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:alpha="0.5"
-                    android:background="@color/edit_text" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/panic_ride_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:alpha="1"
-                        android:drawableLeft="@drawable/ic_panic"
-                        android:drawablePadding="10dp"
-                        android:text="@string/ride_panic"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/panic_ride_txt_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:alpha="0.5"
-                    android:background="@color/edit_text" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/baby_ride_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:alpha="1"
-                        android:drawableLeft="@drawable/ic_child"
-                        android:drawablePadding="10dp"
-                        android:text="@string/ride_baby"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/baby_ride_txt_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-                </LinearLayout>
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:alpha="0.5"
-                    android:background="@color/edit_text" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/pet_ride_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:alpha="1"
-                        android:drawableLeft="@drawable/ic_pets"
-                        android:drawablePadding="10dp"
-                        android:text="@string/ride_pet"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/pet_ride_txt_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:alpha="0.5"
-                    android:background="@color/edit_text" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="30dp">
-
-
-                    <TextView
-                        android:id="@+id/split_fair_ride_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:alpha="1"
-                        android:drawableLeft="@drawable/ic_people"
-                        android:drawablePadding="10dp"
-                        android:text="@string/ride_split_fair"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp"
-                        android:layout_marginBottom="30dp"/>
-
-                    <TextView
-                        android:id="@+id/split_fair_ride_txt_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp"
-                        android:layout_marginBottom="30dp"/>
-
-                </LinearLayout>
+                    android:layout_weight="4"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
             </LinearLayout>
-        </ScrollView>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="10dp"
+                android:alpha="0.5"
+                android:layout_below="@+id/linear_layout_beginning"
+                android:background="@color/edit_text" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="18dp"
+                android:orientation="horizontal"
+                android:id="@+id/linear_layout_end"
+                android:layout_below="@+id/appCompatImageView6"
+
+                >
+
+                <TextView
+                    android:id="@+id/end_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:alpha="1"
+                    android:drawableLeft="@drawable/ic_calendar"
+                    android:drawablePadding="10dp"
+                    android:text="@string/end"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/end_txt_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="10dp"
+                android:alpha="0.5"
+                android:background="@color/edit_text"
+                android:layout_below="@+id/linear_layout_end"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="18dp"
+                android:orientation="horizontal"
+                android:id="@+id/linear_layout_totalcost"
+                android:layout_below="@+id/appCompatImageView4">
+
+                <TextView
+                    android:id="@+id/price_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:alpha="1"
+                    android:drawableLeft="@drawable/ic_dollar_sign"
+                    android:drawablePadding="10dp"
+                    android:text="@string/price"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/price_txt_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/button"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="10dp"
+                android:alpha="0.5"
+                android:background="@color/edit_text"
+                android:layout_below="@+id/linear_layout_totalcost"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="18dp"
+                android:orientation="horizontal"
+                android:id="@+id/linear_layout_duration"
+                android:layout_below="@+id/appCompatImageView3">
+
+                <TextView
+                    android:id="@+id/duration_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:alpha="1"
+                    android:drawableLeft="@drawable/ic_clock"
+                    android:drawablePadding="10dp"
+                    android:text="@string/duration"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/duration_txt_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="10dp"
+                android:alpha="0.5"
+                android:background="@color/edit_text"
+                android:layout_below="@+id/linear_layout_duration"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="18dp"
+                android:orientation="horizontal"
+                android:id="@+id/linear_layout_passengerNum"
+                android:layout_below="@+id/appCompatImageView5">
+
+                <TextView
+                    android:id="@+id/duration_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:alpha="1"
+                    android:drawableLeft="@drawable/ic_clock"
+                    android:drawablePadding="10dp"
+                    android:text="Passengers:"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/duration_txt_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/edit_text"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/background"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:translationZ="50dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/edit_text_background">
+
+                    <ImageView
+                        android:id="@+id/account_account_menu"
+                        android:layout_width="80dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="9dp"
+                        android:background="@drawable/account_menu_item_round_background"
+                        android:src="@drawable/ic_profile" />
+
+                    <ImageView
+                        android:id="@+id/reports_account_menu"
+                        android:layout_width="80dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="9dp"
+                        android:background="@drawable/account_menu_item_round_background"
+                        android:src="@drawable/history" />
+
+                    <ImageView
+                        android:id="@+id/stats_account_menu"
+                        android:layout_width="80dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="9dp"
+                        android:background="@drawable/account_menu_item_round_background"
+                        android:src="@drawable/chart" />
+
+                    <ImageView
+                        android:id="@+id/about_vehicle"
+                        android:layout_width="80dp"
+                        android:layout_height="70dp"
+                        android:layout_margin="9dp"
+                        android:background="@drawable/account_menu_item_round_background"
+                        android:src="@drawable/car" />
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
     </LinearLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/ride_detail_navigation"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="start"
         android:background="@color/edit_text"
-        app:menu="@menu/side_menu_passenger"
-        android:layout_gravity="start"/>
+        app:menu="@menu/side_menu_passenger" />
 </androidx.drawerlayout.widget.DrawerLayout>
 
 

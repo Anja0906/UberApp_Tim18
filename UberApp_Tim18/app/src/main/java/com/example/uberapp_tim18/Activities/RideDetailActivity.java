@@ -64,19 +64,7 @@ public class RideDetailActivity extends Activity {
         price.setText(Double.toString(ride.getTotalCost()));
         TextView duration = findViewById(R.id.duration_txt_view);
         duration.setText(Integer.toString(ride.getEstimatedTimeInMinutes()));
-        TextView panic = findViewById(R.id.panic_ride_txt_view);
-        TextView baby = findViewById(R.id.baby_ride_txt_view);
-        if (ride.isBabyTransport()) {
-            baby.setText("+");
-        } else {
-            baby.setText("-");
-        }
-        TextView pet = findViewById(R.id.pet_ride_txt_view);
-        if (ride.isPetTransport()) {
-            pet.setText("+");
-        } else {
-            pet.setText("-");
-        }
+
 
 
         DrawerLayout drawerLayout = findViewById(R.id.ride_detail);
@@ -114,12 +102,12 @@ public class RideDetailActivity extends Activity {
                     case R.id.home:
                         User user = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("user"));
                         Intent home = null;
-                        if (user.getRoles().get(1) == Role.PASSENGER) {
+                        if (user.getRoles().get(1) == "ROLE_PASSANGER") {
                             home = new Intent(RideDetailActivity.this, PassengerMainActivity.class);
-                        }
-                        if (user.getRoles().get(1) == Role.DRIVER) {
+                        }else{
                             home = new Intent(RideDetailActivity.this, DriverMainActivity.class);
                         }
+
                         home.putExtra("user", getIntent().getByteArrayExtra("user"));
                         startActivity(home);
                         break;

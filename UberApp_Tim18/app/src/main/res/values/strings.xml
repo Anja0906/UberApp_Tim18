@@ -122,4 +122,6 @@
     <string name="false_text">False</string>
     <string name="current_ride">Current ride:</string>
     <string name="start">Start</string>
+    <string name="sendEmail">SEND VERIFICATION</string>
+    <string name="code">Code</string>
 </resources>

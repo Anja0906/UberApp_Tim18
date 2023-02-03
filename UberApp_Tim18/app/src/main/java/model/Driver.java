@@ -11,7 +11,7 @@ public class Driver extends User{
 
     public Driver() {}
 
-    public Driver(Integer id, String name, String surname, String profilePicture, String telephoneNumber, String email, String address, String password, boolean blocked, boolean active, String verificationCode, String resetPasswordToken, Date timeOfResetPasswordToken, List<Role> roles, boolean online, WorkingTime workingTime, List<Document> documents, Vehicle vehicle) {
+    public Driver(Integer id, String name, String surname, String profilePicture, String telephoneNumber, String email, String address, String password, boolean blocked, boolean active, String verificationCode, String resetPasswordToken, String timeOfResetPasswordToken, List<String> roles, boolean online, WorkingTime workingTime, List<Document> documents, Vehicle vehicle) {
         super(id, name, surname, profilePicture, telephoneNumber, email, address, password, blocked, active, verificationCode, resetPasswordToken, timeOfResetPasswordToken, roles);
         this.online = online;
         this.workingTime = workingTime;

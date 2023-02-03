@@ -49,7 +49,7 @@ public class SplashActivity extends Activity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
-
+        System.out.println("DASDASDAS");
         imageView = findViewById(R.id.logo_splash);
         splash_animation = AnimationUtils.loadAnimation(this, R.anim.splash_animation);
         imageView.setAnimation(splash_animation);

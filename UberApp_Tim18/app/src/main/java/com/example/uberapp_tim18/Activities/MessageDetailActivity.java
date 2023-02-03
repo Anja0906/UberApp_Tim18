@@ -100,12 +100,13 @@ public class MessageDetailActivity extends Activity {
                     case R.id.home:
                         User user = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("user"));
                         Intent home = null;
-                        if (user.getRoles().get(1) == Role.PASSENGER) {
+                        if (user.getRoles().get(1) == "ROLE_PASSANGER") {
                             home = new Intent(MessageDetailActivity.this, PassengerMainActivity.class);
-                        }
-                        if (user.getRoles().get(1) == Role.DRIVER) {
+                        }else{
                             home = new Intent(MessageDetailActivity.this, DriverMainActivity.class);
+
                         }
+
                         home.putExtra("user", intent.getByteArrayExtra("user"));
                         startActivity(home);
                         break;

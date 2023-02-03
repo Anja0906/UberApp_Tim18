@@ -40,7 +40,7 @@ public class UserLoginActivity extends Activity {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("id", String.valueOf(response.getId()));
         editor.putString("email", response.getEmail());
-        editor.putString("role", String.valueOf(response.getRoles().get(0)));
+        editor.putString("role", String.valueOf(response.getRoles().get(1)));
         editor.putString("jwt", response.getAccessToken());
         editor.apply();
     }
