@@ -57,8 +57,6 @@ public class ConfirmRegistration extends AppCompatActivity {
                 .enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        System.out.println(response.body().isActive());
-                        System.out.println(response.body().getEmail());
                         if (response.body().isActive()){
                             Toast.makeText(ConfirmRegistration.this, "Your account is active!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(ConfirmRegistration.this, UserLoginActivity.class);
