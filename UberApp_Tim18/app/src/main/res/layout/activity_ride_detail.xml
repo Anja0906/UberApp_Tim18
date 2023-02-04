@@ -329,7 +329,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/confirm_button"
+                        android:id="@+id/review_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
@@ -339,13 +339,13 @@
                         android:layout_weight="1"
                         android:alpha="1"
                         android:background="@drawable/green_button"
-                        android:text="@string/cancel_item"
+                        android:text="Review"
                         android:textColor="@color/black"
                         android:textSize="17sp"
                         android:textStyle="bold" />
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/cancel_button"
+                        android:id="@+id/inbox_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"

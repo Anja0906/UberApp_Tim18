@@ -22,7 +22,7 @@ import retrofit2.http.Query;
 
 public interface PassengerApi {
     @POST("/api/user/register")
-    Call<PassengerResponseDTO> save(@Body PassengerPostDTO passengerPostDTO);
+    Call<Void> save(@Body PassengerPostDTO passengerPostDTO);
 
     @POST("/api/user/{email}")
     Call<User> findByEmail(@Path("email") String email);
