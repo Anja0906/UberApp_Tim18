@@ -88,7 +88,7 @@ public class DriverRideHistoryActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.menu_toolbar_icon_simple_list).setOnClickListener(view -> drawerLayout.openDrawer(GravityCompat.START));
-
+        String role =preferences.getString("role","");
         this.navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.inbox:
@@ -106,15 +106,13 @@ public class DriverRideHistoryActivity extends AppCompatActivity {
                     toast.show();
                     break;
                 case R.id.home:
-                    User user = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("user"));
-                    Intent home = null;
-                    if (user.getRoles().get(1) == Role.PASSENGER) {
+                    Intent home;
+                    if (role.equals("ROLE_PASSENGER") ) {
                         home = new Intent(DriverRideHistoryActivity.this, PassengerMainActivity.class);
                     }
-                    if (user.getRoles().get(1) == Role.DRIVER) {
+                    else {
                         home = new Intent(DriverRideHistoryActivity.this, DriverMainActivity.class);
                     }
-                    home.putExtra("user", getIntent().getByteArrayExtra("user"));
                     startActivity(home);
                     break;
                 case R.id.settings:

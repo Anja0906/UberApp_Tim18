@@ -2,6 +2,9 @@ package retrofit;
 
 import java.util.List;
 
+import java.io.UnsupportedEncodingException;
+
+
 import DTO.JWTResponse;
 import DTO.LoginDTO;
 import DTO.MessageDTO;
@@ -31,5 +34,9 @@ public interface UserApi {
     @POST("api/user/{id}/message")
     Call<MessageResponseDTO> sendMessage(@Path("id") int id, @Body MessageDTO messageDTO);
 
+    @GET("api/user/{id}")
+    Call<User> findUserById(@Path("id")Integer id);
 
+    @GET("/api/user/whoami")
+    Call<User> whoami();
 }

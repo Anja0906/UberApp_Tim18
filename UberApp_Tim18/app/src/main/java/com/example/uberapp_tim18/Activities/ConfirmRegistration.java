@@ -52,7 +52,7 @@ public class ConfirmRegistration extends AppCompatActivity {
         PassengerApi passengerApi = userRetrofitService.getRetrofit().create(PassengerApi.class);
         SharedPreferences preferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         String email = preferences.getString("email", "");
-        passengerApi.findByEmail(new EmailDTO(email))
+        passengerApi.findByEmail(email)
                 .enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {

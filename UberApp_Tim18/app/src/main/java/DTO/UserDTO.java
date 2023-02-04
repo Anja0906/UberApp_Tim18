@@ -19,8 +19,10 @@ public class UserDTO implements Serializable {
     private boolean blocked;
     private List<String> roles;
 
+
     public UserDTO() {
     }
+
 
     public UserDTO(Integer id, String name, String surname, String profilePicture, String telephoneNumber, String email, String address, List<String> roles) {
         this.id                 = id;
@@ -48,11 +50,23 @@ public class UserDTO implements Serializable {
 //        }
 //    }
 
-    public Integer getId() {
+
+    public UserDTO(int id, String name, String surname, String profilePicture, String telephoneNumber, String email, String address, boolean blocked) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.profilePicture = profilePicture;
+        this.telephoneNumber = telephoneNumber;
+        this.email = email;
+        this.address = address;
+        this.blocked = blocked;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

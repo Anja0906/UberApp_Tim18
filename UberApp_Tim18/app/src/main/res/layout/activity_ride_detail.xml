@@ -2,16 +2,17 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ride_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/ride_detail"
-    tools:context=".Activities.RideDetailActivity"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".Activities.RideDetailActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -30,10 +31,10 @@
                 android:id="@+id/menu_toolbar_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
                 android:src="@drawable/ic_menu"
                 tools:ignore="MissingConstraints"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="16dp" />
 
@@ -53,20 +54,42 @@
                 tools:ignore="MissingConstraints" />
         </RelativeLayout>
 
+        <FrameLayout
+            android:id="@+id/fragment_ride_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@color/background">
 
-
+        </FrameLayout>
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/scroll_view_replace"
+            android:background="@color/background">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="18dp"
+                android:layout_weight=".3"
+                android:background="@color/background"
                 android:orientation="vertical">
 
-
+                <TextView
+                    android:id="@+id/acc_info_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/about_ride"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/edit_text"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -80,29 +103,38 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:alpha="1"
+                        android:background="@drawable/textview_border"
                         android:drawableLeft="@drawable/ic_calendar"
                         android:drawablePadding="10dp"
+                        android:fontFamily="sans-serif-medium"
                         android:text="@string/start"
                         android:textColor="@color/edit_text"
                         android:textSize="20sp" />
 
-                    <TextView
-                        android:id="@+id/beginning_txt_view"
+                    <EditText
+                        android:id="@+id/start_txt_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:inputType="text"
+                        android:background="@drawable/textview_border"
+                        />
                 </LinearLayout>
 
+
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView6"
+                    android:id="@+id/appCompatImageView4"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="10dp"
+                    android:fontFamily="sans-serif-medium"
                     android:alpha="0.5"
-                    android:background="@color/edit_text" />
+                    android:background="@color/background"
+                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -117,34 +149,41 @@
                         android:layout_weight="1"
                         android:alpha="1"
                         android:drawableLeft="@drawable/ic_calendar"
+                        android:fontFamily="sans-serif-medium"
                         android:drawablePadding="10dp"
                         android:text="@string/end"
                         android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:background="@drawable/textview_border"/>
 
-                    <TextView
+                    <EditText
                         android:id="@+id/end_txt_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
+                        android:background="@drawable/textview_border"
+                        android:fontFamily="sans-serif-medium"
+                        android:inputType="phone"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/edit_text"
                         android:textSize="20sp" />
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView4"
+                    android:id="@+id/appCompatImageView3"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="10dp"
+                    android:fontFamily="sans-serif-medium"
                     android:alpha="0.5"
-                    android:background="@color/edit_text" />
+                    android:background="@color/background" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="18dp"
                     android:orientation="horizontal">
+
 
                     <TextView
                         android:id="@+id/price_view"
@@ -154,27 +193,34 @@
                         android:alpha="1"
                         android:drawableLeft="@drawable/ic_dollar_sign"
                         android:drawablePadding="10dp"
+                        android:fontFamily="sans-serif-medium"
+
                         android:text="@string/price"
                         android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:background="@drawable/textview_border"/>
 
-                    <TextView
+                    <EditText
                         android:id="@+id/price_txt_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
                         android:textAlignment="viewEnd"
-                        android:textColor="@color/button"
-                        android:textSize="20sp" />
+                        android:fontFamily="sans-serif-medium"
+
+                        android:textColor="@color/edit_text"
+                        android:textSize="20sp"
+                        android:inputType="textEmailAddress"
+                        android:background="@drawable/textview_border"/>
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView3"
+                    android:id="@+id/appCompatImageView2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="10dp"
                     android:alpha="0.5"
-                    android:background="@color/edit_text" />
+                    android:background="@color/background" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -190,27 +236,32 @@
                         android:alpha="1"
                         android:drawableLeft="@drawable/ic_clock"
                         android:drawablePadding="10dp"
+                        android:fontFamily="sans-serif-medium"
                         android:text="@string/duration"
                         android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:background="@drawable/textview_border"/>
 
-                    <TextView
+                    <EditText
                         android:id="@+id/duration_txt_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
+                        android:fontFamily="sans-serif-medium"
+                        android:textSize="20sp"
+                        android:inputType="textPostalAddress"
+                        android:background="@drawable/textview_border"/>
+
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_margin="10dp"
                     android:alpha="0.5"
-                    android:background="@color/edit_text" />
+                    android:background="@color/background" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -219,147 +270,106 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/panic_ride_view"
+                        android:id="@+id/pass_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:alpha="1"
-                        android:drawableLeft="@drawable/ic_panic"
+                        android:drawableLeft="@drawable/ic_clock"
                         android:drawablePadding="10dp"
-                        android:text="@string/ride_panic"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/panic_ride_txt_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:alpha="0.5"
-                    android:background="@color/edit_text" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/baby_ride_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:alpha="1"
-                        android:drawableLeft="@drawable/ic_child"
-                        android:drawablePadding="10dp"
-                        android:text="@string/ride_baby"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/baby_ride_txt_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-                </LinearLayout>
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:alpha="0.5"
-                    android:background="@color/edit_text" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/pet_ride_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:alpha="1"
-                        android:drawableLeft="@drawable/ic_pets"
-                        android:drawablePadding="10dp"
-                        android:text="@string/ride_pet"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/pet_ride_txt_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="4"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp" />
-
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:alpha="0.5"
-                    android:background="@color/edit_text" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="30dp">
-
-
-                    <TextView
-                        android:id="@+id/split_fair_ride_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:alpha="1"
-                        android:drawableLeft="@drawable/ic_people"
-                        android:drawablePadding="10dp"
-                        android:text="@string/ride_split_fair"
+                        android:text="@string/passengers"
                         android:textColor="@color/edit_text"
                         android:textSize="20sp"
-                        android:layout_marginBottom="30dp"/>
+                        android:background="@drawable/textview_border"/>
 
-                    <TextView
-                        android:id="@+id/split_fair_ride_txt_view"
+                    <EditText
+                        android:id="@+id/pass_txt_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/edit_text"
+                        android:fontFamily="sans-serif-medium"
                         android:textSize="20sp"
-                        android:layout_marginBottom="30dp"/>
+                        android:inputType="text"
+                        android:background="@drawable/textview_border"/>
+                </LinearLayout>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/appCompatImageView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:alpha="0.5"
+                    android:background="@color/background" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginBottom="18dp"
+                android:orientation="vertical">
+                <ListView
+                    android:id="@+id/list_view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical" />
+            </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/appCompatImageView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:alpha="0.5"
+                    android:background="@color/background" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/confirm_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="2.5dp"
+                        android:layout_toRightOf="@+id/cancel_button"
+
+                        android:layout_weight="1"
+                        android:alpha="1"
+                        android:background="@drawable/green_button"
+                        android:text="@string/cancel_item"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/cancel_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="2.5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:alpha="1"
+                        android:background="@drawable/button_shape"
+                        android:text="@string/inbox"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/ride_detail_navigation"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="start"
         android:background="@color/edit_text"
-        app:menu="@menu/side_menu_passenger"
-        android:layout_gravity="start"/>
+        app:menu="@menu/side_menu_passenger" />
 </androidx.drawerlayout.widget.DrawerLayout>
 
 

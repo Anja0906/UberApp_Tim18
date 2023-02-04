@@ -20,12 +20,12 @@ public class User implements Serializable {
     private boolean active;
     private String verificationCode;
     private String resetPasswordToken;
-    private Date timeOfResetPasswordToken;
-    private List<Role> roles;
+    private String timeOfResetPasswordToken;
+    private List<String> roles;
 
     public User(){}
 
-    public User(Integer id, String name, String surname, String profilePicture, String telephoneNumber, String email, String address, String password, boolean blocked, boolean active, String verificationCode, String resetPasswordToken, Date timeOfResetPasswordToken, List<Role> roles) {
+    public User(Integer id, String name, String surname, String profilePicture, String telephoneNumber, String email, String address, String password, boolean blocked, boolean active, String verificationCode, String resetPasswordToken, String timeOfResetPasswordToken, List<String> roles) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -138,19 +138,19 @@ public class User implements Serializable {
         this.resetPasswordToken = resetPasswordToken;
     }
 
-    public Date getTimeOfResetPasswordToken() {
+    public String getTimeOfResetPasswordToken() {
         return timeOfResetPasswordToken;
     }
 
-    public void setTimeOfResetPasswordToken(Date timeOfResetPasswordToken) {
+    public void setTimeOfResetPasswordToken(String timeOfResetPasswordToken) {
         this.timeOfResetPasswordToken = timeOfResetPasswordToken;
     }
 
-    public List<Role> getRoles() {
+    public List<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(List<String> roles) {
         this.roles = roles;
     }
 }

@@ -40,7 +40,7 @@ public class UserLoginActivity extends Activity {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("id", String.valueOf(response.getId()));
         editor.putString("email", response.getEmail());
-        editor.putString("role", String.valueOf(response.getRoles().get(0)));
+        editor.putString("role", String.valueOf(response.getRoles().get(1)));
         editor.putString("jwt", response.getAccessToken());
         editor.apply();
     }
@@ -63,14 +63,19 @@ public class UserLoginActivity extends Activity {
                         .enqueue(new Callback<JWTResponse>() {
                             @Override
                             public void onResponse(Call<JWTResponse> call, Response<JWTResponse> response) {
-                                Toast.makeText(UserLoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                                saveLoggedUser(response.body());
-                                if (response.body().getRoles().get(1).equals("ROLE_PASSENGER")) {
-                                    Intent intent = new Intent(UserLoginActivity.this, PassengerMainActivity.class);
-                                    startActivity(intent);
-                                } else {
-                                    Intent intent2 = new Intent(UserLoginActivity.this, DriverMainActivity.class);
-                                    startActivity(intent2);
+                                if(response.body()==null) {
+                                    Toast.makeText(UserLoginActivity.this, "Account is suspended!", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    saveLoggedUser(response.body());
+                                    if (response.body().getRoles().get(1).equals("ROLE_PASSENGER")) {
+                                        Toast.makeText(UserLoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(UserLoginActivity.this, PassengerMainActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        Toast.makeText(UserLoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                                        Intent intent2 = new Intent(UserLoginActivity.this, DriverMainActivity.class);
+                                        startActivity(intent2);
+                                    }
                                 }
                             }
 

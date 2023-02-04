@@ -6,31 +6,47 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.airbnb.lottie.L;
+import com.example.uberapp_tim18.Adapters.PassengerAdapter;
 import com.example.uberapp_tim18.R;
+import com.example.uberapp_tim18.fragments.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.Set;
 
+import DTO.LocationSetDTO;
+import DTO.PassengerIdEmailDTO;
 import DTO.RideResponseDTO;
+import model.Location;
+import model.Passenger;
 import model.Role;
 import model.User;
 import tools.HelperClasses;
 
-public class RideDetailActivity extends Activity {
+public class RideDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride_detail);
+
         Intent intent = getIntent();
         byte[] rideBytes = intent.getByteArrayExtra("ride");
         ByteArrayInputStream bis = new ByteArrayInputStream(rideBytes);
@@ -53,30 +69,47 @@ public class RideDetailActivity extends Activity {
             }
         }
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        Set<LocationSetDTO> location = ride.getLocations();
+        LocationSetDTO l = location.iterator().next();
+        LatLng departure = new LatLng(l.getDeparture().getLatitude(),l.getDeparture().getLongitude());
+        LatLng destination = new LatLng(l.getDestination().getLatitude(),l.getDestination().getLongitude());
+        MapFragment fragment = new MapFragment(departure,destination);
+        transaction.replace(R.id.fragment_ride_detail, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
         System.out.println(ride);
-        TextView start = findViewById(R.id.beginning_txt_view);
+        EditText start = findViewById(R.id.start_txt_view);
         start.setText(ride.getStartTime());
 
-        TextView end = findViewById(R.id.end_txt_view);
+        EditText end = findViewById(R.id.end_txt_view);
         end.setText(ride.getEndTime());
 
-        TextView price = findViewById(R.id.price_txt_view);
+        EditText price = findViewById(R.id.price_txt_view);
         price.setText(Double.toString(ride.getTotalCost()));
-        TextView duration = findViewById(R.id.duration_txt_view);
+        EditText duration = findViewById(R.id.duration_txt_view);
         duration.setText(Integer.toString(ride.getEstimatedTimeInMinutes()));
-        TextView panic = findViewById(R.id.panic_ride_txt_view);
-        TextView baby = findViewById(R.id.baby_ride_txt_view);
-        if (ride.isBabyTransport()) {
-            baby.setText("+");
-        } else {
-            baby.setText("-");
-        }
-        TextView pet = findViewById(R.id.pet_ride_txt_view);
-        if (ride.isPetTransport()) {
-            pet.setText("+");
-        } else {
-            pet.setText("-");
-        }
+
+        EditText passenger = findViewById(R.id.pass_txt_view);
+
+        System.out.println(ride.getPassengers().size());
+        String r = String.valueOf(ride.getPassengers().size());
+        passenger.setText(r);
+        ArrayList<PassengerIdEmailDTO> list = new ArrayList<>(ride.getPassengers());
+
+        ListView listView = findViewById(R.id.list_view1);
+        PassengerAdapter passengerAdapter = new PassengerAdapter(this,list);
+        listView.setAdapter(passengerAdapter);
+
+
+
+
+        start.setEnabled(false);
+        end.setEnabled(false);
+        price.setEnabled(false);
+        duration.setEnabled(false);
 
 
         DrawerLayout drawerLayout = findViewById(R.id.ride_detail);
@@ -114,12 +147,12 @@ public class RideDetailActivity extends Activity {
                     case R.id.home:
                         User user = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("user"));
                         Intent home = null;
-                        if (user.getRoles().get(1) == Role.PASSENGER) {
+                        if (user.getRoles().get(1) == "ROLE_PASSANGER") {
                             home = new Intent(RideDetailActivity.this, PassengerMainActivity.class);
-                        }
-                        if (user.getRoles().get(1) == Role.DRIVER) {
+                        }else{
                             home = new Intent(RideDetailActivity.this, DriverMainActivity.class);
                         }
+
                         home.putExtra("user", getIntent().getByteArrayExtra("user"));
                         startActivity(home);
                         break;

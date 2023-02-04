@@ -15,7 +15,8 @@
     </fragment>
 
     <RelativeLayout
-        android:translationZ="90dp"
+        android:translationZ="0dp"
+        android:id="@+id/relativeZ"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

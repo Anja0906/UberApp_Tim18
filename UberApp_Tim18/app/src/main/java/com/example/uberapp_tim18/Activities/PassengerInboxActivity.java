@@ -137,12 +137,13 @@ public class PassengerInboxActivity extends Activity {
                     case R.id.home:
                         User user = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("user"));
                         Intent home = null;
-                        if (user.getRoles().get(1) == Role.PASSENGER) {
+                        if (user.getRoles().get(1) =="ROLE_PASSANGER") {
                             home = new Intent(PassengerInboxActivity.this, PassengerMainActivity.class);
-                        }
-                        if (user.getRoles().get(1) == Role.DRIVER) {
+                        }else{
                             home = new Intent(PassengerInboxActivity.this, DriverMainActivity.class);
+
                         }
+                        
                         home.putExtra("user", mainIntent.getByteArrayExtra("user"));
                         startActivity(home);
                         break;

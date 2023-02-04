@@ -122,4 +122,14 @@
     <string name="false_text">False</string>
     <string name="current_ride">Current ride:</string>
     <string name="start">Start</string>
+    <string name="sendEmail">SEND VERIFICATION</string>
+    <string name="code">Code</string>
+    <string name="passengers">Passengers:</string>
+    <string name="about_ride">About ride:</string>
+    <string name="skip">skip</string>
+    <string name="driver_id">Driver id</string>
+    <string name="driver_name">Driver name:</string>
+    <string name="driver_surname">Driver Surname</string>
+    <string name="choose_dates">Choose dates</string>
+    <string name="to">To:</string>
 </resources>
