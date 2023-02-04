@@ -34,3 +34,6 @@ public interface UserApi {
 //            return new ResponseEntity<>("Error while sending email", HttpStatus.NOT_FOUND);
 //        }
 //    }
+    @GET("/api/user/whoami")
+    Call<User> whoami();
+}

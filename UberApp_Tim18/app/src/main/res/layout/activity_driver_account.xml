@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/driver_account_activity"
+    android:background="@color/background"
     tools:context=".Activities.DriverAccountActivity">
 
     <RelativeLayout
@@ -16,13 +17,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/account_header"
             android:translationZ="50dp">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/edit_text"
+                android:background="@color/background"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
                 app:titleTextColor="#fff" />
@@ -31,7 +33,7 @@
                 android:id="@+id/menu_toolbar_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/menu_dark"
+                android:src="@drawable/ic_menu"
                 tools:ignore="MissingConstraints"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="15dp"
@@ -64,65 +66,70 @@
                 android:text="@string/toggle_text"
                 android:textOff="@string/toggle_off"
                 android:textOn="@string/toggle_on" />
+            <ImageView
+                android:layout_width="100dp"
+                android:id="@+id/picture"
+                android:layout_height="100dp"
+                android:background="@drawable/round_image_view"
+                android:src="@drawable/user4"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="15dp"
+                android:layout_centerHorizontal="true"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@+id/picture"
+                android:background="@color/background"
+                android:orientation="horizontal"
+                android:translationZ="50dp"
+                android:padding="10dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="5dp"
+                    android:layout_centerHorizontal="true">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:id="@+id/account_account_menu"
+                        android:layout_height="50dp"
+                        android:src="@drawable/account_light"
+                        android:layout_margin="10dp"
+                        />
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:id="@+id/reports_account_menu"
+                        android:layout_height="50dp"
+                        android:src="@drawable/history_light"
+                        android:layout_margin="10dp"/>
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:id="@+id/stats_account_menu"
+                        android:layout_height="50dp"
+                        android:src="@drawable/chart_light"
+                        android:layout_margin="10dp"/>
+
+                    <ImageView
+                        android:id="@+id/about_vehicle"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/car_light" />
+                </LinearLayout>
+
+            </RelativeLayout>
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
+            android:layout_below="@+id/account_header"
             android:orientation="vertical">
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/background"
-            android:orientation="horizontal"
-            android:translationZ="50dp"
-            android:padding="10dp">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/edit_text_background"
-                android:layout_centerHorizontal="true">
-                <ImageView
-                    android:layout_width="80dp"
-                    android:id="@+id/account_account_menu"
-                    android:layout_height="70dp"
-                    android:background="@drawable/account_menu_item_round_background"
-                    android:src="@drawable/ic_profile"
-                    android:layout_margin="9dp"
-                    />
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:id="@+id/reports_account_menu"
-                    android:layout_height="70dp"
-                    android:background="@drawable/account_menu_item_round_background"
-                    android:src="@drawable/history"
-                    android:layout_margin="9dp"/>
-                <ImageView
-                    android:layout_width="80dp"
-                    android:id="@+id/stats_account_menu"
-                    android:layout_height="70dp"
-                    android:background="@drawable/account_menu_item_round_background"
-                    android:src="@drawable/chart"
-                    android:layout_margin="9dp"/>
-                <ImageView
-                    android:layout_width="80dp"
-                    android:id="@+id/about_vehicle"
-                    android:layout_height="70dp"
-                    android:background="@drawable/account_menu_item_round_background"
-                    android:src="@drawable/car"
-                    android:layout_margin="9dp"
-                    />
-            </LinearLayout>
-
         </RelativeLayout>
-
     </RelativeLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view_passenger_account"
         android:layout_width="wrap_content"

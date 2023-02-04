@@ -1,13 +1,17 @@
 package com.example.uberapp_tim18.fragments;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+
 import com.example.uberapp_tim18.Activities.PassengerRegisterActivity;
 import com.example.uberapp_tim18.R;
 import com.github.mikephil.charting.charts.BarChart;
@@ -17,6 +21,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,14 +30,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import DTO.ReportDTO;
 import retrofit.DriverApi;
+import retrofit.PassengerApi;
 import retrofit.RetrofitService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DriverStatistics extends Fragment {
+public class PassengerStatistics extends Fragment {
     View rootView;
     ReportDTO report;
     AppCompatButton buttonDates;
@@ -42,10 +49,10 @@ public class DriverStatistics extends Fragment {
     BarChart barChart3;
     Date savedDate1;
     Date savedDate2;
-
-    public DriverStatistics(ReportDTO reportDTO) {
+    public PassengerStatistics(ReportDTO reportDTO) {
         this.report = reportDTO;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,11 +60,12 @@ public class DriverStatistics extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_driver_statistics, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        rootView = inflater.inflate(R.layout.fragment_passenger_statistics, container, false);
         initView();
         return rootView;
-
     }
 
     private void initView(){
@@ -178,11 +186,11 @@ public class DriverStatistics extends Fragment {
     private void getReportsWithDates(String date1, String date2){
         RetrofitService retrofitService = new RetrofitService();
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
-        String driverId = sharedPreferences.getString("id", "");
+        String passengerId = sharedPreferences.getString("id", "");
         String token = sharedPreferences.getString("jwt", "");
         retrofitService.onSavedUser(token);
-        DriverApi driverApi = retrofitService.getRetrofit().create(DriverApi.class);
-        driverApi.getReportsForDates(Integer.parseInt(driverId), date1, date2)
+        PassengerApi passengerApi = retrofitService.getRetrofit().create(PassengerApi.class);
+        passengerApi.getReportsForDates(Integer.parseInt(passengerId), date1, date2, "0", "100")
                 .enqueue(new Callback<ReportDTO>() {
                     @Override
                     public void onResponse(Call<ReportDTO> call, Response<ReportDTO> response) {

@@ -3,63 +3,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:id="@+id/passenger_account_fragment"
     tools:context=".fragments.PassengerAccount">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/fragment_container_layout"
-        >
-        <RelativeLayout
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_weight="1"
-            android:background="@color/background">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/ic_person"
-                android:contentDescription="@string/profile_picture"
-                />
-        </RelativeLayout>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight=".7"
-            android:id="@+id/scroll_view_replace"
-            android:background="@color/background">
-
-            <LinearLayout
+            android:layout_height="wrap_content"
+            android:id="@+id/user_data"
+            android:orientation="vertical">
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".3"
-                android:background="@color/background"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/acc_info_txt"
+                android:layout_marginTop="10dp">
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="@string/acc_info"
-                    android:fontFamily="sans-serif-medium"
-                    android:textColor="@color/edit_text"
-                    android:textSize="30dp"
-                    android:textStyle="bold" />
+                    android:id="@+id/edit"
+                    android:layout_marginTop="20dp"
+                    android:visibility="visible">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/edit_data"
+                        android:background="@drawable/round_image_view"
+                        android:padding="10dp"
+                        android:src="@drawable/edit"
+                        android:layout_marginStart="20dp"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/confirm_edit"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:visibility="gone"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="end">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/confirm_edit_data"
+                        android:background="@drawable/round_image_view"
+                        android:padding="10dp"
+                        android:src="@drawable/confirm"
+                        />
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/cancel_edit_data"
+                        android:background="@drawable/round_red"
+                        android:padding="10dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/cancel"
+                        />
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
+                    android:layout_margin="20dp"
+                    android:id="@+id/name_layout"
                     android:orientation="horizontal">
 
                     <TextView
@@ -79,7 +94,45 @@
 
 
                     <EditText
-                        android:id="@+id/name_txt_view"
+                        android:id="@+id/name_edit_text"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/edit_text"
+                        android:textSize="20sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:inputType="text"
+                        android:background="@drawable/textview_border"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:id="@+id/surname_layout"
+                    android:layout_below="@+id/name_layout"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/surname_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:alpha="1"
+                        android:drawableLeft="@drawable/ic_person"
+                        android:fontFamily="sans-serif-medium"
+                        android:drawablePadding="10dp"
+                        android:text="@string/surname"
+                        android:textColor="@color/edit_text"
+                        android:textSize="20sp"
+                        android:background="@drawable/textview_border"
+                        />
+
+
+                    <EditText
+                        android:id="@+id/surname_edit_text"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -93,20 +146,12 @@
                 </LinearLayout>
 
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:alpha="0.5"
-                    android:background="@color/background"
-                    />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
+                    android:layout_margin="20dp"
+                    android:id="@+id/phone_layout"
+                    android:layout_below="@+id/surname_layout"
                     android:orientation="horizontal">
 
                     <TextView
@@ -124,7 +169,7 @@
                         android:background="@drawable/textview_border"/>
 
                     <EditText
-                        android:id="@+id/phone_txt_view"
+                        android:id="@+id/phone_edit_text"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -137,19 +182,15 @@
                         />
                 </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:alpha="0.5"
-                    android:background="@color/background" />
-
                 <LinearLayout
+                    android:id="@+id/email_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
+                    android:layout_below="@+id/phone_layout"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -158,41 +199,35 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:alpha="1"
+                        android:background="@drawable/textview_border"
                         android:drawableLeft="@drawable/ic_monkey_a"
                         android:drawablePadding="10dp"
-                        android:fontFamily="sans-serif-medium"
 
+                        android:fontFamily="sans-serif-medium"
                         android:text="@string/email"
                         android:textColor="@color/edit_text"
-                        android:textSize="20sp"
-                        android:background="@drawable/textview_border"/>
+                        android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/email_txt_view"
+                        android:id="@+id/email_edit_text"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="1.7dp"
                         android:layout_weight="1"
-                        android:textAlignment="viewEnd"
+                        android:background="@drawable/textview_border"
                         android:fontFamily="sans-serif-medium"
-
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp"
                         android:inputType="textEmailAddress"
-                        android:background="@drawable/textview_border"/>
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/edit_text"
+                        android:textSize="15sp" />
                 </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:alpha="0.5"
-                    android:background="@color/background" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
+                    android:layout_margin="20dp"
+                    android:id="@+id/address_layout"
+                    android:layout_below="@+id/email_layout"
                     android:orientation="horizontal">
 
                     <TextView
@@ -210,7 +245,7 @@
                         android:background="@drawable/textview_border"/>
 
                     <EditText
-                        android:id="@+id/address_txt_view"
+                        android:id="@+id/address_edit_text"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -220,76 +255,13 @@
                         android:textSize="20sp"
                         android:inputType="textPostalAddress"
                         android:background="@drawable/textview_border"/>
-
                 </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:alpha="0.5"
-                    android:background="@color/background" />
+            </RelativeLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="18dp"
-                    android:orientation="horizontal">
+        </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/pass_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:alpha="1"
-                        android:drawableLeft="@drawable/ic_password"
-                        android:drawablePadding="10dp"
-                        android:text="@string/password"
-                        android:textColor="@color/edit_text"
-                        android:textSize="20sp"
-                        android:background="@drawable/textview_border"/>
 
-                    <EditText
-                        android:id="@+id/pass_txt_view"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/edit_text"
-                        android:fontFamily="sans-serif-medium"
-                        android:textSize="20sp"
-                        android:inputType="textPassword"
-                        android:background="@drawable/textview_border"/>
-                </LinearLayout>
+    </RelativeLayout>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:alpha="0.5"
-                    android:background="@color/background" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/edit_personal"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft ="20dp"
-                        android:layout_marginRight ="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/button_shape"
-                        android:text="@string/edit_data"
-                        android:textColor="@color/black"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
 </FrameLayout>

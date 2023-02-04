@@ -130,4 +130,6 @@
     <string name="driver_id">Driver id</string>
     <string name="driver_name">Driver name:</string>
     <string name="driver_surname">Driver Surname</string>
+    <string name="choose_dates">Choose dates</string>
+    <string name="to">To:</string>
 </resources>
