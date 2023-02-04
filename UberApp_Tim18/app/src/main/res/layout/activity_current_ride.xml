@@ -108,7 +108,7 @@
               android:drawableLeft="@drawable/baseline_identification_number"
               android:drawablePadding="10dp"
               android:fontFamily="sans-serif-medium"
-              android:text="@string/ID"
+              android:text="@string/driver_id"
               android:textColor="@color/edit_text"
               android:textSize="20sp" />
 
@@ -129,6 +129,96 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:alpha="0.5"
+            android:background="@color/background"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:orientation="horizontal">
+
+
+          <TextView
+              android:id="@+id/driver_name"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:alpha="1"
+              android:background="@drawable/textview_border"
+              android:drawableLeft="@drawable/ic_person"
+              android:drawablePadding="10dp"
+              android:fontFamily="sans-serif-medium"
+              android:text="@string/driver_name"
+              android:textColor="@color/edit_text"
+              android:textSize="20sp" />
+
+          <EditText
+              android:id="@+id/driver_name_txt"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="4"
+              android:textAlignment="viewEnd"
+              android:textColor="@color/edit_text"
+              android:textSize="20sp"
+              android:fontFamily="sans-serif-medium"
+              android:inputType="text"
+              android:background="@drawable/textview_border"
+              />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/appCompatImageView1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:alpha="0.5"
+            android:background="@color/background"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:orientation="horizontal">
+
+
+          <TextView
+              android:id="@+id/driver_surname"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:alpha="1"
+              android:background="@drawable/textview_border"
+              android:drawableLeft="@drawable/ic_person"
+              android:drawablePadding="10dp"
+              android:fontFamily="sans-serif-medium"
+              android:text="@string/driver_surname"
+              android:textColor="@color/edit_text"
+              android:textSize="20sp" />
+
+          <EditText
+              android:id="@+id/driver_surname_txt"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="4"
+              android:textAlignment="viewEnd"
+              android:textColor="@color/edit_text"
+              android:textSize="20sp"
+              android:fontFamily="sans-serif-medium"
+              android:inputType="text"
+              android:background="@drawable/textview_border"
+              />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/appCompatImageView10"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="10dp"
@@ -270,20 +360,21 @@
             android:orientation="horizontal">
 
           <TextView
-              android:id="@+id/pass_view"
+              android:id="@+id/departure"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_weight="1"
               android:alpha="1"
-              android:drawableLeft="@drawable/ic_password"
+              android:drawableLeft="@drawable/ic_home"
               android:drawablePadding="10dp"
-              android:text="@string/password"
+              android:fontFamily="sans-serif-medium"
+              android:text="Departure"
               android:textColor="@color/edit_text"
               android:textSize="20sp"
               android:background="@drawable/textview_border"/>
 
           <EditText
-              android:id="@+id/pass_txt_view"
+              android:id="@+id/departure_txt_view"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_weight="4"
@@ -291,20 +382,97 @@
               android:textColor="@color/edit_text"
               android:fontFamily="sans-serif-medium"
               android:textSize="20sp"
-              android:inputType="textPassword"
+              android:inputType="textPostalAddress"
               android:background="@drawable/textview_border"/>
+
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView5"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="10dp"
             android:alpha="0.5"
             android:background="@color/background" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:orientation="horizontal">
 
+          <TextView
+              android:id="@+id/destination"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:alpha="1"
+              android:drawableLeft="@drawable/ic_home"
+              android:drawablePadding="10dp"
+              android:fontFamily="sans-serif-medium"
+              android:text="Destination"
+              android:textColor="@color/edit_text"
+              android:textSize="20sp"
+              android:background="@drawable/textview_border"/>
+
+          <EditText
+              android:id="@+id/destination_txt_view"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="4"
+              android:textAlignment="viewEnd"
+              android:textColor="@color/edit_text"
+              android:fontFamily="sans-serif-medium"
+              android:textSize="20sp"
+              android:inputType="textPostalAddress"
+              android:background="@drawable/textview_border"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="10dp"
+            android:alpha="0.5"
+            android:background="@color/background" />
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+          <androidx.appcompat.widget.AppCompatButton
+              android:id="@+id/confirm_button"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:layout_marginLeft="5dp"
+              android:layout_marginRight="2.5dp"
+              android:layout_toRightOf="@+id/cancel_button"
+
+              android:layout_weight="1"
+              android:alpha="1"
+              android:background="@drawable/button_cancel"
+              android:text="PANIC!!!"
+              android:textColor="@color/black"
+              android:textSize="17sp"
+              android:textStyle="bold" />
+
+          <androidx.appcompat.widget.AppCompatButton
+              android:id="@+id/cancel_button"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:layout_alignParentLeft="true"
+              android:layout_marginLeft="2.5dp"
+              android:layout_marginRight="5dp"
+              android:layout_weight="1"
+              android:alpha="1"
+              android:background="@drawable/button_shape"
+              android:text="@string/inbox"
+              android:textColor="@color/black"
+              android:textSize="17sp"
+              android:textStyle="bold" />
+        </LinearLayout>
       </LinearLayout>
+
+
     </ScrollView>
   </LinearLayout>
 

@@ -148,18 +148,15 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.map_container, mMapFragment).commit();
         mMapFragment.getMapAsync(this);
-
         i=0;
-        if(flag == 0){
-            l.setTranslationZ(-1000);
+        if(flag == 1){
+            l.setTranslationZ(1000);
         }else{
             drawRoute();
             createRide();
         }
 
     }
-
-
     public void createRide(){
         buttonOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -229,13 +226,6 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 12.0f));
         }
 
-        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                Toast.makeText(getActivity(), marker.getTitle(), Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
         map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
@@ -267,10 +257,6 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
     }
 
 
-
-
-
-
     @SuppressLint("MissingPermission")
     @Override
     public void onResume() {
@@ -300,18 +286,11 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         }
 
     }
-
-
     @Override
     public void onLocationChanged(@NonNull Location location) {
-
     }
-
     public void drawCurrentRide(LatLng departure,LatLng destination){
         MarkerOptions markerOptions = new MarkerOptions();
-        System.out.println("AAAAAAAAAAAAAAAA");
-        System.out.println(departure);
-        System.out.println(destination);
         if(i<2){
             markerOptions.position(departure);
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
@@ -389,9 +368,6 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
         map.getUiSettings().setZoomControlsEnabled(true);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(zoom, 13));
     }
-
-
-
     public void drawRoute(){
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -522,13 +498,9 @@ public class MapFragment extends Fragment implements LocationListener, OnMapRead
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
                 new AlertDialog.Builder(getActivity())
                         .setTitle("Allow user location")
                         .setMessage("To continue working we need your locations....Allow now?")
