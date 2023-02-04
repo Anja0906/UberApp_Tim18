@@ -89,6 +89,10 @@ public class PassengerRideHistoryActivity extends AppCompatActivity {
                     profile.putExtra("user", getIntent().getByteArrayExtra("user"));
                     startActivity(profile);
                     break;
+                case R.id.logout:
+                    Intent logout = new Intent(PassengerRideHistoryActivity.this, UserLoginActivity.class);
+                    startActivity(logout);
+                    break;
                 case R.id.ride_history:
                     Toast toast= Toast. makeText(getApplicationContext(),"Already on page",Toast. LENGTH_SHORT);
                     toast.show();

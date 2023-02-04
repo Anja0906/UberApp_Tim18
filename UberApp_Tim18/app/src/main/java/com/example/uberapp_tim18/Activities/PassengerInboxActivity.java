@@ -134,6 +134,10 @@ public class PassengerInboxActivity extends Activity {
                         ride.putExtra("user", mainIntent.getByteArrayExtra("user"));
                         startActivity(ride);
                         break;
+                    case R.id.logout:
+                        Intent logout = new Intent(PassengerInboxActivity.this, UserLoginActivity.class);
+                        startActivity(logout);
+                        break;
                     case R.id.home:
                         User user = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("user"));
                         Intent home = null;

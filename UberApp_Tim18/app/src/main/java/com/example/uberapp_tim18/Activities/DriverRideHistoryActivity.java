@@ -69,12 +69,7 @@ public class DriverRideHistoryActivity extends AppCompatActivity {
                 Logger.getLogger(PassengerRegisterActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
             }
         });
-//        this.lv.setOnItemClickListener((parent, view, position, id) -> {
-//
-//            Intent intent = new Intent(DriverRideHistoryActivity.this, RideDetailActivity.class);
-//            intent.putExtra("id",)
-//            startActivity(intent);
-//        });
+
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -114,6 +109,10 @@ public class DriverRideHistoryActivity extends AppCompatActivity {
                         home = new Intent(DriverRideHistoryActivity.this, DriverMainActivity.class);
                     }
                     startActivity(home);
+                    break;
+                case R.id.logout:
+                    Intent logout = new Intent(DriverRideHistoryActivity.this, UserLoginActivity.class);
+                    startActivity(logout);
                     break;
                 case R.id.settings:
                     Intent settings = new Intent(DriverRideHistoryActivity.this, ReviewerPreferenceActivity.class);

@@ -72,6 +72,10 @@ public class DriverMainActivity extends AppCompatActivity {
                         toast.setMargin(50,50);
                         toast.show();
                         break;
+                    case R.id.logout:
+                        Intent logout = new Intent(DriverMainActivity.this, UserLoginActivity.class);
+                        startActivity(logout);
+                        break;
 
                     case R.id.settings:
                         Intent setting = new Intent(DriverMainActivity.this, ReviewerPreferenceActivity.class);

@@ -89,6 +89,10 @@ public class PassengerMainActivity extends AppCompatActivity {
                         toast.setMargin(50,50);
                         toast.show();
                         break;
+                    case R.id.logout:
+                        Intent logout = new Intent(PassengerMainActivity.this, UserLoginActivity.class);
+                        startActivity(logout);
+                        break;
                     case R.id.settings:
                         Intent setting = new Intent(PassengerMainActivity.this, ReviewerPreferenceActivity.class);
                         setting.putExtra("user", getIntent().getByteArrayExtra("user"));
