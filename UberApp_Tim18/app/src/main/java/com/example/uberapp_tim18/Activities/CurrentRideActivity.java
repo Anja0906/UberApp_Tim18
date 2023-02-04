@@ -15,9 +15,18 @@ import com.example.uberapp_tim18.R;
 import com.example.uberapp_tim18.dialog.PanicDialog;
 import com.example.uberapp_tim18.fragments.MapFragment;
 import com.google.gson.Gson;
+import com.google.android.gms.maps.model.LatLng;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import DTO.DriverDTO;
 import DTO.LocationSetDTO;
 import DTO.RideResponseDTO;
+import retrofit.DriverApi;
+import retrofit.RetrofitService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CurrentRideActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
@@ -30,6 +39,7 @@ public class CurrentRideActivity extends AppCompatActivity {
     EditText destination;
 
     RideResponseDTO ride;
+    DriverDTO driver;
 
 
     @Override
@@ -38,17 +48,13 @@ public class CurrentRideActivity extends AppCompatActivity {
         setContentView(R.layout.activity_current_ride);
         SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
         String ride = sharedPreferences.getString("ride", null);
-
         Gson gson = new Gson();
         this.ride = gson.fromJson(ride, RideResponseDTO.class);
 
-        initGUI();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        MapFragment fragment = new MapFragment(0);
-        transaction.replace(R.id.fragment_current_ride, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        System.out.println(this.ride.getDriver().getId());
+        getDriver(this.ride.getDriver().getId());
+
+
 
         Button inbox = findViewById(R.id.inbox_button);
         inbox.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +78,11 @@ public class CurrentRideActivity extends AppCompatActivity {
 
     private void initRide(){
         LocationSetDTO locationSetDTO = ride.getLocations().iterator().next();
-        driverId.setText(String.valueOf(ride.getDriver()));
+        driverId.setText(String.valueOf(ride.getDriver().getId()));
+        driverName.setText(String.valueOf(driver.getName()));
+        driverSurname.setText(String.valueOf(driver.getSurname()));
+        phone.setText(String.valueOf(driver.getTelephoneNumber()));
+        email.setText(String.valueOf(ride.getDriver().getEmail()));
         departure.setText(String.valueOf(locationSetDTO.getDeparture().getAddress()));
         destination.setText(String.valueOf(locationSetDTO.getDestination().getAddress()));
     }
@@ -87,5 +97,34 @@ public class CurrentRideActivity extends AppCompatActivity {
         departure = findViewById(R.id.departure_txt_view);
         destination = findViewById(R.id.destination_txt_view);
         initRide();
+    }
+
+    private void getDriver(int id){
+        RetrofitService retrofitService = new RetrofitService();
+        String token = getSharedPreferences("user_prefs", MODE_PRIVATE).getString("jwt", "");
+        retrofitService.onSavedUser(token);
+        DriverApi driverApi = retrofitService.getRetrofit().create(DriverApi.class);
+        driverApi.getDriver(id)
+                .enqueue(new Callback<DriverDTO>() {
+                    @Override
+                    public void onResponse(Call<DriverDTO> call, Response<DriverDTO> response) {
+                        System.out.println(response.body());
+                        driver = response.body();
+                        initGUI();
+                        LocationSetDTO locationSetDTO = ride.getLocations().iterator().next();
+                        LatLng dest = new LatLng(locationSetDTO.getDestination().getLatitude(),locationSetDTO.getDestination().getLongitude());
+                        LatLng departure = new LatLng(locationSetDTO.getDeparture().getLatitude(),locationSetDTO.getDeparture().getLongitude());
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        FragmentTransaction transaction = fragmentManager.beginTransaction();
+                        MapFragment fragment = new MapFragment(departure,dest);
+                        transaction.replace(R.id.fragment_current_ride, fragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    }
+                    @Override
+                    public void onFailure(Call<DriverDTO> call, Throwable t) {
+                        Logger.getLogger(PassengerRegisterActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+                    }
+                });
     }
 }
