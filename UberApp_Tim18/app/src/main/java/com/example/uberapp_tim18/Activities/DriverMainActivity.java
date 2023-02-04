@@ -1,7 +1,9 @@
 package com.example.uberapp_tim18.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -13,14 +15,20 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.uberapp_tim18.R;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+
+import DTO.RideResponseDTO;
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
 
 public class DriverMainActivity extends AppCompatActivity {
+    StompClient stompClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_main);
-
+        initializeWebSocketConnection();
         DrawerLayout drawerLayout = findViewById(R.id.driver_main);
 
         findViewById(R.id.menu_toolbar_icon).setOnClickListener(new View.OnClickListener() {
@@ -77,6 +85,25 @@ public class DriverMainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+    }
+
+    @SuppressLint("CheckResult")
+    void openGlobalSocket(){
+        stompClient.topic("/socket-topic/newRide").subscribe(
+                topicMessage ->{
+                    Log.i("SOCKET", topicMessage.getPayload());
+                },
+                throwable -> {
+                    Log.e("SOCKET", "Error: " + throwable.getMessage());
+                }
+        );
+    }
+
+    private void initializeWebSocketConnection(){
+        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP,"ws://192.168.8.104:8080/socket/websocket");
+        stompClient.connect();
+        openGlobalSocket();
 
     }
 
