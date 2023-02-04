@@ -1,5 +1,6 @@
 package retrofit;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import DTO.ReportDTO;
 import DTO.RideResponseDTO;
 import DTO.RideRetDTOMap;
 import DTO.VehicleDTO;
+import model.WorkingTime;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -31,4 +33,20 @@ public interface DriverApi {
     Call<ReportDTO> getReportsForDates(@Path("id") int id, @Query("from") String from, @Query("to") String to);
     @POST("/api/request/{id}")
     Call<Void> sendChange(@Path("id") int id, @Body DriverDTO driverDTO);
+    @GET("/api/driver/working-hour/{driverId}/login")
+    Call<Integer> workingHourValidation (@Path("driverId") int id);
+    @GET("/api/driver/working-hour/{driverId}/logged")
+    Call<Integer> checkDriver (@Path("driverId") int id);
+
+    @GET("/api/driver/working-hour/{driverId}/logout")
+    Call<Integer> workingHourValidationLogout (@Path("driverId") int id) ;
+
+    @GET("/api/driver/online/{id}")
+    Call<Void> onlineDriver (@Path("id") int id);
+
+    @GET("/api/driver/offline/{id}")
+    Call<Void> offlineDriver (@Path("id") int id);
+
+    @POST("/api/driver/{id}/working-hour")
+    Call<WorkingTime> addWorkingHourForDriver(@Path("id") int id);
 }

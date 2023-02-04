@@ -47,9 +47,9 @@ public class CurrentRideActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_ride);
         SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
-        String ride = sharedPreferences.getString("ride", null);
+        String ride1 = sharedPreferences.getString("ride", null);
         Gson gson = new Gson();
-        this.ride = gson.fromJson(ride, RideResponseDTO.class);
+        this.ride = gson.fromJson(ride1, RideResponseDTO.class);
 
         System.out.println(this.ride.getDriver().getId());
         getDriver(this.ride.getDriver().getId());
@@ -69,7 +69,7 @@ public class CurrentRideActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PanicDialog panicDialog = new PanicDialog();
+                PanicDialog panicDialog = new PanicDialog(ride);
                 panicDialog.show(getSupportFragmentManager(), "custom_dialog");
             }
         });
