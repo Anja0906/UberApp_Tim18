@@ -8,7 +8,7 @@ import model.VehicleName;
 
 public class RideResponseDTO implements Serializable {
 
-    private Integer id;
+    private int id;
     private String startTime;
     private String endTime;
     private long totalCost;
@@ -23,7 +23,8 @@ public class RideResponseDTO implements Serializable {
     private Status status;
     private String scheduledTime;
 
-    public RideResponseDTO(Integer id, String startTime, String endTime, long totalCost, PassengerIdEmailDTO driver, Set<PassengerIdEmailDTO> passengers, int estimatedTimeInMinutes, VehicleName vehicleType, boolean babyTransport, boolean petTransport, RejectionDTO rejection, Set<LocationSetDTO> locations, Status status, String scheduledTime) {
+
+    public RideResponseDTO(int id, String startTime, String endTime, long totalCost, PassengerIdEmailDTO driver, Set<PassengerIdEmailDTO> passengers, int estimatedTimeInMinutes, VehicleName vehicleType, boolean babyTransport, boolean petTransport, RejectionDTO rejection, Set<LocationSetDTO> locations, Status status, String scheduledTime) {
         this.id = id;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -40,11 +41,11 @@ public class RideResponseDTO implements Serializable {
         this.scheduledTime = scheduledTime;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

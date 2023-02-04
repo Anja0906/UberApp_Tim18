@@ -1,9 +1,11 @@
 package com.example.uberapp_tim18.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,7 +19,15 @@ import com.example.uberapp_tim18.R;
 import com.example.uberapp_tim18.fragments.MapFragment;
 import com.google.android.material.navigation.NavigationView;
 
+import DTO.RideResponseDTO;
+import retrofit.RetrofitService;
+import retrofit.RideApi;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class PassengerMainActivity extends AppCompatActivity {
+    Button currentRide;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +37,13 @@ public class PassengerMainActivity extends AppCompatActivity {
         MapFragment fragment = new MapFragment();
         fragmentTransaction.add(R.id.fragment_container, fragment, "my_fragment_tag");
         fragmentTransaction.commit();
+        currentRide = this.findViewById(R.id.current_ride_button);
+        currentRide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkCurrentRide();
+            }
+        });
 
         DrawerLayout drawerLayout = findViewById(R.id.passenger_main);
 
@@ -76,6 +93,34 @@ public class PassengerMainActivity extends AppCompatActivity {
                         break;
                 }
                 return false;
+            }
+        });
+    }
+
+    private void checkCurrentRide(){
+        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        String id = sharedPreferences.getString("id", "");
+        String token = sharedPreferences.getString("jwt", "");
+        int passengerId = Integer.parseInt(id);
+        RetrofitService retrofitService = new RetrofitService();
+        retrofitService.onSavedUser(token);
+        RideApi rideApi = retrofitService.getRetrofit().create(RideApi.class);
+        rideApi.passengerActiveRide(passengerId).enqueue(new Callback<RideResponseDTO>() {
+            @Override
+            public void onResponse(Call<RideResponseDTO> call, Response<RideResponseDTO> response) {
+                if (response.body()!=null){
+                    Intent intent = new Intent(PassengerMainActivity.this, CurrentRideActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(PassengerMainActivity.this, "You don't have ride!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<RideResponseDTO> call, Throwable t) {
+
             }
         });
     }

@@ -275,7 +275,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void initializeWebSocketConnection(){
-        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP,"ws://172.16.177.204:8080/socket/websocket");
+        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP,"ws://192.168.0.33:8080/socket/websocket");
         stompClient.connect();
         openGlobalSocket();
 
