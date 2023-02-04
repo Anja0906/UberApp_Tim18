@@ -68,9 +68,9 @@ public class PassengerRegisterActivity extends AppCompatActivity {
         PassengerPostDTO passengerPostDTO = collectInputs();
         if(passengerPostDTO!=null){
             passengerApi.save(passengerPostDTO)
-                    .enqueue(new Callback<PassengerResponseDTO>() {
+                    .enqueue(new Callback<Void>() {
                         @Override
-                        public void onResponse(Call<PassengerResponseDTO> call, Response<PassengerResponseDTO> response) {
+                        public void onResponse(Call<Void> call, Response<Void> response) {
                             saveLoggedUser(passengerPostDTO.getEmail());
                             Toast.makeText(PassengerRegisterActivity.this, "Save successful!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(PassengerRegisterActivity.this, ConfirmRegistration.class);
@@ -78,10 +78,7 @@ public class PassengerRegisterActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<PassengerResponseDTO> call, Throwable t) {
-                            System.out.println("pada");
-                            Log.i("Pada zbog", t.toString());
-                            Toast.makeText(PassengerRegisterActivity.this, "Save failed!!!", Toast.LENGTH_SHORT).show();
+                        public void onFailure(Call<Void> call, Throwable t) {
                             Logger.getLogger(PassengerRegisterActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
                         }
 
