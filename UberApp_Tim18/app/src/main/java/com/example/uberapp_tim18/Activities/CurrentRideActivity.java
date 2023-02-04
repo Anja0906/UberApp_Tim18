@@ -29,6 +29,14 @@ public class CurrentRideActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
 
+        Button inbox = findViewById(R.id.inbox_button);
+        inbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //OVDE SE DOPISUJU DRIVER I PASSANGER
+            }
+        });
+
 
         Button button = findViewById(R.id.panic_button);
         button.setOnClickListener(new View.OnClickListener() {

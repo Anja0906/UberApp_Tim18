@@ -121,7 +121,7 @@ public class RideDetailActivity extends AppCompatActivity {
         buttonInbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //OVDE JE LISTENER
+                //OVDE TREBA DA SE VIDE CHATOVI ZA ODREDJENU VOZNJU
             }
         });
 

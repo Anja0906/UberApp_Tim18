@@ -117,7 +117,6 @@ public class PassengerMainActivity extends AppCompatActivity {
                 }
 
             }
-
             @Override
             public void onFailure(Call<RideResponseDTO> call, Throwable t) {
 
