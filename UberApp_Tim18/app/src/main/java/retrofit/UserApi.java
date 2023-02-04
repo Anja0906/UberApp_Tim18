@@ -17,23 +17,7 @@ public interface UserApi {
 
     @GET("api/user/{id}")
     Call<User> findUserById(@Path("id")Integer id);
-//    @GET
-}
-//    @GetMapping("{id}/resetPassword")
-//    public ResponseEntity<?> changePasswordRequest(@PathVariable("id") int id) {
-//        try{
-//            User user = userService.findUserById(id);
-//            String email = user.getEmail();
-//            String token = String.valueOf(userService.generateRandomInt());
-//            userService.updateResetPasswordToken(token, email);
-//            userService.sendEmail(email, token);
-//            return new ResponseEntity<>("Email with reset code has been sent!", HttpStatus.NO_CONTENT);
-//        }catch (UserNotFoundException e){
-//            return new ResponseEntity<>("User does not exist!", HttpStatus.NOT_FOUND);
-//        } catch (UnsupportedEncodingException | MessagingException e) {
-//            return new ResponseEntity<>("Error while sending email", HttpStatus.NOT_FOUND);
-//        }
-//    }
+
     @GET("/api/user/whoami")
     Call<User> whoami();
 }

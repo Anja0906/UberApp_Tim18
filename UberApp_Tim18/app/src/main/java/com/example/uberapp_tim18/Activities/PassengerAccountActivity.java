@@ -5,8 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -18,6 +21,8 @@ import com.example.uberapp_tim18.fragments.FavoriteRides;
 import com.example.uberapp_tim18.fragments.PassengerAccount;
 import com.example.uberapp_tim18.fragments.PassengerStatistics;
 import com.example.uberapp_tim18.fragments.ProfileStart;
+import com.google.android.material.navigation.NavigationView;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import DTO.ReportDTO;
@@ -85,15 +90,15 @@ public class PassengerAccountActivity extends AppCompatActivity {
         });
         NavigationView navigationView = findViewById(R.id.navigation_view_passenger_account);
         navigationView.setItemIconTintList(null);
-        String role =preferences.getString("role","");
-
+        String role =sharedPreferences.getString("role","");
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.inbox:
                         Intent inbox = new Intent(PassengerAccountActivity.this, PassengerInboxActivity.class);
-                        inbox.putExtra("user", getIntent().getByteArrayExtra("user"));;
+                        inbox.putExtra("user", getIntent().getByteArrayExtra("user"));
+                        ;
                         startActivity(inbox);
                         break;
                     case R.id.account:
@@ -109,10 +114,9 @@ public class PassengerAccountActivity extends AppCompatActivity {
                         break;
                     case R.id.home:
                         Intent home;
-                        if (role.equals("ROLE_PASSENGER") ) {
+                        if (role.equals("ROLE_PASSENGER")) {
                             home = new Intent(PassengerAccountActivity.this, PassengerMainActivity.class);
-                        }
-                        else {
+                        } else {
                             home = new Intent(PassengerAccountActivity.this, DriverMainActivity.class);
                         }
                         startActivity(home);
@@ -124,7 +128,8 @@ public class PassengerAccountActivity extends AppCompatActivity {
                         break;
                 }
                 return false;
-            });
+            }
+        });
         reports.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
