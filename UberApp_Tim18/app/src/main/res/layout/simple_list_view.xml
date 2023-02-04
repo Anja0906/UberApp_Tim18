@@ -37,19 +37,6 @@
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="16dp" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/toolbar_text"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="15dp"-->
-<!--                android:layout_marginTop="15dp"-->
-<!--                android:layout_toRightOf="@+id/menu_toolbar_icon_simple_list"-->
-<!--                android:fontFamily="monospace"-->
-<!--                android:textColor="@color/edit_text"-->
-<!--                android:textSize="18sp"-->
-<!--                android:textStyle="bold"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                tools:ignore="MissingConstraints" />-->
         </RelativeLayout>
 
         <RelativeLayout

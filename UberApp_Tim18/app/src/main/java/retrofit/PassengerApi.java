@@ -33,7 +33,7 @@ public interface PassengerApi {
     @PUT("api/user/{id}/resetPassword")
     Call<String> resetPass(@Path("id") Integer id,@Body ResetPasswordDTO resetPass);
     
-    @GET("/api/user/{id}/ride")
+    @GET("/api/passenger/{id}/ride")
     Call<RideRetDTOMap> getRides(@Path("id") int id);
 
     @GET("/api/user/{id}")

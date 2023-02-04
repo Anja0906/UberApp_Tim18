@@ -1,6 +1,8 @@
 package model;
 
-public enum VehicleName {
+import java.io.Serializable;
+
+public enum VehicleName implements Serializable {
     STANDARD,
     LUKSUZNO,
     KOMBI

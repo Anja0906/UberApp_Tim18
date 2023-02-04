@@ -1,12 +1,15 @@
 package DTO;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.Set;
 
 import model.Status;
 import model.VehicleName;
 
-public class RideResponseDTO implements Serializable {
+public class RideResponseDTO implements Serializable{
 
     private int id;
     private String startTime;

@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.uberapp_tim18.R;
 import com.example.uberapp_tim18.fragments.MapFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
 
 import DTO.RideResponseDTO;
 import retrofit.RetrofitService;
@@ -28,10 +29,12 @@ import retrofit2.Response;
 
 public class PassengerMainActivity extends AppCompatActivity {
     Button currentRide;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_main);
+        editor = getPreferences(MODE_PRIVATE).edit();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         MapFragment fragment = new MapFragment();
@@ -73,7 +76,7 @@ public class PassengerMainActivity extends AppCompatActivity {
                         startActivity(profile);
                         break;
                     case R.id.ride_history:
-                        Intent rideHistory = new Intent(PassengerMainActivity.this, DriverRideHistoryActivity.class);
+                        Intent rideHistory = new Intent(PassengerMainActivity.this, PassengerRideHistoryActivity.class);
                         rideHistory.putExtra("user", getIntent().getByteArrayExtra("user"));
                         startActivity(rideHistory);
                         break;
@@ -109,17 +112,22 @@ public class PassengerMainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RideResponseDTO> call, Response<RideResponseDTO> response) {
                 if (response.body()!=null){
+                    System.out.println(response.body());
+                    Gson gson = new Gson();
+                    String ride = gson.toJson(response.body());
+                    SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("ride", ride);
+                    editor.apply();
                     Intent intent = new Intent(PassengerMainActivity.this, CurrentRideActivity.class);
                     startActivity(intent);
                 }
                 else{
                     Toast.makeText(PassengerMainActivity.this, "You don't have ride!", Toast.LENGTH_SHORT).show();
                 }
-
             }
             @Override
             public void onFailure(Call<RideResponseDTO> call, Throwable t) {
-
             }
         });
     }
