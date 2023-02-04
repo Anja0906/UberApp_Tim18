@@ -1,6 +1,7 @@
 package com.example.uberapp_tim18.Adapters;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -112,6 +113,12 @@ public class UserAdapter extends BaseAdapter {
 //            image.setImageResource(pfp);
 //        }
 
+        if (user.getRoles().contains("ROLE_ADMIN")) {
+            vi.setBackgroundColor(Color.GREEN);
+        }
+        if (user.getRoles().contains("ROLE_DRIVER")) {
+            vi.setBackgroundColor(Color.YELLOW);
+        }
 
         return vi;
     }

@@ -78,6 +78,7 @@ public class PassengerInboxActivity extends Activity {
                     toast.show();
                 } else {
                     adapter.setAllUsers(response.body());
+
                     lv.setAdapter(adapter);
                 }
             }
