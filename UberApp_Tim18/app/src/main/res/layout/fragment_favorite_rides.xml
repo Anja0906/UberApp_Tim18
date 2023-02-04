@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".fragments.FavoriteRides">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttons"
+            android:layout_marginTop="10dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit"
+                android:layout_marginTop="20dp"
+                android:visibility="visible">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/edit_data"
+                    android:background="@drawable/round_image_view"
+                    android:padding="10dp"
+                    android:src="@drawable/plus"
+                    android:layout_marginStart="20dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/confirm_edit"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="end">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/confirm_edit_data"
+                    android:background="@drawable/round_image_view"
+                    android:padding="10dp"
+                    android:src="@drawable/confirm"
+                    />
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/cancel_edit_data"
+                    android:background="@drawable/round_red"
+                    android:padding="10dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/cancel"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/form"
+            android:layout_below="@+id/buttons"
+            android:layout_marginTop="10dp">
+            <EditText
+                android:id="@+id/from"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:background="@drawable/textview_border"
+                android:fontFamily="sans-serif-medium"
+                android:inputType="text"
+                android:hint="@string/from"
+                android:textAlignment="center"
+                android:textColor="@color/edit_text"
+                android:layout_margin="10dp"
+                android:textColorHint="@color/edit_text"
+                android:textSize="20sp" />
+            <EditText
+                android:id="@+id/to"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/from"
+                android:layout_weight="4"
+                android:background="@drawable/textview_border"
+                android:fontFamily="sans-serif-medium"
+                android:inputType="text"
+                android:hint="@string/to"
+                android:textAlignment="center"
+                android:textColor="@color/edit_text"
+                android:layout_margin="10dp"
+                android:textColorHint="@color/edit_text"
+                android:textSize="20sp" />
+
+
+        </RelativeLayout>
+
+
+        <ListView
+            android:id="@+id/list_view"
+            android:layout_marginTop="20dp"
+            android:padding="20dp"
+            android:layout_below="@+id/form"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

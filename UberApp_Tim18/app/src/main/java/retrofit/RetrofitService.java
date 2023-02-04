@@ -26,7 +26,7 @@ public class RetrofitService {
         httpClient.writeTimeout(30, TimeUnit.MINUTES);
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.8.104:8080")
+                .baseUrl("http://192.168.0.33:8080")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
@@ -50,7 +50,7 @@ public class RetrofitService {
             }
         });
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.8.104:8080")
+                .baseUrl("http://192.168.0.33:8080")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient.build())
                 .build();
