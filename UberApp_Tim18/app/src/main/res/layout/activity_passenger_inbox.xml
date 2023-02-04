@@ -25,7 +25,7 @@
                             android:layout_marginEnd="5dp"
                             android:layout_marginBottom="5dp"
                             android:contentDescription="@null"
-                            android:src="@drawable/ic_email_black" />
+                            android:src="@drawable/user4" />
                 <TextView
                     android:id="@+id/from_name_txt_view"
                     android:layout_width="wrap_content"

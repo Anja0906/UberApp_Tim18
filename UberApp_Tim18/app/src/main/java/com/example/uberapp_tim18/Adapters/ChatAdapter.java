@@ -1,8 +1,12 @@
 package com.example.uberapp_tim18.Adapters;
 
+import android.os.Bundle;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -13,21 +17,25 @@ import android.widget.TextView;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.example.uberapp_tim18.R;
 
+import DTO.MessageResponseDTO;
+import DTO.UserDTO;
+import br.ciceromoura.loaderrecycler.BaseLoaderRecyclerViewAdapter;
 import model.Message;
 import model.User;
 
 public class ChatAdapter extends RecyclerView.Adapter {
-    private ArrayList<Message> messagesArrayList;
+    private ArrayList<MessageResponseDTO> messagesArrayList;
     private Context context;
-    private User currentUser;
+    private UserDTO currentUser;
     int SENT = 1;
     int RECEIVED = 2;
 
-    public ChatAdapter(ArrayList<Message> _messagesArrayList, Context _context, User _currentUser) {
+    public ChatAdapter(ArrayList<MessageResponseDTO> _messagesArrayList, Context _context, UserDTO _currentUser) {
         this.messagesArrayList = _messagesArrayList;
         this.context = _context;
         this.currentUser = _currentUser;
@@ -51,27 +59,51 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Message message = messagesArrayList.get(position);
+        MessageResponseDTO message = messagesArrayList.get(position);
         if(holder.getClass()==SenderViewHolder.class)
         {
             SenderViewHolder viewHolder=(SenderViewHolder)holder;
 
-            viewHolder.message.setText(message.getContent());
+            viewHolder.message.setText(message.getMessage());
 
-            LocalDateTime date = message.getDate();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
-            viewHolder.timeOfMessage.setText(date.format(formatter));
+//            LocalDateTime date = message.getTimeOfSending();
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
+            viewHolder.timeOfMessage.setText(message.getTimeOfSending());
         }
         else
         {
             ReceiverViewHolder viewHolder=(ReceiverViewHolder)holder;
-            viewHolder.message.setText(message.getContent());
+            viewHolder.message.setText(message.getMessage());
 
-            LocalDateTime date = message.getDate();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
-            viewHolder.timeOfMessage.setText(date.format(formatter));
+//            LocalDateTime date = message.getDate();
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
+            viewHolder.timeOfMessage.setText(message.getTimeOfSending());
         }
     }
+
+//    @Override
+//    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, Object o, int position) {
+//        MessageResponseDTO message = messagesArrayList.get(position);
+//        if(holder.getClass()==SenderViewHolder.class)
+//        {
+//            SenderViewHolder viewHolder=(SenderViewHolder)holder;
+//
+//            viewHolder.message.setText(message.getMessage());
+//
+////            LocalDateTime date = message.getTimeOfSending();
+////            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
+//            viewHolder.timeOfMessage.setText(message.getTimeOfSending());
+//        }
+//        else
+//        {
+//            ReceiverViewHolder viewHolder=(ReceiverViewHolder)holder;
+//            viewHolder.message.setText(message.getMessage());
+//
+////            LocalDateTime date = message.getDate();
+////            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
+//            viewHolder.timeOfMessage.setText(message.getTimeOfSending());
+//        }
+//    }
 
 
     @Override
@@ -81,8 +113,8 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int i) {
-        Message message = messagesArrayList.get(i);
-        if (Objects.equals(message.getTo(), currentUser)) {
+        MessageResponseDTO message = messagesArrayList.get(i);
+        if (Objects.equals(message.getReceiverId(), currentUser.getId())) {
             return 2;
         }
         return 1;

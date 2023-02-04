@@ -1,8 +1,14 @@
 package com.example.uberapp_tim18.Activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,9 +23,24 @@ import com.example.uberapp_tim18.Adapters.UserAdapter;
 import com.example.uberapp_tim18.R;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import DTO.MessageResponseDTO;
+import DTO.RideRetDTOMap;
+import DTO.UserDTO;
 import model.Role;
 import model.User;
+import retrofit.DriverApi;
+import retrofit.RetrofitService;
+import retrofit.UserApi;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import tools.HelperClasses;
+import ua.naiksoftware.stomp.Stomp;
+import ua.naiksoftware.stomp.StompClient;
 
 /*
 SENDER - > Current user
@@ -30,28 +51,54 @@ RECEIVER - > Person current user is talking to
 
 public class PassengerInboxActivity extends Activity {
     private ListView lv;
+    private RetrofitService retrofitService;
+    private UserAdapter adapter;
+    private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
+    private SharedPreferences preferences;
+
+    private String token;
+    private Integer id;
+    private UserDTO currentUser;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.simple_list_view);
-
         Intent mainIntent = getIntent();
+        this.initGUI();
 
-        byte[] userBytes = getIntent().getByteArrayExtra("user");
-        User currentUser = (User)HelperClasses.Deserialize(userBytes);
+        UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
+        userApi.findAlmostAllUsers().enqueue(new Callback<List<UserDTO>>() {
+            @Override
+            public void onResponse(Call<List<UserDTO>> call, Response<List<UserDTO>> response) {
+                if (response.body().isEmpty()) {
+                    Toast toast = Toast.makeText(getApplicationContext(),"No users to talk to!",Toast. LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    adapter.setAllUsers(response.body());
+                    lv.setAdapter(adapter);
+                }
+            }
+            @Override
+            public void onFailure(Call<List<UserDTO>> call, Throwable t) {
+                Logger.getLogger(PassengerRegisterActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
 
-        lv  = (ListView) findViewById(R.id.list_view);
-        UserAdapter adapter = new UserAdapter(this, currentUser);
-        lv.setAdapter(adapter);
+//        byte[] userBytes = getIntent().getByteArrayExtra("user");
+//        User currentUser = (User)HelperClasses.Deserialize(userBytes);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(PassengerInboxActivity.this, ChatActivity.class);
-                User user = (User) parent.getItemAtPosition(position);
+                UserDTO user = (UserDTO) parent.getItemAtPosition(position);
                 byte[] receiverBytes = HelperClasses.Serialize(user);
                 intent.putExtra("receiver", receiverBytes);
-                intent.putExtra("sender", mainIntent.getByteArrayExtra("user"));
+                byte[] senderBytes = HelperClasses.Serialize(currentUser);
+                intent.putExtra("sender", senderBytes);
                 startActivity(intent);
             }
         });
@@ -107,6 +154,7 @@ public class PassengerInboxActivity extends Activity {
                 return false;
             }
         });
+        initializeWebSocketConnection();
     }
 
     @Override
@@ -138,4 +186,93 @@ public class PassengerInboxActivity extends Activity {
     protected void onRestart() {
         super.onRestart();
     }
+
+    public void initGUI() {
+        this.preferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        this.token = preferences.getString("jwt", "");
+        this.retrofitService = new RetrofitService();
+        this.id = Integer.parseInt(preferences.getString("id", ""));
+        lv  = (ListView) findViewById(R.id.list_view);
+        this.adapter = new UserAdapter(this);
+        UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
+        userApi.findById(this.id).enqueue(new Callback<UserDTO>() {
+            @Override
+            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                if(response.body()==null){
+                    Toast toast= Toast.makeText(getApplicationContext(),"No user",Toast. LENGTH_SHORT);
+                    toast.show();
+                }else{
+                    currentUser = response.body();
+                    adapter.setUser(response.body());
+//                    lv.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserDTO> call, Throwable t) {
+                Logger.getLogger(PassengerRegisterActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
+
+        this.navigationView = findViewById(R.id.navigation_view_simple_list);
+        this.navigationView.setItemIconTintList(null);
+        this.drawerLayout = findViewById(R.id.simple_list_view);
+        retrofitService.onSavedUser(token);
+    }
+
+    StompClient stompClient;
+    @SuppressLint("CheckResult")
+    void openGlobalSocket(){
+        stompClient.topic("/socket-topic/newMessageInbox/" + this.id).subscribe(
+                topicMessage ->{
+                    Log.i("SOCKET", topicMessage.getPayload());
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(),"New message!",Toast. LENGTH_SHORT).show();
+                            try {
+                                Thread.sleep(1000);
+                                Intent intent = new Intent(PassengerInboxActivity.this, ChatActivity.class);
+                                byte[] receiverBytes = HelperClasses.Serialize(currentUser);
+                                intent.putExtra("sender", receiverBytes);
+                                String intUser = topicMessage.getPayload().split(",")[2].split(":")[1];
+                                Log.i("USER SENDER", intUser);
+                                int receiverId = Integer.parseInt(intUser);
+//                                byte[] senderBytes = null;
+                                UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
+                                userApi.findById(receiverId).enqueue(new Callback<UserDTO>() {
+                                    @Override
+                                    public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                                        byte[] senderBytes = HelperClasses.Serialize(response.body());
+                                        intent.putExtra("receiver", senderBytes);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intent);
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<UserDTO> call, Throwable t) {
+
+                                    }
+                                });
+
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+                      },
+                throwable -> {
+                    Log.e("SOCKET", "Error: " + throwable.getMessage());
+                }
+        );
+    }
+
+    private void initializeWebSocketConnection(){
+        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP,"ws://172.16.177.204:8080/socket/websocket");
+        stompClient.connect();
+        openGlobalSocket();
+
+    }
+
 }

@@ -91,4 +91,12 @@ public class Ride implements Serializable {
     public void setDuration(int duration) {
         this.duration = duration;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

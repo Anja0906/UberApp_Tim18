@@ -53,15 +53,15 @@ public class MessageDetailActivity extends Activity {
             }
         }
 
-        TextView from = (TextView)findViewById(R.id.from_txt_view);
-        from.setText(message.getFrom().getEmail());
-        TextView type = (TextView)findViewById(R.id.type_txt_view);
-        type.setText(message.getType().toString());
-        TextView date = (TextView)findViewById(R.id.date_txt_view);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
-        date.setText(message.getDate().format(formatter));
-        TextView content = (TextView)findViewById(R.id.content_txt_view);
-        content.setText(message.getContent());
+//        TextView from = (TextView)findViewById(R.id.from_txt_view);
+//        from.setText(message.getFrom().getEmail());
+//        TextView type = (TextView)findViewById(R.id.type_txt_view);
+//        type.setText(message.getType().toString());
+//        TextView date = (TextView)findViewById(R.id.date_txt_view);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm");
+//        date.setText(message.getDate().format(formatter));
+//        TextView content = (TextView)findViewById(R.id.content_txt_view);
+//        content.setText(message.getContent());
 
 
         DrawerLayout drawerLayout = findViewById(R.id.message_detail);

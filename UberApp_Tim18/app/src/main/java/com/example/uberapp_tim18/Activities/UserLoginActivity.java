@@ -66,7 +66,7 @@ public class UserLoginActivity extends Activity {
                                 Toast.makeText(UserLoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
                                 saveLoggedUser(response.body());
                                 if (response.body().getRoles().get(1).equals("ROLE_PASSENGER")) {
-                                    Intent intent = new Intent(UserLoginActivity.this, PassengerMainActivity.class);
+                                    Intent intent = new Intent(UserLoginActivity.this, PassengerInboxActivity.class);
                                     startActivity(intent);
                                 } else {
                                     Intent intent2 = new Intent(UserLoginActivity.this, DriverMainActivity.class);

@@ -9,17 +9,44 @@ import android.widget.TextView;
 
 import com.example.uberapp_tim18.R;
 
+import java.util.List;
+
+import DTO.UserDTO;
 import model.User;
+import retrofit.UserApi;
 import tools.Mockup;
 
 public class UserAdapter extends BaseAdapter {
     private Activity activity;
-    private User user;
+    private UserDTO user;
+    private List<UserDTO> allUsers;
 
-    public UserAdapter(Activity _activity, User _user) {
-
+    public UserAdapter(Activity _activity) {
         this.activity = _activity;
-        this.user = _user;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
+    }
+
+    public List<UserDTO> getAllUsers() {
+        return allUsers;
+    }
+
+    public void setAllUsers(List<UserDTO> allUsers) {
+        this.allUsers = allUsers;
     }
 
     /*
@@ -27,15 +54,15 @@ public class UserAdapter extends BaseAdapter {
      * */
     @Override
     public int getCount() {
-        return Mockup.getUsers().size();
+        return allUsers.size();
     }
 
     /*
      * Ova metoda vraca pojedinacan element na osnovu pozicije
      * */
     @Override
-    public User getItem(int position) {
-        return Mockup.getUsers().get(position);
+    public UserDTO getItem(int position) {
+        return allUsers.get(position);
     }
 
 
@@ -62,7 +89,7 @@ public class UserAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View vi=convertView;
-        User user = Mockup.getUsers().get(position);
+        UserDTO user = allUsers.get(position);
 
         if(convertView==null)
             vi = activity.getLayoutInflater().inflate(R.layout.activity_passenger_inbox, null);
@@ -75,15 +102,15 @@ public class UserAdapter extends BaseAdapter {
         */
         ImageView image = (ImageView)vi.findViewById(R.id.from_pfp_view);
 
-        int pfp = Integer.parseInt(user.getProfilePicture());
+//        int pfp = Integer.parseInt(user.getProfilePicture());
         String fromName = user.getName() + " " + user.getSurname();
 
 
         from_name.setText(fromName);
 
-        if (pfp != -1){
-            image.setImageResource(pfp);
-        }
+//        if (pfp != -1){
+//            image.setImageResource(pfp);
+//        }
 
 
         return vi;
