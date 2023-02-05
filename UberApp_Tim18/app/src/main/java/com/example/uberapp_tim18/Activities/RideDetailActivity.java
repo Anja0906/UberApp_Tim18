@@ -225,6 +225,10 @@ public class RideDetailActivity extends AppCompatActivity {
                         history.putExtra("user", getIntent().getByteArrayExtra("user"));
                         startActivity(history);
                         break;
+                    case R.id.logout:
+                        Intent logout = new Intent(RideDetailActivity.this, UserLoginActivity.class);
+                        startActivity(logout);
+                        break;
                     case R.id.home:
                         User user = (User) HelperClasses.Deserialize(getIntent().getByteArrayExtra("user"));
                         Intent home = null;

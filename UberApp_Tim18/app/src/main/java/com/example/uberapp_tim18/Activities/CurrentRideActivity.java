@@ -15,11 +15,11 @@ import com.example.uberapp_tim18.R;
 import com.example.uberapp_tim18.dialog.PanicDialog;
 import com.example.uberapp_tim18.fragments.MapFragment;
 import com.google.gson.Gson;
-
-import java.util.Set;
+import com.google.android.gms.maps.model.LatLng;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.util.Set;
+import DTO.DriverDTO;
 import DTO.LocationSetDTO;
 import DTO.PassengerIdEmailDTO;
 import DTO.ResetPasswordDTO;
@@ -31,6 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import tools.HelperClasses;
+import retrofit.DriverApi;
 
 public class CurrentRideActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
@@ -47,6 +48,7 @@ public class CurrentRideActivity extends AppCompatActivity {
     private RetrofitService retrofitService;
     private Set<PassengerIdEmailDTO> passengers;
     private Integer passengerId;
+    DriverDTO driver;
 
 
     @Override
@@ -56,11 +58,18 @@ public class CurrentRideActivity extends AppCompatActivity {
         this.retrofitService = new RetrofitService();
         UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
         SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+
         String ride = sharedPreferences.getString("ride", null);
         String role = sharedPreferences.getString("role", "ROLE_PASSENGER");
 
+        String ride1 = sharedPreferences.getString("ride", null);
+
         Gson gson = new Gson();
-        this.ride = gson.fromJson(ride, RideResponseDTO.class);
+        this.ride = gson.fromJson(ride1, RideResponseDTO.class);
+
+        System.out.println(this.ride.getDriver().getId());
+        getDriver(this.ride.getDriver().getId());
+
 
         byte[] rideBytes = getIntent().getByteArrayExtra("ride");
         this.rideResponseDTO = (RideResponseDTO) HelperClasses.Deserialize(rideBytes);
@@ -77,6 +86,7 @@ public class CurrentRideActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment_current_ride, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+
 
         userApi.findById(rideResponseDTO.getDriver().getId()).enqueue(new Callback<UserDTO>() {
             @Override
@@ -133,7 +143,7 @@ public class CurrentRideActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PanicDialog panicDialog = new PanicDialog();
+                PanicDialog panicDialog = new PanicDialog(ride);
                 panicDialog.show(getSupportFragmentManager(), "custom_dialog");
             }
         });
@@ -142,7 +152,11 @@ public class CurrentRideActivity extends AppCompatActivity {
 
     private void initRide(){
         LocationSetDTO locationSetDTO = ride.getLocations().iterator().next();
-        driverId.setText(String.valueOf(ride.getDriver()));
+        driverId.setText(String.valueOf(ride.getDriver().getId()));
+        driverName.setText(String.valueOf(driver.getName()));
+        driverSurname.setText(String.valueOf(driver.getSurname()));
+        phone.setText(String.valueOf(driver.getTelephoneNumber()));
+        email.setText(String.valueOf(ride.getDriver().getEmail()));
         departure.setText(String.valueOf(locationSetDTO.getDeparture().getAddress()));
         destination.setText(String.valueOf(locationSetDTO.getDestination().getAddress()));
     }
@@ -157,5 +171,34 @@ public class CurrentRideActivity extends AppCompatActivity {
         departure = findViewById(R.id.departure_txt_view);
         destination = findViewById(R.id.destination_txt_view);
         initRide();
+    }
+
+    private void getDriver(int id){
+        RetrofitService retrofitService = new RetrofitService();
+        String token = getSharedPreferences("user_prefs", MODE_PRIVATE).getString("jwt", "");
+        retrofitService.onSavedUser(token);
+        DriverApi driverApi = retrofitService.getRetrofit().create(DriverApi.class);
+        driverApi.getDriver(id)
+                .enqueue(new Callback<DriverDTO>() {
+                    @Override
+                    public void onResponse(Call<DriverDTO> call, Response<DriverDTO> response) {
+                        System.out.println(response.body());
+                        driver = response.body();
+                        initGUI();
+                        LocationSetDTO locationSetDTO = ride.getLocations().iterator().next();
+                        LatLng dest = new LatLng(locationSetDTO.getDestination().getLatitude(),locationSetDTO.getDestination().getLongitude());
+                        LatLng departure = new LatLng(locationSetDTO.getDeparture().getLatitude(),locationSetDTO.getDeparture().getLongitude());
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        FragmentTransaction transaction = fragmentManager.beginTransaction();
+                        MapFragment fragment = new MapFragment(departure,dest);
+                        transaction.replace(R.id.fragment_current_ride, fragment);
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+                    }
+                    @Override
+                    public void onFailure(Call<DriverDTO> call, Throwable t) {
+                        Logger.getLogger(PassengerRegisterActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+                    }
+                });
     }
 }

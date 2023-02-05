@@ -126,6 +126,10 @@ public class PassengerAccountActivity extends AppCompatActivity {
                         settings.putExtra("user", getIntent().getByteArrayExtra("user"));
                         startActivity(settings);
                         break;
+                    case R.id.logout:
+                        Intent logout = new Intent(PassengerAccountActivity.this, UserLoginActivity.class);
+                        startActivity(logout);
+                        break;
                 }
                 return false;
             }

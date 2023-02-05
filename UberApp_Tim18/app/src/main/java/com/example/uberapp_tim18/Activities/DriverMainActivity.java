@@ -14,8 +14,12 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.uberapp_tim18.R;
+import com.example.uberapp_tim18.dialog.NewRideDialog;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
 
+import DTO.RideResponseDTO;
+import model.Ride;
 import ua.naiksoftware.stomp.Stomp;
 import ua.naiksoftware.stomp.StompClient;
 
@@ -72,6 +76,10 @@ public class DriverMainActivity extends AppCompatActivity {
                         toast.setMargin(50,50);
                         toast.show();
                         break;
+                    case R.id.logout:
+                        Intent logout = new Intent(DriverMainActivity.this, UserLoginActivity.class);
+                        startActivity(logout);
+                        break;
 
                     case R.id.settings:
                         Intent setting = new Intent(DriverMainActivity.this, ReviewerPreferenceActivity.class);
@@ -93,7 +101,10 @@ public class DriverMainActivity extends AppCompatActivity {
         String id = getSharedPreferences("user_prefs",MODE_PRIVATE).getString("id","");
         stompClient.topic("/socket-topic/newRide/"+id).subscribe(
                 topicMessage ->{
-                    Log.i("SOCKET", topicMessage.getPayload());
+                    Gson g = new Gson();
+                    RideResponseDTO ride = g.fromJson(topicMessage.getPayload(), RideResponseDTO.class);
+                    NewRideDialog newRideDialog = new NewRideDialog(ride);
+                    newRideDialog.show(getSupportFragmentManager(), "custom_dialog");
                 },
                 throwable -> {
                     Log.e("SOCKET", "Error: " + throwable.getMessage());

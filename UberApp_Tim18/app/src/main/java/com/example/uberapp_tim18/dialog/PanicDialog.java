@@ -12,6 +12,13 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.uberapp_tim18.R;
 
+import DTO.ReasonDTO;
+import DTO.RideResponseDTO;
+import retrofit.RetrofitService;
+import retrofit.RideApi;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class PanicDialog extends DialogFragment {
@@ -19,6 +26,12 @@ public class PanicDialog extends DialogFragment {
     private EditText editText;
     private Button confirmButton;
     private Button cancelButton;
+    private RideResponseDTO rideResponseDTO;
+
+    public PanicDialog(RideResponseDTO rideResponseDTO) {
+        this.rideResponseDTO = rideResponseDTO;
+    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -29,13 +42,24 @@ public class PanicDialog extends DialogFragment {
         EditText editText = view.findViewById(R.id.text_area);
         Button confirmButton = view.findViewById(R.id.confirm_button);
         Button cancelButton = view.findViewById(R.id.cancel_button);
-
+        RetrofitService retrofitService = new RetrofitService();
+        RideApi rideApi = retrofitService.getRetrofit().create(RideApi.class);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String reason = String.valueOf(editText.getText());
-                System.out.println(reason);
-                dismiss();
+                rideApi.activatePanic(rideResponseDTO.getId(),new ReasonDTO(reason)).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+
+                    }
+                });
+
             }
         });
 

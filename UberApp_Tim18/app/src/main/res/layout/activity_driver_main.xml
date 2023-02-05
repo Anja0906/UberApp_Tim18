@@ -66,7 +66,8 @@
                     android:background="@drawable/toggle_button_color"
                     android:text="@string/toggle_text"
                     android:textOff="@string/toggle_off"
-                    android:textOn="@string/toggle_on" />
+                    android:textOn="@string/toggle_on"
+                    android:checked="true"/>
             </RelativeLayout>
             <ImageView
                 android:layout_width="300dp"

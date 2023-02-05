@@ -112,6 +112,10 @@ public class DriverAccountActivity extends AppCompatActivity {
                         profile.putExtra("user", getIntent().getByteArrayExtra("user"));
                         startActivity(profile);
                         break;
+                    case R.id.logout:
+                        Intent logout = new Intent(DriverAccountActivity.this, UserLoginActivity.class);
+                        startActivity(logout);
+                        break;
 
                     case R.id.ride_history:
                         Intent history = new Intent(DriverAccountActivity.this, DriverRideHistoryActivity.class);
