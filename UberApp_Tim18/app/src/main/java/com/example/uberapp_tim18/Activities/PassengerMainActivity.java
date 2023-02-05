@@ -26,6 +26,7 @@ import retrofit.RideApi;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import tools.HelperClasses;
 
 public class PassengerMainActivity extends AppCompatActivity {
     Button currentRide;
@@ -124,6 +125,8 @@ public class PassengerMainActivity extends AppCompatActivity {
                     editor.putString("ride", ride);
                     editor.apply();
                     Intent intent = new Intent(PassengerMainActivity.this, CurrentRideActivity.class);
+                    byte[] rideBytes = HelperClasses.Serialize(response.body());
+                    intent.putExtra("ride", rideBytes);
                     startActivity(intent);
                 }
                 else{

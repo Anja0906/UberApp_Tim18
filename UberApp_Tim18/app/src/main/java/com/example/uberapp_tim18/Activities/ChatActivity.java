@@ -48,6 +48,7 @@ public class ChatActivity extends AppCompatActivity {
     private UserDTO sender, receiver;
     private RetrofitService retrofitService;
     private Integer id;
+    private Integer otherUserId;
     private SharedPreferences preferences;
     private String token;
     private Integer rideId;
@@ -70,34 +71,62 @@ public class ChatActivity extends AppCompatActivity {
 
         this.sender = (UserDTO) HelperClasses.Deserialize(getIntent().getByteArrayExtra("sender"));
         this.receiver = (UserDTO) HelperClasses.Deserialize(getIntent().getByteArrayExtra("receiver"));
+        if (this.receiver!=null){
+            this.otherUserId=this.receiver.getId();
+        }
         this.rideId = (Integer) getIntent().getIntExtra("rideId", -1);
 
         UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
-        userApi.findMessages(this.id).enqueue(new Callback<MessageRetDTOMap>() {
-            @Override
-            public void onResponse(Call<MessageRetDTOMap> call, Response<MessageRetDTOMap> response) {
-                ArrayList<MessageResponseDTO> messageResponseDTOS = response.body().getResults();
-                if (messageResponseDTOS.isEmpty()) {
-                    Toast toast = Toast.makeText(getApplicationContext(),"No messages to show!",Toast. LENGTH_SHORT);
-                    toast.show();
-                } else {
-                    sort(messageResponseDTOS);
-                    for (MessageResponseDTO message : messageResponseDTOS) {
-                        if ((message.getSenderId().equals(sender.getId()) && message.getReceiverId().equals(receiver.getId())) || (
-                                message.getSenderId().equals(receiver.getId()) && message.getReceiverId().equals(sender.getId()))) {
+        if (rideId==-1) {
+            userApi.findMessages(id).enqueue(new Callback<MessageRetDTOMap>() {
+                @Override
+                public void onResponse(Call<MessageRetDTOMap> call, Response<MessageRetDTOMap> response) {
+                    ArrayList<MessageResponseDTO> messageResponseDTOS = response.body().getResults();
+                    if (messageResponseDTOS.isEmpty()) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "No messages to show!", Toast.LENGTH_SHORT);
+                        toast.show();
+                    } else {
+                        sort(messageResponseDTOS);
+                        for (MessageResponseDTO message : messageResponseDTOS) {
+                            if ((message.getSenderId().equals(sender.getId()) && message.getReceiverId().equals(receiver.getId())) || (
+                                    message.getSenderId().equals(receiver.getId()) && message.getReceiverId().equals(sender.getId()))) {
+                                messages.add(message);
+                                chatAdapter.notifyDataSetChanged();
+                            }
+                        }
+                        chatAdapter.notifyDataSetChanged();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<MessageRetDTOMap> call, Throwable t) {
+                    Logger.getLogger(PassengerRegisterActivity.class.getName()).log(Level.SEVERE, "Error occurred get all messages", t);
+                }
+            });
+        } else {
+            userApi.findMessages(id, otherUserId, rideId).enqueue(new Callback<MessageRetDTOMap>() {
+                @Override
+                public void onResponse(Call<MessageRetDTOMap> call, Response<MessageRetDTOMap> response) {
+                    ArrayList<MessageResponseDTO> messageResponseDTOS = response.body().getResults();
+                    if (messageResponseDTOS.isEmpty()) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "No messages to show!", Toast.LENGTH_SHORT);
+                        toast.show();
+                    } else {
+                        sort(messageResponseDTOS);
+                        for (MessageResponseDTO message : messageResponseDTOS) {
                             messages.add(message);
                             chatAdapter.notifyDataSetChanged();
                         }
+                        chatAdapter.notifyDataSetChanged();
                     }
-                    chatAdapter.notifyDataSetChanged();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<MessageRetDTOMap> call, Throwable t) {
-                Logger.getLogger(PassengerRegisterActivity.class.getName()).log(Level.SEVERE, "Error occurred get all messages", t);
-            }
-        });
+                @Override
+                public void onFailure(Call<MessageRetDTOMap> call, Throwable t) {
+                    Logger.getLogger(PassengerRegisterActivity.class.getName()).log(Level.SEVERE, "Error occurred get all messages", t);
+                }
+            });
+        }
         txtSender.setText(receiver.getName() + " " + receiver.getSurname());
         chatAdapter = new ChatAdapter(messages, ChatActivity.this, sender);
         rv.setAdapter(chatAdapter);

@@ -3,6 +3,7 @@ package com.example.uberapp_tim18.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,28 +32,45 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import DTO.LocationSetDTO;
 import DTO.PassengerIdEmailDTO;
 import DTO.RideResponseDTO;
+import DTO.UserDTO;
 import model.Location;
 import model.Passenger;
 import model.Role;
 import model.User;
+import retrofit.RetrofitService;
+import retrofit.UserApi;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import tools.HelperClasses;
 
 public class RideDetailActivity extends AppCompatActivity {
+
+    byte[] rideBytes, receiverBytes, senderBytes;
+    private RetrofitService retrofitService;
+    private Set<PassengerIdEmailDTO> passengers;
+    private Integer passengerId;
+    private RideResponseDTO ride;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride_detail);
 
+        this.retrofitService = new RetrofitService();
+        UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
+
         Intent intent = getIntent();
         byte[] rideBytes = intent.getByteArrayExtra("ride");
         ByteArrayInputStream bis = new ByteArrayInputStream(rideBytes);
         ObjectInput in = null;
-        RideResponseDTO ride = null;
+        ride = null;
         try {
             in = new ObjectInputStream(bis);
             ride = (RideResponseDTO) in.readObject();
@@ -118,10 +136,62 @@ public class RideDetailActivity extends AppCompatActivity {
         Button buttonReview = findViewById(R.id.review_button);
         Button buttonInbox = findViewById(R.id.inbox_button);
 
+        passengers = ride.getPassengers();
+        for (PassengerIdEmailDTO passengerIdEmailDTO : passengers) {
+            // ima samo jedan svakako...
+            passengerId = passengerIdEmailDTO.getId();
+        }
+        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        String role = sharedPreferences.getString("role", "ROLE_PASSENGER");
+
+        userApi.findById(ride.getDriver().getId()).enqueue(new Callback<UserDTO>() {
+            @Override
+            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                if (response.body()!=null) {
+                    UserDTO dto = response.body();
+                    if (dto.getRoles().contains("ROLE_DRIVER") && role.equals("ROLE_DRIVER")) {
+                        senderBytes = HelperClasses.Serialize(dto);
+                    } else {
+                        receiverBytes = HelperClasses.Serialize(dto);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserDTO> call, Throwable t) {
+                Logger.getLogger(PassengerRegisterActivity.class.getName()).log(Level.SEVERE, "Error occurred get user", t);
+            }
+        });
+
+        userApi.findById(passengerId).enqueue(new Callback<UserDTO>() {
+            @Override
+            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                if (response.body()!=null) {
+                    UserDTO dto = response.body();
+                    if (dto.getRoles().contains("ROLE_PASSENGER") && role.equals("ROLE_PASSENGER")) {
+                        senderBytes = HelperClasses.Serialize(dto);
+                    } else {
+                        receiverBytes = HelperClasses.Serialize(dto);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserDTO> call, Throwable t) {
+                Logger.getLogger(PassengerRegisterActivity.class.getName()).log(Level.SEVERE, "Error occurred get user", t);
+            }
+        });
+
+
         buttonInbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //OVDE TREBA DA SE VIDE CHATOVI ZA ODREDJENU VOZNJU
+                Intent intent = new Intent(RideDetailActivity.this, ChatActivity.class);
+                intent.putExtra("receiver", receiverBytes);
+                intent.putExtra("sender", senderBytes);
+                intent.putExtra("rideId", ride.getId());
+                startActivity(intent);
             }
         });
 
