@@ -59,16 +59,12 @@ public class CurrentRideActivity extends AppCompatActivity {
         UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
         SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
 
-        String ride = sharedPreferences.getString("ride", null);
         String role = sharedPreferences.getString("role", "ROLE_PASSENGER");
 
         String ride1 = sharedPreferences.getString("ride", null);
 
         Gson gson = new Gson();
         this.ride = gson.fromJson(ride1, RideResponseDTO.class);
-
-        System.out.println(this.ride.getDriver().getId());
-        getDriver(this.ride.getDriver().getId());
 
 
         byte[] rideBytes = getIntent().getByteArrayExtra("ride");
@@ -79,13 +75,8 @@ public class CurrentRideActivity extends AppCompatActivity {
             passengerId = passengerIdEmailDTO.getId();
         }
 
-        initGUI();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        MapFragment fragment = new MapFragment(0);
-        transaction.replace(R.id.fragment_current_ride, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        System.out.println(this.rideResponseDTO.getDriver().getId());
+        getDriver(this.rideResponseDTO.getDriver().getId());
 
 
         userApi.findById(rideResponseDTO.getDriver().getId()).enqueue(new Callback<UserDTO>() {
