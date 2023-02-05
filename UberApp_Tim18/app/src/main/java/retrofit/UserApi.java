@@ -31,6 +31,9 @@ public interface UserApi {
     @GET("api/user/{id}/message")
     Call<MessageRetDTOMap> findMessages(@Path("id") int id);
 
+    @GET("api/user/{id}/otherUser/{otherId}/message/{rideId}")
+    Call<MessageRetDTOMap> findMessages(@Path("id") int id, @Path("otherId") int otherId, @Path("rideId") int rideId);
+
     @POST("api/user/{id}/message")
     Call<MessageResponseDTO> sendMessage(@Path("id") int id, @Body MessageDTO messageDTO);
 
